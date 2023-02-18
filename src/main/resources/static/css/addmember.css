@@ -1,0 +1,256 @@
+#container {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+}
+
+#addmem_hed_con {
+    background-color: #4285F4;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-bottom: 1px solid #e2e2e2;
+}
+
+.addmem_hed_box {
+    width: 1000px;
+    height: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+}
+
+.addmem_hed_box span {
+    color: white;
+    width: 150px;
+    height: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+#addmem_main_con {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    padding: 50px;
+}
+
+.addmem_main_box {
+    width: 600px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    margin-top: 200px;
+}
+
+.addmem_tag_email {
+    width: 600px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.addmem_tag_email span {
+    width: 100px;
+    height: 50px;
+    font-size: 16px;
+    font-weight: bold;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+}
+
+.addmem_tag_email input {
+    margin-left: 50px;
+    width: 350px;
+    height: 50px;
+    border: 1px solid #e2e2e2;
+    border-radius: 10px;
+}
+
+.addmem_tag_email button {
+    width: 80px;
+    height: 50px;
+    margin-left: 20px;
+    border: 1px solid #e2e2e2;
+    border-radius: 10px;
+}
+
+.addmem_tag {
+    width: 600px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 20px;
+}
+
+.addmem_tag span {
+    width: 100px;
+    height: 50px;
+    font-size: 16px;
+    font-weight: bold;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+}
+
+.addmem_tag input {
+    margin-left: 50px;
+    width: 450px;
+    height: 50px;
+    border: 1px solid #e2e2e2;
+    border-radius: 10px;
+}
+
+.addmem_tag2 {
+    width: 600px;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    margin-top: 20px;
+}
+
+.addmem_tag2 span {
+
+    width: 100px;
+    height: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    font-size: 16px;
+    font-weight: bold;
+}
+
+.addmem_tag2 select {
+    margin-left: 50px;
+    width: 100px;
+    height: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid #e2e2e2;
+    padding-left: 10px;
+    font-size: 18px;
+    font-weight: bold;
+}
+
+.addmem_tag2 p {
+    width: 50px;
+    height: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 24px;
+    font-weight: bold;
+}
+
+.addmem_tag2 input {
+    width: 100px;
+    height: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 22px;
+    font-weight: bold;
+    border: 1px solid #e2e2e2;
+    border-radius: 10px;
+    padding-left: 10px;
+}
+
+.addmem_tag3 {
+    width: 600px;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    margin-top: 20px;
+}
+
+.addmem_tag3 span {
+    width: 100px;
+    height: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    font-size: 16px;
+    font-weight: bold;
+}
+
+.addmem_tag3 input {
+    width: 150px;
+    height: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-left: 50px;
+    border: 1px solid #e2e2e2;
+    border-radius: 10px;
+}
+
+.addmem_tag3 button {
+    width: 100px;
+    height: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid #e2e2e2;
+    border-radius: 10px;
+    margin-left: 30px;
+
+}
+
+.addr_box {
+    width: 600px;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    margin-top: 30px;
+}
+
+.addr_box input {
+    font-size: 14px;
+    height: 30px;
+    border: 1px solid #e2e2e2;
+    border-radius: 10px;
+    padding-left: 5px;
+}
+
+.addr1 {
+    padding-left: 5px;
+}
+
+.addr2 {
+    margin-left: 150px;
+    width: 250px;
+}
+
+.addr3 {
+    width: 200px;
+    margin-left: 20px;
+}
+
+.addr_btn_box {
+    margin: 50px;
+    width: 600px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.addr_btn_box button {
+    width: 150px;
+    height: 40px;
+    border: 1px solid #e2e2e2;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 20px;
+    border-radius: 10px;
+
+}

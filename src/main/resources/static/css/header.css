@@ -1,0 +1,47 @@
+#index_hed_con{
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-bottom: 1px solid #e2e2e2;
+    flex-direction: column;
+    padding: 30px;
+}
+.index_hed_menu_box {
+    width: 1000px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+}
+
+.index_hed_menu {
+    width: 200px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid #e2e2e2;
+    margin:50px;
+}
+.index_hed_menu a {
+    width: 200px;
+    height: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.index_hed_log_box{
+    width:1200px;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+}
+.index_hed_log_box a{
+    width: 100px;
+    height: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 16px;
+    font-weight: bold;
+}

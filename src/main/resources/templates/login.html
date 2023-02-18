@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>ToyShop</title>
+    <link th:href="@{/css/reset2.css}" rel="stylesheet"/>
+    <link th:href="@{/css/reset.css}" rel="stylesheet"/>
+    <link th:href="@{/css/header.css}" rel="stylesheet"/>
+    <link th:href="@{/css/footer.css}" rel="stylesheet"/>
+    <link th:href="@{/css/login.css}" rel="stylesheet"/>
+</head>
+<body>
+<div id="container">
+    <header id="index_hed_con">
+            <div class="index_hed_log_box">
+                <a href="/login">로그인</a>
+                <a href="#">회원가입</a>
+            </div>
+            <div class="index_hed_menu_box">
+                <div class="index_hed_menu"><a href="#">Menu</a></div>
+                <div class="index_hed_menu"><a href="#">Menu</a></div>
+                <div class="index_hed_menu"><a href="#">Menu</a></div>
+                <div class="index_hed_menu"><a href="#">Menu</a></div>
+                <div class="index_hed_menu"><a href="#">Menu</a></div>
+            </div>
+
+    </header>
+    <main id="login_main_con">
+        <form class="login_main_box">
+            <label class="login_main_cont">
+                <span>Email : </span>
+                <input type="text" name="email" placeholder="Email 입력">
+            </label>
+            <label class="login_main_cont">
+                <span>Password : </span>
+                <input type="password" name="pwd" placeholder="비밀번호 입력">
+            </label>
+
+            <button type="submit" class="loginbtn">
+                로그인
+            </button>
+            <a href="/members" class="membertag">
+                    회원가입
+            </a>
+
+
+
+        </form>
+    </main>
+    <footer id="index-foo_con"></footer>
+</div>
+
+</body>
+</html>

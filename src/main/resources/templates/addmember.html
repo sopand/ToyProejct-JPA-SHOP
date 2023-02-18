@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>ToyShop</title>
+    <link th:href="@{/css/reset2.css}" rel="stylesheet"/>
+    <link th:href="@{/css/reset.css}" rel="stylesheet"/>
+    <link th:href="@{/css/footer.css}" rel="stylesheet"/>
+    <link th:href="@{/css/addmember.css}" rel="stylesheet"/>
+    <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+    <script
+            src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script type="text/javascript" th:src="@{/css/js/addmember.js}"></script>
+</head>
+<body>
+<div id="container">
+    <header id="addmem_hed_con">
+        <div class="addmem_hed_box">
+            <span>회원 가입 페이지</span>
+        </div>
+    </header>
+    <main id="addmem_main_con">
+        <form class="addmem_main_box" th:action="@{/members}" th:method="post">
+            <div class="addmem_tag_email">
+                <span>이메일 : </span>
+                <input type="email" name="email" placeholder="이메일 입력">
+                <button type="button">이메일 인증</button>
+            </div>
+            <label class="addmem_tag">
+                <span>비밀번호 : </span>
+                <input type="password" name="pwd" placeholder="패스워드 입력">
+            </label>
+            <label class="addmem_tag2">
+                <span>전화 번호 : </span>
+                <select name="tel1">
+                    <option value="010">010</option>
+                    <option value="011">011</option>
+                    <option value="012">012</option>
+                </select>
+                <p>-</p>
+                <input type="tel" name="tel2">
+                <p>-</p>
+                <input type="tel" name="tel3">
+            </label>
+
+            <div class="addmem_tag3">
+                <span>주소 :</span>
+                <input type="text" name="addr1" readonly class="addr1">
+                <button type="button" id="addPost">우편 번호</button>
+
+            </div>
+
+            <div class="addr_box">
+                <input type="text" name="addr2" readonly class="addr2" placeholder="자동 입력">
+                <input type="text" name="addr3" placeholder="상세주소 입력" class="addr3">
+            </div>
+
+            <div class="addr_btn_box">
+                <button type="button" id="addmem_btn">가입 완료</button>
+                <button type="reset">재작성</button>
+
+            </div>
+
+        </form>
+
+
+    </main>
+    <footer id="index-foo_con"></footer>
+</div>
+
+</body>
+</html>
