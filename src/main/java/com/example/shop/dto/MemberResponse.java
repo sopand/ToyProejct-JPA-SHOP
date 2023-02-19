@@ -2,8 +2,10 @@ package com.example.shop.dto;
 
 import com.example.shop.entity.Member;
 import lombok.Getter;
+import lombok.ToString;
 
 @Getter
+@ToString
 public class MemberResponse {
     private String email;
     private String pwd;

@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>ToyShop</title>
+    <link th:href="@{/css/reset2.css}" rel="stylesheet"/>
+    <link th:href="@{/css/reset.css}" rel="stylesheet"/>
+    <link th:href="@{/css/header.css}" rel="stylesheet"/>
+    <link th:href="@{/css/footer.css}" rel="stylesheet"/>
+    <link th:href="@{/css/productadd.css}" rel="stylesheet"/>
+    <script
+            src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script type="text/javascript" th:src="@{/css/js/login.js}"></script>
+</head>
+<body>
+<div id="container">
+    <header th:replace="header :: header"></header>
+    <main id="proadd_main_con">
+        <div class="proadd_main_box">
+            <div class="proadd_main_tag">
+                <p>제품 정보 등록</p>
+
+            </div>
+            <form th:action="@{/products}" class="proadd_form" >
+                <label class="input_name">
+                    <span>제품명 : </span>
+                    <input type="text" name="pro_name">
+                </label>
+                <label class="input_name">
+                    <span>제품가격 : </span>
+                    <input type="text" name="pro_price">
+                </label>
+                <label class="input_name">
+                    <span>판매자 : </span>
+                    <input type="text" name="email">
+                </label>
+                <label class="input_name">
+                    <span>상품 이미지 업로드</span>
+                    <input type="file" name="img" style="display: none">
+                </label>
+                <button type="submit" class="proaddBtn"> 제품 등록</button>
+            </form>
+        </div>
+    </main>
+    <footer id="index-foo_con"></footer>
+</div>
+
+</body>
+</html>

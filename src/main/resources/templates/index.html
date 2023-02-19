@@ -8,31 +8,19 @@
     <link th:href="@{/css/header.css}" rel="stylesheet"/>
     <link th:href="@{/css/footer.css}" rel="stylesheet"/>
     <link th:href="@{/css/index.css}" rel="stylesheet"/>
+    <script
+            src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script type="text/javascript" th:src="@{/css/js/login.js}"></script>
 </head>
 <body>
 <div id="container">
-    <header id="index_hed_con">
-        <div class="index_hed_box">
-            <div class="index_hed_log_box">
-                    <a href="/login">로그인</a>
-                    <a href="#">회원가입</a>
-            </div>
-            <div class="index_hed_menu_box">
-                <div class="index_hed_menu"><a href="#">Menu</a></div>
-                <div class="index_hed_menu"><a href="#">Menu</a></div>
-                <div class="index_hed_menu"><a href="#">Menu</a></div>
-                <div class="index_hed_menu"><a href="#">Menu</a></div>
-                <div class="index_hed_menu"><a href="#">Menu</a></div>
-            </div>
-        </div>
-
-    </header>
+    <header th:replace="header :: header"> </header>
     <main id="index_main_con">
         <div class="index_main_box">
-            <div class="index_main_con1"><a href="#">이미지1</a></div>
-            <div class="index_main_con2"><a href="#">이미지2</a></div>
-            <div class="index_main_con3"><a href="#">이미지3</a></div>
-            <div class="index_main_con4"><a href="#">이미지4</a></div>
+            <div class="index_main_con1 img_box"><a href="#"><img th:src="|/projectimg/frequency-wave-g888ba46b2_1920.jpg|"/></a></div>
+            <div class="index_main_con2 img_box"><a href="#"><img th:src="|/projectimg/forest-ga4b4871d6_1920.jpg|"/></a></div>
+            <div class="index_main_con3 img_box"><a href="#"><img th:src="|/projectimg/explosion-g93d33eb11_1920.jpg|"/></a></div>
+            <div class="index_main_con4 img_box"><a href="#"><img th:src="|/projectimg/digitization-gd96eff1cd_1920.jpg|"/></a></div>
         </div>
 
         <div class="index_best_box">

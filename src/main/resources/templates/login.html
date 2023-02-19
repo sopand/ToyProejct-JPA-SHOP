@@ -8,25 +8,16 @@
     <link th:href="@{/css/header.css}" rel="stylesheet"/>
     <link th:href="@{/css/footer.css}" rel="stylesheet"/>
     <link th:href="@{/css/login.css}" rel="stylesheet"/>
+    <script
+            src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script type="text/javascript" th:src="@{/css/js/login.js}"></script>
 </head>
 <body>
 <div id="container">
-    <header id="index_hed_con">
-            <div class="index_hed_log_box">
-                <a href="/login">로그인</a>
-                <a href="#">회원가입</a>
-            </div>
-            <div class="index_hed_menu_box">
-                <div class="index_hed_menu"><a href="#">Menu</a></div>
-                <div class="index_hed_menu"><a href="#">Menu</a></div>
-                <div class="index_hed_menu"><a href="#">Menu</a></div>
-                <div class="index_hed_menu"><a href="#">Menu</a></div>
-                <div class="index_hed_menu"><a href="#">Menu</a></div>
-            </div>
+    <header th:replace="header :: header"> </header>
 
-    </header>
     <main id="login_main_con">
-        <form class="login_main_box">
+        <form class="login_main_box" th:action="@{/members/login}" method="post">
             <label class="login_main_cont">
                 <span>Email : </span>
                 <input type="text" name="email" placeholder="Email 입력">
@@ -40,9 +31,8 @@
                 로그인
             </button>
             <a href="/members" class="membertag">
-                    회원가입
+                회원가입
             </a>
-
 
 
         </form>

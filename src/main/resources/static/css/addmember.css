@@ -17,7 +17,7 @@
 
 .addmem_hed_box {
     width: 1000px;
-    height: 50px;
+    height: 70px;
     display: flex;
     align-items: center;
     justify-content: flex-start;
@@ -25,10 +25,12 @@
 
 .addmem_hed_box span {
     color: white;
-    width: 150px;
+    width: 200px;
     height: 50px;
     display: flex;
     align-items: center;
+    font-size: 22px;
+    font-weight: bold;
     justify-content: center;
 }
 
@@ -42,7 +44,8 @@
 }
 
 .addmem_main_box {
-    width: 600px;
+    border:1px solid #e2e2e2;
+    width: 700px;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -51,6 +54,7 @@
 }
 
 .addmem_tag_email {
+    margin-top:100px;
     width: 600px;
     display: flex;
     align-items: center;

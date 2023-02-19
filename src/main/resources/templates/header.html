@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<html xmlns:th="http://www.thymeleaf.org" >
+
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<header id="index_hed_con" th:fragment="header">
+    <div class="index_hed_box">
+        <div class="index_hed_log_box" th:if="${session.email}==null">
+            <a href="/login">로그인</a>
+            <a href="/members">회원가입</a>
+            <a href="/products">제품등록</a>
+        </div>
+        <div class="index_hed_log_box" th:if="${session.email}!=null">
+            <a href="javascript:void(0)" class="logout_href" th:value="${session.email}">로그아웃</a>
+            <a href="/members">회원가입</a>
+        </div>
+        <div class="index_hed_menu_box">
+            <div class="index_hed_menu"><a href="#">MENU</a></div>
+            <div class="index_hed_menu"><a href="#">Menu</a></div>
+            <div class="index_hed_menu"><a href="#">Menu</a></div>
+            <div class="index_hed_menu"><a href="#">Menu</a></div>
+        </div>
+    </div>
+
+</header>
+</body>
+</html>

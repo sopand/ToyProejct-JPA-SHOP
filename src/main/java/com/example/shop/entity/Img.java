@@ -9,27 +9,23 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
-import java.util.Optional;
-
-
 @Entity
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
-public class Member {
+public class Img {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
-    private String email;
-    private String pwd;
-    private String address;
-    private String tel;
+    private Long img_id;
 
+    private String img_name;
+    private String img_original;
+
+    private String pro_name;
     @Builder
-    public Member(String email,String pwd,String address,String tel){
-        this.email = email;
-        this.pwd = pwd;
-        this.address = address;
-        this.tel = tel;
+    public Img(String img_name,String img_original,String pro_name){
+        this.img_name=img_name;
+        this.img_original=img_original;
+        this.pro_name=pro_name;
     }
-
 }

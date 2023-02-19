@@ -1,0 +1,74 @@
+#container{
+    width:100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+}
+#proadd_main_con{
+    width:100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.proadd_main_box{
+    width:800px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+}
+.proadd_main_tag{
+    margin-top:100px;
+    width: 800px;
+    height: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 22px;
+    font-weight: bold;
+}
+.proadd_form{
+    width:800px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+
+}
+.input_name{
+    width:800px;
+    height: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.input_name span{
+    width:150px;
+    height:50px;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    font-size: 20px;
+    font-weight: bold;
+    margin-right: 50px;
+}
+.input_name input{
+    width:400px;
+    height:40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding-left: 10px;
+    border:1px solid #e2e2e2;
+}
+.proaddBtn{
+    width:150px;
+    height: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 10px;
+    border:1px solid #e2e2e2;
+}
+
