@@ -6,7 +6,10 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
-import java.sql.Date;
+import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
 
 @Getter
 @Entity
@@ -19,13 +22,17 @@ public class Product {
     private int pro_price;
     private String email;
 
-    @Temporal(value = TemporalType.TIMESTAMP)
+    @OneToMany( mappedBy = "product")
+    private List<Img> img=new ArrayList<>();
+    @Temporal(TemporalType.TIMESTAMP)
     private Date pro_date;
+
 
     @Builder
     public Product(String pro_name,int pro_price,String email){
         this.pro_name=pro_name;
         this.pro_price=pro_price;
         this.email=email;
+        this.pro_date=new Date();
     }
 }

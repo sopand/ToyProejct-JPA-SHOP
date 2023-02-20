@@ -40,8 +40,6 @@ public class MemberController {
         }else{
             return "login";
         }
-
-
     }
     @PostMapping("/logout")
     public String deleteLogin(String email,HttpSession session){

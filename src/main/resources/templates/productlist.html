@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>ToyShop</title>
+    <link th:href="@{/css/reset2.css}" rel="stylesheet"/>
+    <link th:href="@{/css/reset.css}" rel="stylesheet"/>
+    <link th:href="@{/css/header.css}" rel="stylesheet"/>
+    <link th:href="@{/css/footer.css}" rel="stylesheet"/>
+    <link th:href="@{/css/index.css}" rel="stylesheet"/>
+    <script
+            src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script type="text/javascript" th:src="@{/css/js/login.js}"></script>
+</head>
+<body>
+<div id="container">
+    <header th:replace="header :: header"></header>
+    <main id="prolist_main_con">
+        <div class="prolist_main_box">
+            <div class="prolist_main_text">
+                <p>All Product List</p>
+            </div>
+            <div class="prolist_main_searchbox"></div>
+            <div class="prolist_main_listbox">
+                <ul class="prolist_main_list">
+                    <li class="prolist_list_img"></li>
+                    <li class="prolist_list_name"></li>
+                    <li class="prolist_list_price"></li>
+                </ul>
+
+
+            </div>
+        </div>
+
+    </main>
+    <footer id="index-foo_con"></footer>
+</div>
+
+</body>
+</html>

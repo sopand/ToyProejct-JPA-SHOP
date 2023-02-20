@@ -21,7 +21,7 @@
                 <p>제품 정보 등록</p>
 
             </div>
-            <form th:action="@{/products}" class="proadd_form" >
+            <form th:action="@{/products}" th:method="post" class="proadd_form" enctype="multipart/form-data" >
                 <label class="input_name">
                     <span>제품명 : </span>
                     <input type="text" name="pro_name">
@@ -32,11 +32,11 @@
                 </label>
                 <label class="input_name">
                     <span>판매자 : </span>
-                    <input type="text" name="email">
+                    <input type="text" name="email" th:value="${session.email}" readonly >
                 </label>
                 <label class="input_name">
                     <span>상품 이미지 업로드</span>
-                    <input type="file" name="img" style="display: none">
+                    <input type="file" name="imgList"  multiple>
                 </label>
                 <button type="submit" class="proaddBtn"> 제품 등록</button>
             </form>

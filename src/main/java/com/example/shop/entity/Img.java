@@ -1,9 +1,6 @@
 package com.example.shop.entity;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 import lombok.AccessLevel;
 import lombok.Builder;
 import lombok.Getter;
@@ -21,11 +18,15 @@ public class Img {
     private String img_name;
     private String img_original;
 
-    private String pro_name;
+    @ManyToOne
+    @JoinColumn(name = "pro_id")
+    private Product product;
+
     @Builder
-    public Img(String img_name,String img_original,String pro_name){
+    public Img(String img_name,String img_original,Product product){
         this.img_name=img_name;
         this.img_original=img_original;
-        this.pro_name=pro_name;
+        this.product=product;
     }
+
 }
