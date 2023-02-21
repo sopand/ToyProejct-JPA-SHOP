@@ -12,10 +12,12 @@ public class MemberResponse {
     private String tel;
     private String address;
 
+    private Long id;
     public MemberResponse(Member entity){
         this.email=entity.getEmail();
         this.pwd=entity.getPwd();
         this.tel=entity.getTel();
         this.address=entity.getAddress();
+        this.id=entity.getId();
     }
 }

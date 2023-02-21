@@ -1,15 +1,21 @@
 package com.example.shop.controller;
 
 
+import com.example.shop.dto.MemberResponse;
+import com.example.shop.dto.ProductResponse;
 import com.example.shop.dto.ProductReuqest;
 import com.example.shop.entity.Product;
+import com.example.shop.service.MemberService;
 import com.example.shop.service.ProductService;
+import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
+import org.springframework.data.querydsl.QPageRequest;
 import org.springframework.data.web.PageableDefault;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -24,19 +30,22 @@ import java.util.List;
 @RequestMapping("/products")
 public class ProductController {
     private final ProductService productService;
+    private final MemberService memberService;
     @GetMapping("")
     public String loadProudctAdd(){
         return "productadd";
     }
     @PostMapping("")
-    public String createProduct(ProductReuqest request) throws IOException {
-        productService.createProduct(request);
+    public String createProduct(ProductReuqest request,HttpSession session) throws IOException {
+        productService.createProduct(request,(Long)session.getAttribute("id"));
+
         return "index";
     }
     @GetMapping("/list")
-    public String findProducts(){
-        PageRequest page = PageRequest.of(0, 10, Sort.by("pro_id").descending());
-        productService.findProducts(page);
+    public String findProducts(Model model,@PageableDefault(page = 0,size = 10,sort ="proid",direction = Sort.Direction.DESC) Pageable pageable){
+        List<ProductResponse> pagingProducts= productService.findProducts(pageable);
+
+        model.addAttribute("pagingProducts",pagingProducts);
         return "productlist";
     }
 }

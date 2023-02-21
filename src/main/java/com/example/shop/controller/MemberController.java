@@ -36,6 +36,7 @@ public class MemberController {
         MemberResponse findMember = memberService.hasMember(request);
         if (findMember !=null) {
             session.setAttribute("email", findMember.getEmail());
+            session.setAttribute("id", findMember.getId());
             return "redirect:/index";
         }else{
             return "login";
@@ -43,7 +44,6 @@ public class MemberController {
     }
     @PostMapping("/logout")
     public String deleteLogin(String email,HttpSession session){
-
         session.removeAttribute("email");
         return "index";
     }

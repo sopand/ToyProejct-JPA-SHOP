@@ -13,19 +13,24 @@ public class Img {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long img_id;
+    @Column(name = "img_id")
+    private Long imgid;
 
-    private String img_name;
-    private String img_original;
+
+    @Column(name = "img_name")
+    private String imgname;
+
+    @Column(name = "img_original")
+    private String imgoriginal;
 
     @ManyToOne
     @JoinColumn(name = "pro_id")
     private Product product;
 
     @Builder
-    public Img(String img_name,String img_original,Product product){
-        this.img_name=img_name;
-        this.img_original=img_original;
+    public Img(String imgname,String imgoriginal,Product product){
+        this.imgname=imgname;
+        this.imgoriginal=imgoriginal;
         this.product=product;
     }
 
