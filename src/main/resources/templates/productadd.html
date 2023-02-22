@@ -5,44 +5,59 @@
     <title>ToyShop</title>
     <link th:href="@{/css/reset2.css}" rel="stylesheet"/>
     <link th:href="@{/css/reset.css}" rel="stylesheet"/>
-    <link th:href="@{/css/header.css}" rel="stylesheet"/>
-    <link th:href="@{/css/footer.css}" rel="stylesheet"/>
     <link th:href="@{/css/productadd.css}" rel="stylesheet"/>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,0,0"/>
     <script
             src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-    <script type="text/javascript" th:src="@{/css/js/login.js}"></script>
+    <script type="text/javascript" th:src="@{/css/js/productadd.js}"></script>
 </head>
 <body>
 <div id="container">
-    <header th:replace="header :: header"></header>
+    <header id="proadd_hed_con">
+        <div class="proadd_hed_box">
+            <span class="proadd_hed_text">
+             제품정보 등록페이지
+             </span>
+
+        </div>
+    </header>
     <main id="proadd_main_con">
-        <div class="proadd_main_box">
+        <form th:action="@{/products}" th:method="post" class="proadd_form" enctype="multipart/form-data">
             <div class="proadd_main_tag">
                 <p>제품 정보 등록</p>
-
             </div>
-            <form th:action="@{/products}" th:method="post" class="proadd_form" enctype="multipart/form-data" >
-                <label class="input_name">
-                    <span>제품명 : </span>
-                    <input type="text" name="pro_name">
-                </label>
-                <label class="input_name">
-                    <span>제품가격 : </span>
-                    <input type="text" name="pro_price">
-                </label>
-                <label class="input_name">
-                    <span>판매자 : </span>
-                    <input type="text" name="email" th:value="${session.email}" readonly >
-                </label>
-                <label class="input_name">
-                    <span>상품 이미지 업로드</span>
-                    <input type="file" name="imgList"  multiple>
-                </label>
-                <button type="submit" class="proaddBtn"> 제품 등록</button>
-            </form>
-        </div>
+
+            <label class="input_name">
+                <span>제품명 : </span>
+                <input type="text" name="proname">
+            </label>
+            <label class="input_name">
+                <span>제품가격 : </span>
+                <input type="text" name="proprice">
+            </label>
+            <label class="input_name">
+                <span>판매자 : </span>
+                <input type="text" name="email" th:value="${session.email}" readonly>
+            </label>
+            <label class="input_file">
+                <span> 상품이미지</span>
+                <input type="file" name="imgList" multiple>
+            </label>
+            <label class="input_file">
+                <span> 제품설명파일</span>
+                <input type="file" name="textimgList" multiple>
+            </label>
+            <div class="btn_box">
+                <button type="submit" class="proaddBtn"> <span class="material-symbols-outlined">
+arrow_forward
+</span>
+                </button>
+                <a href="/index" class="main_tag"><span class="material-symbols-outlined">
+home
+</span></a>
+            </div>
+        </form>
     </main>
-    <footer id="index-foo_con"></footer>
 </div>
 
 </body>

@@ -1,11 +1,14 @@
 package com.example.shop.service;
 
+import com.example.shop.dto.ImgResponse;
 import com.example.shop.dto.MemberResponse;
 import com.example.shop.dto.ProductResponse;
 import com.example.shop.dto.ProductReuqest;
 import com.example.shop.entity.*;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
+import org.modelmapper.ModelMapper;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -17,10 +20,7 @@ import org.springframework.web.multipart.MultipartFile;
 import javax.swing.text.html.Option;
 import java.io.File;
 import java.io.IOException;
-import java.util.Collections;
-import java.util.List;
-import java.util.Optional;
-import java.util.UUID;
+import java.util.*;
 import java.util.stream.Collectors;
 
 @Service
@@ -32,6 +32,7 @@ public class ProductService {
     private final ProductRepository productRepository;
     private final ImgRepository imgRepository;
     private final MemberRepository memberRepository;
+
 
     public void createProduct(ProductReuqest request, Long id) throws IOException {
         System.out.println("id = " + id);
@@ -55,10 +56,28 @@ public class ProductService {
         }
     }
 
-    public List<ProductResponse> findProducts(Pageable page) {
+    public Map<String,Object> findProducts(Pageable page) {
+        List<ImgResponse> imgList=new ArrayList<>();
+        Page<Product> productLimit=productRepository.findAll(page);
+        List<ProductResponse> productList=productLimit.stream().map(ProductResponse::new).collect(Collectors.toList());
 
-        return productRepository.findAll(page).stream().map(ProductResponse::new).collect(Collectors.toList());
+        for(ProductResponse pro: productList){
+            imgList.addAll(pro.getImg().stream().map(ImgResponse::new).collect(Collectors.toList()));
+        }
+        Map<String, Object> pagingMap = new HashMap<>();
+        int nowPage = productLimit.getPageable().getPageNumber() + 1;
+        int startPage = Math.max(nowPage - 4, 1);
+        int endPage = Math.min(nowPage + 5, productLimit.getTotalPages());
+        pagingMap.put("imgList", imgList);
+        pagingMap.put("startPage",startPage);
+        pagingMap.put("nowPage",nowPage);
+        pagingMap.put("endPage",endPage);
+        pagingMap.put("productList", productList);
+        return pagingMap;
+    }
 
+    public ProductResponse findProduct(Long proid){
+        return new ProductResponse(productRepository.findByProid(proid));
     }
 
 

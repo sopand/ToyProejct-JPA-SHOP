@@ -23,7 +23,7 @@ public class Img {
     @Column(name = "img_original")
     private String imgoriginal;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "pro_id")
     private Product product;
 

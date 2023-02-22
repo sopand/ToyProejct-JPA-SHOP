@@ -4,20 +4,49 @@
     align-items: center;
     justify-content: center;
     flex-direction: column;
+    padding-bottom:200px;
 }
+
+#proadd_hed_con{
+    width:100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #4285F4;
+}
+.proadd_hed_box{
+    width:1200px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    font-weight: bold;
+    color:white;
+    padding: 20px;
+}
+.proadd_hed_text{
+    font-size: 24px;
+}
+
+
+
+
+
+
+
+
+
+/*-===========-=-=-=-=-=-=*/
+
+
+
+
 #proadd_main_con{
     width:100%;
     display: flex;
     align-items: center;
     justify-content: center;
 }
-.proadd_main_box{
-    width:800px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-direction: column;
-}
+
 .proadd_main_tag{
     margin-top:100px;
     width: 800px;
@@ -36,8 +65,10 @@
     flex-direction: column;
 
 }
+
+
 .input_name{
-    width:800px;
+    width:600px;
     height: 50px;
     display: flex;
     align-items: center;
@@ -55,6 +86,7 @@
 }
 .input_name input{
     width:400px;
+    border-radius: 5px;
     height:40px;
     display: flex;
     align-items: center;
@@ -62,13 +94,75 @@
     padding-left: 10px;
     border:1px solid #e2e2e2;
 }
+
+.input_file{
+    margin-top:30px;
+    width:600px;
+    flex-direction: column;
+    background-color: #4285F4;
+    display: flex;
+    justify-content: center;
+    border-radius: 10px;
+    color:white;
+    font-size: 22px;
+    font-weight: bold;
+
+}
+.input_file span{
+    width: 200px;
+    height: 40px;
+    margin-left: 100px;
+    display: flex;
+    align-items: center;
+}
+.input_file input{
+    width:200px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    margin-left: 100px;
+
+}
+
+.btn_box{
+    width:200px;
+    margin-left: 500px;
+    margin-top:200px;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+
+}
 .proaddBtn{
-    width:150px;
-    height: 50px;
+    width:80px;
+    height: 80px;
     display: flex;
     align-items: center;
     justify-content: center;
     border-radius: 10px;
     border:1px solid #e2e2e2;
+    background-color: #4285F4;
+    color:white;
+    margin-right: 30px;
+}
+.proaddBtn span{
+    font-size: 26px;
+    font-weight: bold;
+
+}
+.main_tag{
+    color: white;
+    border-radius: 10px;
+    width:80px;
+    height: 80px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #4285F4;
+}
+.main_tag span{
+    font-size: 26px;
+    font-weight: bold;
 }
 

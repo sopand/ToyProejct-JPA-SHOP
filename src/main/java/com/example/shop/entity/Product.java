@@ -32,7 +32,7 @@ public class Product {
 
 
     @OneToMany(mappedBy = "product")
-    private List<Img> img=new ArrayList<>();
+    private List<Img> img;
     @Temporal(TemporalType.TIMESTAMP)
     @Column(name="pro_date")
     private Date prodate;

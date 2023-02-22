@@ -7,7 +7,7 @@
     <link th:href="@{/css/reset.css}" rel="stylesheet"/>
     <link th:href="@{/css/header.css}" rel="stylesheet"/>
     <link th:href="@{/css/footer.css}" rel="stylesheet"/>
-    <link th:href="@{/css/index.css}" rel="stylesheet"/>
+    <link th:href="@{/css/productlist.css}" rel="stylesheet"/>
     <script
             src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script type="text/javascript" th:src="@{/css/js/login.js}"></script>
@@ -20,18 +20,29 @@
             <div class="prolist_main_text">
                 <p>All Product List</p>
             </div>
-            <div class="prolist_main_searchbox"></div>
+            <form class="prolist_main_searchbox">
+                <input type="search" name="search" placeholder="검색할 제품">
+                <button type="submit">검색</button>
+            </form>
             <div class="prolist_main_listbox">
-                <ul class="prolist_main_list">
-                    <li class="prolist_list_img"></li>
-                    <li class="prolist_list_name"></li>
-                    <li class="prolist_list_price"></li>
-                </ul>
-
-
+                <div class="prolist_main_list" th:if="${pagingProducts}!=null"
+                     th:each="product :${pagingProducts['productList']}">
+                    <div class="prolist_list_img"><a th:href="|/products/${product.proid}/detail|"><img th:src="|/projectimg/${img.img_name}|"
+                                                                   th:each="img :${pagingProducts['imgList']}"
+                                                                   th:if="${img.pro_id}==${product.proid}"></a></div>
+                    <div class="prolist_list_textbox">
+                        <div class="prolist_list_name"><a href="#" th:text="|제품명:${product.proname}|">제품명</a></div>
+                        <div class="prolist_list_price" th:text="|가격 :${product.proprice}|">가격</div>
+                    </div>
+                </div>
             </div>
         </div>
-
+        <div class="btnbox">
+            <th:block th:each="page : ${#numbers.sequence(pagingProducts['startPage'], pagingProducts['endPage'])}">
+                <a th:if="${page != pagingProducts['nowPage']}" th:href="@{/products/list(page = ${page - 1})}" th:text="${page}"></a>
+                <strong th:if="${page == pagingProducts['nowPage']}" th:text="${page}" style="color : red;font-weight:bold;font-size: 18px"></strong>
+            </th:block>
+        </div>
     </main>
     <footer id="index-foo_con"></footer>
 </div>

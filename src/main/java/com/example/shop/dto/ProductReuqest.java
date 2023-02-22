@@ -17,6 +17,9 @@ public class ProductReuqest {
     private int proprice;
     private Member member;
     private List<MultipartFile> imgList;
+    private List<MultipartFile> textimgList;
+
+
 
     public Product productEntity() {
         return Product.builder().proname(proname).proprice(proprice).member(member).build();

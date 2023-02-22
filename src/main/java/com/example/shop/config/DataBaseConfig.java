@@ -2,6 +2,7 @@ package com.example.shop.config;
 
 import com.zaxxer.hikari.HikariConfig;
 import com.zaxxer.hikari.HikariDataSource;
+import org.modelmapper.ModelMapper;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -12,6 +13,8 @@ import javax.sql.DataSource;
 @Configuration
 @PropertySource("classpath:/application.properties")
 public class DataBaseConfig {
+
+
 
     @Bean
     @ConfigurationProperties(prefix = "spring.datasource.hikari")

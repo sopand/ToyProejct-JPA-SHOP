@@ -34,4 +34,8 @@ public class Member {
         this.tel = tel;
     }
 
+    public interface FindMemberId {
+        Long getId();
+    }
+
 }

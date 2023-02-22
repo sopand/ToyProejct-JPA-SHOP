@@ -1,0 +1,134 @@
+#container {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+}
+
+/*==========================================*/
+
+#detail_main_con {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.detail_main_box {
+    width: 1400px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    border: 1px solid blue;
+}
+
+.detail_text_box {
+    width: 1200px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.detail_text_left_box {
+    width: 600px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 50px;
+}
+
+.detail_text_left_box img {
+    width: 500px;
+    height: 500px;
+}
+
+.detail_text_right_box {
+    width: 600px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+}
+
+.text_tag_label {
+    width: 600px;
+    display: flex;
+    align-items: center;
+}
+
+.text_tag {
+    width: 600px;
+    height: 50px;
+    border-bottom: 1px solid #e2e2e2;
+    display: flex;
+    align-items: center;
+    margin-left: 50px;
+}
+
+.buyer_box {
+    width: 600px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 50px;
+}
+
+.input_label {
+    width: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    margin:10px;
+}
+
+.input_label span {
+    width: 50px;
+    height: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.input_label input {
+    width: 50px;
+    height: 30px;
+    padding-left:10px;
+    font-size: 16px;
+    font-weight: bold;
+    border:2px solid #e2e2e2;
+}
+
+.buyer_box button {
+    width: 150px;
+    height: 50px;
+    border: 1px solid #e2e2e2;
+    background-color: #4285F4;
+    color: white;
+    margin: 10px;
+}
+
+#favoritebtn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    background-color: #fff;
+    width: 50px;
+    height: 50px;
+    color: black;
+}
+
+#firebtn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    background-color: #fff;
+    width: 50px;
+    height: 50px;
+    color: black;
+    margin: 0px;
+}
