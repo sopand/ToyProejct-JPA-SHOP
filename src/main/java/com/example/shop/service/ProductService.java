@@ -1,23 +1,14 @@
 package com.example.shop.service;
 
-import com.example.shop.dto.ImgResponse;
-import com.example.shop.dto.MemberResponse;
-import com.example.shop.dto.ProductResponse;
-import com.example.shop.dto.ProductReuqest;
+import com.example.shop.dto.*;
 import com.example.shop.entity.*;
-import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
-import org.modelmapper.ModelMapper;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
-import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
-import javax.swing.text.html.Option;
 import java.io.File;
 import java.io.IOException;
 import java.util.*;
@@ -32,30 +23,35 @@ public class ProductService {
     private final ProductRepository productRepository;
     private final ImgRepository imgRepository;
     private final MemberRepository memberRepository;
+    private final OptionRepository optionRepository;
 
 
-    public void createProduct(ProductReuqest request, Long id) throws IOException {
-        System.out.println("id = " + id);
+    public void fileUpload(MultipartFile file,String img_type,Product p) throws IOException{
+        String img_original = file.getOriginalFilename(); // 입력한 원본 파일의 이름
+        String uuid = String.valueOf(UUID.randomUUID()); // toString 보다는 valueOf를 추천 , NPE에러 예방,
+        String extension = img_original.substring(img_original.lastIndexOf(".")); // 원본파일의 파일확장자
+        String savedName = uuid + extension; // 랜덤이름 + 확장자
+        File converFile = new File(path, savedName); // path = 상품 이미지 파일의 저장 경로가 들어있는 프로퍼티 설정값
+        if (!converFile.exists()) {
+            converFile.mkdirs();
+        }
+        file.transferTo(converFile);
+        Img i = Img.builder().imgname(savedName).imgoriginal(img_original).imgtype(img_type).product(p).build();
+        imgRepository.save(i);
+    }
+    public Long createProduct(ProductRequest request, Long id) throws IOException {
         Member m= Member.builder().id(id).build();
         request.setMember(m);
         Product p = productRepository.save(request.productEntity());
-        for (MultipartFile file : request.getImgList()) {
-            if (!file.isEmpty()) {
-                String img_original = file.getOriginalFilename(); // 입력한 원본 파일의 이름
-                String uuid = String.valueOf(UUID.randomUUID()); // toString 보다는 valueOf를 추천 , NPE에러 예방,
-                String extension = img_original.substring(img_original.lastIndexOf(".")); // 원본파일의 파일확장자
-                String savedName = uuid + extension; // 랜덤이름 + 확장자
-                File converFile = new File(path, savedName); // path = 상품 이미지 파일의 저장 경로가 들어있는 프로퍼티 설정값
-                if (!converFile.exists()) {
-                    converFile.mkdirs();
-                }
-                file.transferTo(converFile); // --- 실제로 저장을 시켜주는 부분 , 해당 경로에 접근할 수 있는 권한이 없으면 에러 발생
-                Img i = Img.builder().imgname(savedName).imgoriginal(img_original).product(p).build();
-                imgRepository.save(i);
-            }
+        for(MultipartFile imgFile:request.getImgList()){
+            fileUpload(imgFile,StaticType.ProductImg.name(),p);
         }
-    }
+        for(MultipartFile textimgFile:request.getTextimgList()){
+            fileUpload(textimgFile,StaticType.ProductTextImg.name(),p);
+        }
+    return p.getProid();
 
+    }
     public Map<String,Object> findProducts(Pageable page) {
         List<ImgResponse> imgList=new ArrayList<>();
         Page<Product> productLimit=productRepository.findAll(page);
@@ -77,8 +73,28 @@ public class ProductService {
     }
 
     public ProductResponse findProduct(Long proid){
+
         return new ProductResponse(productRepository.findByProid(proid));
     }
+    public void createOption(ProductRequest request){
+
+        Product findProduct =productRepository.findByProid(request.getProid());
+        if(request.getOpt1()==null){
+            for(int i=0;i<request.getOpt2().size();i++){
+                Option opt= Option.builder().opt2(request.getOpt2().get(i)).optquantity(request.getOptquantity().get(i)).product(findProduct).build();
+                optionRepository.save(opt);
+            }
+        }else{
+            for(int i=0;i<request.getOpt2().size();i++){
+                Option opt= Option.builder().opt1(request.getOpt1()).opt2(request.getOpt2().get(i)).optquantity(request.getOptquantity().get(i)).product(findProduct).build();
+                optionRepository.save(opt);
+            }
+        }
+
+
+
+    }
+
 
 
 }

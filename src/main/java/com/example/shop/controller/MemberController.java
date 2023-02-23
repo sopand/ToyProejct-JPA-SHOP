@@ -2,7 +2,6 @@ package com.example.shop.controller;
 
 import com.example.shop.dto.MemberRequest;
 import com.example.shop.dto.MemberResponse;
-import com.example.shop.entity.Member;
 import com.example.shop.service.MemberService;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;

@@ -1,5 +1,6 @@
 package com.example.shop.entity;
 
+import com.example.shop.dto.StaticType;
 import jakarta.persistence.*;
 import lombok.AccessLevel;
 import lombok.Builder;
@@ -27,11 +28,15 @@ public class Img {
     @JoinColumn(name = "pro_id")
     private Product product;
 
+    @Column(name = "img_type")
+    private String imgtype;
+
     @Builder
-    public Img(String imgname,String imgoriginal,Product product){
+    public Img(String imgname,String imgoriginal,Product product,String imgtype){
         this.imgname=imgname;
         this.imgoriginal=imgoriginal;
         this.product=product;
+        this.imgtype=imgtype;
     }
 
 }

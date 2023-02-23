@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>ToyShop</title>
+    <link th:href="@{/css/reset2.css}" rel="stylesheet"/>
+    <link th:href="@{/css/reset.css}" rel="stylesheet"/>
+    <link th:href="@{/css/optadd.css}" rel="stylesheet"/>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,0,0"/>
+    <script
+            src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script type="text/javascript" th:src="@{/css/js/optadd.js}"></script>
+</head>
+<body>
+<div id="container">
+    <header id="proadd_hed_con">
+        <div class="proadd_hed_box">
+            <span class="proadd_hed_text">
+             옵션정보 등록페이지
+             </span>
+
+        </div>
+    </header>
+    <main id="opt_add_con">
+        <form th:action="@{/products/option}" class="opt_add_box" id="opt2" method="post">
+            <div class="opt_add_select">
+                <button type="button" class="optbtn">1옵션</button>
+                <button type="button" class="optbtn2">2옵션</button>
+            </div>
+            <div class="opt_add_tag">
+                <input name="opt1" type="text" placeholder="대분류">
+            </div>
+            <div class="opt_add_tag">
+                <input name="opt2" type="text" placeholder="입력">
+                <input name="opt2" type="text" placeholder="입력">
+                <input name="opt2" type="text" placeholder="입력">
+                <input name="opt2" type="text" placeholder="입력">
+                <input name="opt2" type="text" placeholder="입력">
+                <input name="opt2" type="text" placeholder="입력">
+                <input name="opt2" type="text" placeholder="입력">
+
+            </div>
+            <div class="opt_add_tag2">
+                <input name="optquantity" type="text" placeholder="수량">
+                <input name="optquantity" type="text" placeholder="수량">
+                <input name="optquantity" type="text" placeholder="수량">
+                <input name="optquantity" type="text" placeholder="수량">
+                <input name="optquantity" type="text" placeholder="수량">
+                <input name="optquantity" type="text" placeholder="수량">
+                <input name="optquantity" type="text" placeholder="수량">
+            </div>
+        </form>
+
+        <form th:action="@{/products/option}" class="opt_add_box" id="opt1" method="post">
+            <input name="proid" type="hidden" th:value="${proid}">
+            <div class="opt_add_select">
+                <button type="button" class="optbtn">1옵션</button>
+                <button type="button" class="optbtn2">2옵션</button>
+            </div>
+            <div class="opt_add_tag">
+                <input name="opt2" type="text" placeholder="대분류">
+                <input name="opt2" type="text" placeholder="대분류">
+                <input name="opt2" type="text" placeholder="대분류">
+                <input name="opt2" type="text" placeholder="대분류">
+                <input name="opt2" type="text" placeholder="대분류">
+                <input name="opt2" type="text" placeholder="대분류">
+                <input name="opt2" type="text" placeholder="대분류">
+            </div>
+
+            <div class="opt_add_tag2">
+                <input name="optquantity" type="text" placeholder="수량">
+                <input name="optquantity" type="text" placeholder="수량">
+                <input name="optquantity" type="text" placeholder="수량">
+                <input name="optquantity" type="text" placeholder="수량">
+                <input name="optquantity" type="text" placeholder="수량">
+                <input name="optquantity" type="text" placeholder="수량">
+                <input name="optquantity" type="text" placeholder="수량">
+            </div>
+        </form>
+
+
+        <div class="btn_box">
+            <a href="javascript:void(0)" class="optadd">
+                <span class="material-symbols-outlined">arrow_forward</span>
+            </a>
+            <a href="/index" class="main_tag">
+                <span class="material-symbols-outlined">home</span>
+            </a>
+
+
+        </div>
+
+
+    </main>
+</div>
+
+</body>
+</html>
