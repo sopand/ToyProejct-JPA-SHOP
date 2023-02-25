@@ -6,11 +6,10 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import org.apache.ibatis.annotations.Many;
+import org.hibernate.annotations.BatchSize;
 
 import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
+import java.util.*;
 
 @Getter
 @Entity
@@ -24,25 +23,37 @@ public class Product {
     @Column(name = "pro_name")
     private String proname;
 
+
     @Column(name = "pro_price")
     private int proprice;
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name="id")
     private Member member;
 
+    @Column(name="pro_category")
+    private String procategory;
 
-    @OneToMany(mappedBy = "product")
-    private List<Img> img;
+
+
+    @OneToMany(mappedBy = "product",cascade = CascadeType.ALL)
+    @OrderBy("imgid asc")
+    private Set<Img> img=new LinkedHashSet<>();
     @Temporal(TemporalType.TIMESTAMP)
     @Column(name="pro_date")
     private Date prodate;
 
 
+    @OneToMany(mappedBy ="product",cascade = CascadeType.ALL)
+    @OrderBy("optid asc")
+    private Set<Option> option=new LinkedHashSet<>();
+
+
     @Builder
-    public Product(String proname,int proprice,Long id,Member member){
+    public Product(String proname,int proprice,Long id,String procategory,Member member){
         this.proname=proname;
         this.proprice=proprice;
         this.prodate=new Date();
+        this.procategory=procategory;
         this.member=member;
     }
 }

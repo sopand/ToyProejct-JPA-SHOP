@@ -8,15 +8,18 @@ import lombok.ToString;
 @Getter
 @ToString
 public class ImgResponse {
-    private String img_name;
-    private String img_original;
-    private Long pro_id;
+    private String imgname;
+    private String imgoriginal;
+    private Long proid;
+    private Long imgid;
 
-    private Long img_id;
+    private String imgtype;
     public ImgResponse(Img entity){
-        this.img_name=entity.getImgname();
-        this.pro_id=entity.getProduct().getProid();
-        this.img_original=entity.getImgoriginal();
-        this.img_id=entity.getImgid();
+        this.imgname=entity.getImgname();
+        this.proid=entity.getProduct().getProid();
+        this.imgoriginal=entity.getImgoriginal();
+        this.imgid=entity.getImgid();
+        this.imgtype=entity.getImgtype();
     }
+
 }

@@ -2,6 +2,7 @@ package com.example.shop.service;
 
 import com.example.shop.dto.*;
 import com.example.shop.entity.*;
+import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.domain.Page;
@@ -25,8 +26,8 @@ public class ProductService {
     private final MemberRepository memberRepository;
     private final OptionRepository optionRepository;
 
-
-    public void fileUpload(MultipartFile file,String img_type,Product p) throws IOException{
+    @Transactional
+    public void fileUpload(MultipartFile file, String img_type, Product p) throws IOException {
         String img_original = file.getOriginalFilename(); // 입력한 원본 파일의 이름
         String uuid = String.valueOf(UUID.randomUUID()); // toString 보다는 valueOf를 추천 , NPE에러 예방,
         String extension = img_original.substring(img_original.lastIndexOf(".")); // 원본파일의 파일확장자
@@ -39,62 +40,60 @@ public class ProductService {
         Img i = Img.builder().imgname(savedName).imgoriginal(img_original).imgtype(img_type).product(p).build();
         imgRepository.save(i);
     }
+
+    @Transactional
     public Long createProduct(ProductRequest request, Long id) throws IOException {
-        Member m= Member.builder().id(id).build();
+        Member m = Member.builder().id(id).build();
         request.setMember(m);
         Product p = productRepository.save(request.productEntity());
-        for(MultipartFile imgFile:request.getImgList()){
-            fileUpload(imgFile,StaticType.ProductImg.name(),p);
+        for (MultipartFile imgFile : request.getImgList()) {
+            fileUpload(imgFile, StaticType.ProductImg.name(), p);
         }
-        for(MultipartFile textimgFile:request.getTextimgList()){
-            fileUpload(textimgFile,StaticType.ProductTextImg.name(),p);
+        for (MultipartFile textimgFile : request.getTextimgList()) {
+            fileUpload(textimgFile, StaticType.ProductTextImg.name(), p);
         }
-    return p.getProid();
+        return p.getProid();
 
     }
-    public Map<String,Object> findProducts(Pageable page) {
-        List<ImgResponse> imgList=new ArrayList<>();
-        Page<Product> productLimit=productRepository.findAll(page);
-        List<ProductResponse> productList=productLimit.stream().map(ProductResponse::new).collect(Collectors.toList());
 
-        for(ProductResponse pro: productList){
-            imgList.addAll(pro.getImg().stream().map(ImgResponse::new).collect(Collectors.toList()));
-        }
+    public Map<String, Object> findProducts(Pageable page) {
+        Page<Product> productLimit = productRepository.findAll(page);
+        List<ProductResponse> productList = productLimit.stream().map(ProductResponse::new).collect(Collectors.toList());
+        System.out.println("productList dscdscdscdscds= " + productList);
         Map<String, Object> pagingMap = new HashMap<>();
         int nowPage = productLimit.getPageable().getPageNumber() + 1;
         int startPage = Math.max(nowPage - 4, 1);
         int endPage = Math.min(nowPage + 5, productLimit.getTotalPages());
-        pagingMap.put("imgList", imgList);
-        pagingMap.put("startPage",startPage);
-        pagingMap.put("nowPage",nowPage);
-        pagingMap.put("endPage",endPage);
+        pagingMap.put("startPage", startPage);
+        pagingMap.put("nowPage", nowPage);
+        pagingMap.put("endPage", endPage);
         pagingMap.put("productList", productList);
         return pagingMap;
     }
 
-    public ProductResponse findProduct(Long proid){
+    public ProductResponse findProduct(Long proid) {
 
-        return new ProductResponse(productRepository.findByProid(proid));
+        return new ProductResponse(productRepository.findByProduct(proid));
     }
-    public void createOption(ProductRequest request){
 
-        Product findProduct =productRepository.findByProid(request.getProid());
-        if(request.getOpt1()==null){
-            for(int i=0;i<request.getOpt2().size();i++){
-                Option opt= Option.builder().opt2(request.getOpt2().get(i)).optquantity(request.getOptquantity().get(i)).product(findProduct).build();
+    @Transactional
+    public void createOption(ProductRequest request) {
+
+        Product findProduct = productRepository.findByProid(request.getProid());
+        if (request.getOpt1() == null) {
+            for (int i = 0; i < request.getOpt2().size(); i++) {
+                Option opt = Option.builder().opt2(request.getOpt2().get(i)).optquantity(request.getOptquantity().get(i)).product(findProduct).build();
                 optionRepository.save(opt);
             }
-        }else{
-            for(int i=0;i<request.getOpt2().size();i++){
-                Option opt= Option.builder().opt1(request.getOpt1()).opt2(request.getOpt2().get(i)).optquantity(request.getOptquantity().get(i)).product(findProduct).build();
+        } else {
+            for (int i = 0; i < request.getOpt2().size(); i++) {
+                Option opt = Option.builder().opt1(request.getOpt1()).opt2(request.getOpt2().get(i)).optquantity(request.getOptquantity().get(i)).product(findProduct).build();
                 optionRepository.save(opt);
             }
         }
 
 
-
     }
-
 
 
 }

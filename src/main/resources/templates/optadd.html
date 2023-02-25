@@ -50,9 +50,9 @@
                 <input name="optquantity" type="text" placeholder="수량">
             </div>
         </form>
-
+        <input name="proid" type="hidden" th:value="${proid}">
         <form th:action="@{/products/option}" class="opt_add_box" id="opt1" method="post">
-            <input name="proid" type="hidden" th:value="${proid}">
+
             <div class="opt_add_select">
                 <button type="button" class="optbtn">1옵션</button>
                 <button type="button" class="optbtn2">2옵션</button>

@@ -27,9 +27,10 @@
             <div class="prolist_main_listbox">
                 <div class="prolist_main_list" th:if="${pagingProducts}!=null"
                      th:each="product :${pagingProducts['productList']}">
-                    <div class="prolist_list_img"><a th:href="|/products/${product.proid}/detail|"><img th:src="|/projectimg/${img.img_name}|"
-                                                                   th:each="img :${pagingProducts['imgList']}"
-                                                                   th:if="${img.pro_id}==${product.proid}"></a></div>
+                    <div class="prolist_list_img">
+                        <a th:href="|/products/${product.proid}|">
+                            <img th:src="|/projectimg/${img.imgname}|"th:each="img :${product['img']}" th:if="${img.proid}==${product.proid}">
+                        </a></div>
                     <div class="prolist_list_textbox">
                         <div class="prolist_list_name"><a href="#" th:text="|제품명:${product.proname}|">제품명</a></div>
                         <div class="prolist_list_price" th:text="|가격 :${product.proprice}|">가격</div>

@@ -18,6 +18,8 @@ public class ProductRequest {
 
     private Long proid;
     private int proprice;
+
+    private String procategory;
     private Member member;
     private String opt1;
     private List<String> opt2;
@@ -28,6 +30,6 @@ public class ProductRequest {
 
 
     public Product productEntity() {
-        return Product.builder().proname(proname).proprice(proprice).member(member).build();
+        return Product.builder().proname(proname).proprice(proprice).procategory(procategory).member(member).build();
     }
 }
