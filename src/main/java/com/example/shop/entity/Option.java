@@ -24,7 +24,8 @@ public class Option {
     private Product product;
 
     @Builder
-    public Option(int optquantity,String opt1,String opt2,Product product){
+    public Option(Long optid,int optquantity,String opt1,String opt2,Product product){
+        this.optid=optid;
         this.optquantity=optquantity;
         this.opt1=opt1;
         this.opt2=opt2;

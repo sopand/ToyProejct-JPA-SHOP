@@ -28,7 +28,7 @@
                     <img th:src="|/projectimg/${findProduct.getImg[0].getImgname}|">
 
                 </div>
-                <form class="detail_text_right_box" th:if="${findProduct}!=null" method="post">
+                <div class="detail_text_right_box" th:if="${findProduct}!=null" >
                     <label class="text_tag_label">
                         <span class="text_tag" th:text="|상품명 : ${findProduct.getProname()}|"></span>
                     </label>
@@ -40,26 +40,23 @@
                     </label>
                     <label class="text_tag_label">
                         <select class="opt1" name="opt1" th:if="${findProduct['option'][0].getOpt1}!=null">
-                            <option></option>
+                            <option th:value="${option1}" th:each="option1:${findProduct['option1']}" th:text="${option1}"></option>
                         </select>
                     </label>
                     <label class="text_tag_label">
-                        <select class="opt2"  name="opt2" th:if="${findProduct['option'][0].getOpt1}==null">
-                            <option th:value="${opt2.opt2}" th:each="opt2:${findProduct['option']}" th:if="${opt2.getOpt1}==null" th:text="${opt2.2}"></option>
+                        <select class="opt2"  name="optid" th:if="${findProduct['option'][0].getOpt1}==null">
+                            <option th:value="${opt2.optid}" th:each="opt2:${findProduct['option']}" th:text="${opt2.opt2}"></option>
                         </select>
                     </label>
                     <label class="text_tag_label">
-                        <select class="opt2"  name="opt2" th:if="${findProduct['option'][0].getOpt1}!=null">
-                            <option th:value="${opt.opt2}" th:each="opt:${findProduct['option']}" th:if="${opt.opt1}==null" th:text="${opt.opt2}"></option>
+                        <select class="opt2"  name="optid" th:if="${findProduct['option'][0].getOpt1}!=null">
                         </select>
                     </label>
-                    <label class="text_tag_label">
-                        <span class="text_tag " th:text="|제품 등록일 : ${findProduct.getProdate()}|"></span>
-                    </label>
+
                     <div class="buyer_box" >
                         <label class="input_label">
                             <span>수량</span>
-                            <input type="number" th:value="|1|" class="quanttiy">
+                            <input type="number" th:value="|1|" class="quantity" name="ord_quantity">
                             <input type="hidden" class="proid" th:value="${findProduct.getProid()}">
                         </label>
                         <button type="button" id="buybtn">구매하기</button>
@@ -73,7 +70,7 @@
                         </button>
                     </div>
 
-                </form>
+                </div>
 
             </div>
             <div class="main_content_box">

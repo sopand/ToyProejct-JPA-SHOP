@@ -72,7 +72,6 @@ public class ProductService {
     }
 
     public ProductResponse findProduct(Long proid) {
-
         return new ProductResponse(productRepository.findByProduct(proid));
     }
 

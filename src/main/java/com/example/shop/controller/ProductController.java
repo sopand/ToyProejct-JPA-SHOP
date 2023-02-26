@@ -48,7 +48,6 @@ public class ProductController {
     public String findProduct(@PathVariable Long proid, Model model) {
         ProductResponse findProduct = productService.findProduct(proid);
         model.addAttribute("findProduct", findProduct);
-        System.out.println("asdsadsadsad"+findProduct.getOption());
         return "productdetail";
     }
 
@@ -63,7 +62,6 @@ public class ProductController {
     @PostMapping("/option")
     public String createOption(ProductRequest request) {
         productService.createOption(request);
-
         return "성공";
     }
 }

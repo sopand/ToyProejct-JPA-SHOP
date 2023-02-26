@@ -4,11 +4,9 @@ import jakarta.persistence.*;
 import lombok.AccessLevel;
 import lombok.Builder;
 import lombok.NoArgsConstructor;
-import org.hibernate.annotations.BatchSize;
 
 import java.util.Date;
 
-@BatchSize(size=100)
 @Entity
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @Table(name = "ord")
@@ -24,6 +22,11 @@ public class Order {
     @JoinColumn(name = "pro_id")
     private Product product;
 
+
+    @OneToOne
+    @JoinColumn(name="optid")
+    private Option option;
+
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name="id")
     private Member member;
@@ -37,8 +40,9 @@ public class Order {
     private int ordquantity;
 
     @Builder
-    public Order(Product product,Member member,int ordquantity){
+    public Order(Option option,Product product,Member member,int ordquantity){
         this.product=product;
+        this.option=option;
         this.member=member;
         this.ordquantity=ordquantity;
 

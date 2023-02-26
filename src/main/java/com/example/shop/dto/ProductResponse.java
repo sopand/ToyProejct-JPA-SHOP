@@ -27,6 +27,8 @@ public class ProductResponse {
     private List<OptionResponse> option=new ArrayList<>();
     private Date prodate;
 
+    private List<String> option1=new ArrayList<>();
+
     public ProductResponse(Product entity){
         this.proid=entity.getProid();
         this.proname=entity.getProname();
@@ -35,6 +37,11 @@ public class ProductResponse {
         this.procategory= entity.getProcategory();
         this.img=entity.getImg().stream().map(ImgResponse::new).toList();
         this.option=entity.getOption().stream().map(OptionResponse::new).toList();
+        if(option.get(0).getOpt1()!=null){
+            List<String> opt1List=option.stream().map(opt->new String(opt.getOpt1())).toList();
+            this.option1=opt1List.stream().distinct().toList();
+        }
+
     }
 
 

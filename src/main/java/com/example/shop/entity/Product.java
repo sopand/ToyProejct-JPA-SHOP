@@ -49,8 +49,9 @@ public class Product {
 
 
     @Builder
-    public Product(String proname,int proprice,Long id,String procategory,Member member){
+    public Product(Long proid,String proname,int proprice,Long id,String procategory,Member member){
         this.proname=proname;
+        this.proid=proid;
         this.proprice=proprice;
         this.prodate=new Date();
         this.procategory=procategory;

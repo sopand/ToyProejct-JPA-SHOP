@@ -18,6 +18,7 @@ public class OrderRequest {
     private int ord_quantity;
 
     private Long proid;
+    private Long optid;
 
 
     public Order toEntity(){
