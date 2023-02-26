@@ -39,11 +39,15 @@ public class Order {
     @Column(name = "ord_quantity")
     private int ordquantity;
 
+    @Column(name="ord_chk")
+    private String ordchk;
+
     @Builder
-    public Order(Option option,Product product,Member member,int ordquantity){
+    public Order(Option option,Product product,Member member,int ordquantity, String ordchk){
         this.product=product;
         this.option=option;
         this.member=member;
+        this.ordchk=ordchk;
         this.ordquantity=ordquantity;
 
     }

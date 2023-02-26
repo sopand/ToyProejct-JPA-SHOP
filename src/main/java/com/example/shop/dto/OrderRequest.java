@@ -15,13 +15,14 @@ import lombok.NoArgsConstructor;
 public class OrderRequest {
     private Product product;
     private Member member;
-    private int ord_quantity;
+    private int ordquantity;
 
+    private String ordchk;
     private Long proid;
     private Long optid;
 
 
     public Order toEntity(){
-        return Order.builder().product(product).member(member).ordquantity(ord_quantity).build();
+        return Order.builder().product(product).member(member).ordquantity(ordquantity).ordchk(ordchk).build();
     }
 }

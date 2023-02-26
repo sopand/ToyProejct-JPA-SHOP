@@ -16,10 +16,10 @@ public class OrderService {
     private final MemberRepository memberRepository;
 
     @Transactional
-    public void createBuy(OrderRequest request, Long id) {
+    public void createOrder(OrderRequest request, Long id) {
         Option option = Option.builder().optid(request.getOptid()).build();
         Member member = Member.builder().id(id).build();
         Product product = Product.builder().proid(request.getProid()).build();
-        orderRepository.save(Order.builder().option(option).member(member).product(product).ordquantity(request.getOrd_quantity()).build());
+        orderRepository.save(Order.builder().option(option).member(member).product(product).ordquantity(request.getOrdquantity()).ordchk(request.getOrdchk()).build());
     }
 }

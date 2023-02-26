@@ -25,23 +25,46 @@ $(function () {
     });
 
     $("#buybtn").click(function () {
-        const ord_quantity = $(".quantity").val();
+        const ordquantity = $(".quantity").val();
         const proid = $(".proid").val();
         const optid = $(".opt2").val();
-        alert(optid);
-        alert(proid);
-        alert(ord_quantity);
+        const ordchk= "구매";
         $.ajax({
             method: "post",
             url: "/orders",
             data: {
-                ord_quantity: ord_quantity,
+                ordquantity: ordquantity,
                 proid: proid,
-                optid:optid
+                optid:optid,
+                ordchk:ordchk
 
             },
             success: function () {
                     alert("구매완료");
+            },
+            error: function () {
+
+            }
+
+        });
+    });
+    $("#cartbtn").click(function () {
+        const ordquantity = $(".quantity").val();
+        const proid = $(".proid").val();
+        const optid = $(".opt2").val();
+        const ordchk= "구매";
+        $.ajax({
+            method: "post",
+            url: "/orders",
+            data: {
+                ordquantity: ordquantity,
+                proid: proid,
+                optid:optid,
+                ordchk:ordchk
+
+            },
+            success: function () {
+                alert("장바구니 추가완료");
             },
             error: function () {
 

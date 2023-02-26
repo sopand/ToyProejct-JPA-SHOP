@@ -22,8 +22,9 @@ public class OrderController {
     @PostMapping
     public String createBuy(OrderRequest order, HttpSession session) {
         Long id=(Long)session.getAttribute("id");
-        orderService.createBuy(order,id);
-        return "구매완료";
+        orderService.createOrder(order,id);
+        
+        return "추가 완료";
     }
 
 }
