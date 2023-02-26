@@ -3,11 +3,13 @@ package com.example.shop.entity;
 import jakarta.persistence.*;
 import lombok.AccessLevel;
 import lombok.Builder;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 import java.util.Date;
 
 @Entity
+@Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @Table(name = "ord")
 public class Order {
@@ -48,6 +50,7 @@ public class Order {
         this.option=option;
         this.member=member;
         this.ordchk=ordchk;
+        this.orddate=new Date();
         this.ordquantity=ordquantity;
 
     }

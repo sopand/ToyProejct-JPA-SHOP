@@ -1,6 +1,7 @@
 package com.example.shop.service;
 
 import com.example.shop.dto.OrderRequest;
+import com.example.shop.dto.OrderResponse;
 import com.example.shop.entity.*;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
@@ -16,10 +17,29 @@ public class OrderService {
     private final MemberRepository memberRepository;
 
     @Transactional
-    public void createOrder(OrderRequest request, Long id) {
-        Option option = Option.builder().optid(request.getOptid()).build();
+    public Long createOrder(OrderRequest request, Long id) {
+
         Member member = Member.builder().id(id).build();
         Product product = Product.builder().proid(request.getProid()).build();
-        orderRepository.save(Order.builder().option(option).member(member).product(product).ordquantity(request.getOrdquantity()).ordchk(request.getOrdchk()).build());
+        if(!request.getOrdchk().equals("찜하기")){
+            Option option = Option.builder().optid(request.getOptid()).build();
+           return orderRepository.save(request.create(product,member,option)).getOrdid();
+        }else{
+           return orderRepository.save(request.favorite(product,member)).getOrdid();
+        }
+
     }
+    public OrderResponse hasFavorite(Long proid, Long id){
+        Order order=orderRepository.findOrderByProid(proid,id);
+        if(order !=null){
+            return new OrderResponse(order);
+        }
+        return null;
+    }
+
+    public void deleteFavorite(Long ordid){
+         orderRepository.deleteById(ordid);
+
+    }
+
 }
