@@ -21,12 +21,28 @@ $(function () {
         },
         success: function (data) {
             console.log(data);
-            if(data!=null&&data!=''){
-                $(".favo").css("color","red");
+            if (data != null && data != '') {
+                $(".favo").css("color", "red");
                 $("#favoritebtn").val(data.ordid);
             }
         },
         error: function () {
+        }
+
+    });
+
+    $("#firebtn").click(function () {
+        $(".detail_modal_con").css("display", "flex");
+    });
+    $(document).mouseup(function (e) {
+        if ($(".detail_modal_con").has(e.target).length === 0) {
+            $(".detail_modal_con").hide();
+        }
+    });
+    $(document).keydown(function (e) {
+        let code = e.keyCode || e.which;
+        if (code == 27) { // 27은 ESC 키번호
+            $('.detail_modal_con').hide();
         }
 
     });
@@ -48,19 +64,19 @@ $(function () {
     $("#buybtn").click(function () {
         const ordquantity = $(".quantity").val();
         const optid = $(".opt2").val();
-        const ordchk= "구매";
+        const ordchk = "구매";
         $.ajax({
             method: "post",
             url: "/orders",
             data: {
                 ordquantity: ordquantity,
                 proid: proid,
-                optid:optid,
-                ordchk:ordchk
+                optid: optid,
+                ordchk: ordchk
 
             },
             success: function () {
-                    alert("구매완료");
+                alert("구매완료");
             },
             error: function () {
 
@@ -71,15 +87,15 @@ $(function () {
     $("#cartbtn").click(function () {
         const ordquantity = $(".quantity").val();
         const optid = $(".opt2").val();
-        const ordchk= "장바구니";
+        const ordchk = "장바구니";
         $.ajax({
             method: "post",
             url: "/orders",
             data: {
                 ordquantity: ordquantity,
                 proid: proid,
-                optid:optid,
-                ordchk:ordchk
+                optid: optid,
+                ordchk: ordchk
 
             },
             success: function () {
@@ -92,20 +108,20 @@ $(function () {
         });
     });
     $("#favoritebtn").click(function () {
-        const ordid=$(this).val();
-        const ordchk= "찜하기";
-        if(ordid==null||ordid==''){
+        const ordid = $(this).val();
+        const ordchk = "찜하기";
+        if (ordid == null || ordid == '') {
             $.ajax({
                 method: "post",
                 url: "/orders",
                 data: {
                     proid: proid,
-                    ordchk:ordchk
+                    ordchk: ordchk
 
                 },
                 success: function (data) {
                     alert("찜 완료");
-                    $(".favo").css("color","red");
+                    $(".favo").css("color", "red");
                     $("#favoritebtn").val(data);
                 },
                 error: function () {
@@ -113,7 +129,7 @@ $(function () {
                 }
 
             });
-        }else{
+        } else {
             console.log(ordid);
             $.ajax({
                 method: "delete",
@@ -123,7 +139,7 @@ $(function () {
                 },
                 success: function () {
                     alert("찜하기 취소");
-                    $(".favo").css("color","black");
+                    $(".favo").css("color", "black");
                     $("#favoritebtn").val('');
                 },
                 error: function () {

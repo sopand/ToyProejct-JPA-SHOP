@@ -14,7 +14,7 @@
     <script type="text/javascript" th:src="@{/css/js/productdetail.js}"></script>
     <script th:inline="javascript">
         /*<![CDATA[*/
-        const opt=/*[[${findProduct.option}]]*/"";
+        const opt =/*[[${findProduct.option}]]*/"";
         /*]]>*/
     </script>
 </head>
@@ -28,7 +28,7 @@
                     <img th:src="|/projectimg/${findProduct.getImg[0].getImgname}|">
 
                 </div>
-                <div class="detail_text_right_box" th:if="${findProduct}!=null" >
+                <div class="detail_text_right_box" th:if="${findProduct}!=null">
                     <label class="text_tag_label">
                         <span class="text_tag" th:text="|상품명 : ${findProduct.getProname()}|"></span>
                     </label>
@@ -44,16 +44,16 @@
                         </select>
                     </label>
                     <label class="text_tag_label">
-                        <select class="opt2"  name="optid" th:if="${findProduct['option'][0].getOpt1}==null">
+                        <select class="opt2" name="optid" th:if="${findProduct['option'][0].getOpt1}==null">
                             <option th:value="${opt2.optid}" th:each="opt2:${findProduct['option']}" th:text="${opt2.opt2}"></option>
                         </select>
                     </label>
                     <label class="text_tag_label">
-                        <select class="opt2"  name="optid" th:if="${findProduct['option'][0].getOpt1}!=null">
+                        <select class="opt2" name="optid" th:if="${findProduct['option'][0].getOpt1}!=null">
                         </select>
                     </label>
 
-                    <div class="buyer_box" >
+                    <div class="buyer_box">
                         <label class="input_label">
                             <span>수량</span>
                             <input type="number" th:value="|1|" class="quantity" name="ord_quantity">
@@ -80,6 +80,33 @@
 
             </div>
         </div>
+
+
+        <form class="detail_modal_con" th:action="@{/products/return}" th:method="post">
+            <span class="detail_modal_text"> 신고 페이지</span>
+            <input type="hidden" name="rep_chk" th:value="|신고|">
+            <input type="hidden" name="proid" th:value="${findProduct.getProid()}">
+            <div class="radio_box">
+                <span class="radio_box_text">신고 사유 선택</span>
+                <label>
+                    <input type="radio" name="rep_select" value="허위 상품 판매">
+                    <span>허위 상품 판매</span>
+                </label>
+                <label>
+                    <input type="radio" name="rep_select" value="불량 상품 판매">
+                    <span>불량 상품 판매</span>
+                </label>
+                <label>
+                    <input type="radio" name="rep_select" value="상품 정보 도용">
+                    <span>상품 정보 도용</span>
+                </label>
+            </div>
+            <label class="text_label">
+                <span>상세 사유 작성</span>
+            <textarea name="rep_text" placeholder="상세하게 신고 사유를 작성해주세요"></textarea>
+            </label>
+            <button type="submit">신고하기</button>
+        </form>
     </main>
     <footer id="index-foo_con"></footer>
 </div>

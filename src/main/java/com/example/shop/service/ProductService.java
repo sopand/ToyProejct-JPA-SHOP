@@ -23,8 +23,9 @@ public class ProductService {
     private String path;
     private final ProductRepository productRepository;
     private final ImgRepository imgRepository;
-    private final MemberRepository memberRepository;
     private final OptionRepository optionRepository;
+
+    private final ReproRepository reproRepository;
 
     @Transactional
     public void fileUpload(MultipartFile file, String img_type, Product p) throws IOException {
@@ -92,6 +93,12 @@ public class ProductService {
         }
 
 
+    }
+
+    @Transactional
+    public void createRepro(ReproRequest request){
+        System.out.println("sdsadsadsad"+request);
+        reproRepository.save(request.toEntity());
     }
 
 

@@ -3,6 +3,7 @@ package com.example.shop.controller;
 
 import com.example.shop.dto.ProductResponse;
 import com.example.shop.dto.ProductRequest;
+import com.example.shop.dto.ReproRequest;
 import com.example.shop.entity.Option;
 import com.example.shop.service.MemberService;
 import com.example.shop.service.ProductService;
@@ -24,14 +25,13 @@ import java.util.Map;
 @RequestMapping("/products")
 public class ProductController {
     private final ProductService productService;
-
     @GetMapping("")
     public String loadProudctAdd() {
         return "productadd";
     }
 
     @PostMapping("")
-    public String createProduct(ProductRequest request, HttpSession session) throws IOException {
+    public String createProduct(ProductRequest request,HttpSession session) throws IOException {
         Long proid = productService.createProduct(request, (Long) session.getAttribute("id"));
 
         return "redirect:/products/option/" + proid;
@@ -63,5 +63,12 @@ public class ProductController {
     public String createOption(ProductRequest request) {
         productService.createOption(request);
         return "성공";
+    }
+
+    @PostMapping("/return")
+    public String createRepro(ReproRequest request,HttpSession session){
+        request.setId((Long)session.getAttribute("id"));
+        productService.createRepro(request);
+        return "redirect:/products/"+request.getProid();
     }
 }
