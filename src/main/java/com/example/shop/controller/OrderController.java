@@ -38,4 +38,10 @@ public class OrderController {
         Long id=(Long)session.getAttribute("id");
         orderService.deleteFavorite(request.getOrdid());
     }
+
+    @GetMapping("/cart")
+    public String findCarts(HttpSession session){
+        Long id=(Long)session.getAttribute("id");
+        return "cart";
+    }
 }

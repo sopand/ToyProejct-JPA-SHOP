@@ -1,0 +1,152 @@
+#container {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+}
+
+#cart_main_con {
+    padding: 50px;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+}
+
+#cart_main_text {
+    width: 1200px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 26px;
+    font-weight: bold;
+}
+
+.cart_main_box {
+    width: 1100px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+}
+
+.cart_main_header {
+    margin-top: 100px;
+    width: 900px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid #e2e2e2;
+}
+
+.cart_chk, .cart_del {
+    width: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-right: 1px solid #e2e2e2;
+    height: 40px;
+}
+
+.cart_del {
+    border: 0;
+}
+
+.cart_chk input {
+    width: 15px;
+    height: 15px;
+    border: 1px solid #e2e2e2;
+}
+
+.cart_img, .cart_name {
+    height: 40px;
+    width: 250px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-right: 1px solid #e2e2e2;
+}
+
+.cart_price {
+    height: 40px;
+    width: 200px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-right: 1px solid #e2e2e2;
+}
+
+.cart_quantity {
+    width: 100px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-right: 1px solid #e2e2e2;
+    height: 40px;
+}
+
+.cart_main_content {
+    width: 900px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid #e2e2e2;
+}
+
+.main_chk,.main_del{
+    width: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-right:1px solid #e2e2e2;
+    height: 200px;
+}
+.main_chk input {
+    width:15px;
+    height: 15px;
+}
+.main_del{
+    border:0;
+}
+.main_img,.main_name{
+    width:250px;
+    height: 200px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-right: 1px solid #e2e2e2;
+}
+.main_img img {
+    width: 200px;
+    height: 150px;
+    box-shadow: 5px 5px 20px 10px #e2e2e2;
+    border-radius: 10px;
+
+}
+.main_price{
+    width:200px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 200px;
+    border-right: 1px solid #e2e2e2;
+}
+
+.main_quantity{
+    width:100px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-right: 1px solid #e2e2e2;
+    height: 200px;
+}
+.main_quantity input {
+    width: 100px;
+    height: 200px;
+    padding-left: 20px;
+    font-size: 24px;
+    font-weight: bold;
+}
+

@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>ToyShop</title>
+    <link th:href="@{/css/reset2.css}" rel="stylesheet"/>
+    <link th:href="@{/css/reset.css}" rel="stylesheet"/>
+    <link th:href="@{/css/header.css}" rel="stylesheet"/>
+    <link th:href="@{/css/footer.css}" rel="stylesheet"/>
+    <link th:href="@{/css/cart.css}" rel="stylesheet"/>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200"/>
+    <script
+            src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script type="text/javascript" th:src="@{/css/js/login.js}"></script>
+</head>
+<body>
+<div id="container">
+    <header th:replace="header :: header"></header>
+
+    <main id="cart_main_con">
+       <span class="material-symbols-outlined" id="cart_main_text">
+shopping_cart장바구니
+</span>
+        <div class="cart_main_box">
+            <ul class="cart_main_header">
+                <li class="cart_chk">
+                    <input type="checkbox">
+                </li>
+                <li class="cart_img">이미지</li>
+                <li class="cart_name">제품명</li>
+                <li class="cart_price">가격</li>
+                <li class="cart_quantity">수량</li>
+                <li class="cart_del">삭제</li>
+            </ul>
+
+            <ul class="cart_main_content">
+                <li class="main_chk">
+                    <input type="checkbox">
+                </li>
+                <li class="main_img">
+                    <img th:src="|/projectimg/logo.png|">
+                </li>
+                <li class="main_name">제품명</li>
+                <li class="main_price">가격</li>
+                <li class="main_quantity">
+                    <input type="number" th:value="|1|">
+                </li>
+                <li class="main_del"><span class="material-symbols-outlined">
+close
+</span>
+                </li>
+            </ul>
+        </div>
+    </main>
+    <footer id="index-foo_con"></footer>
+</div>
+
+</body>
+</html>
