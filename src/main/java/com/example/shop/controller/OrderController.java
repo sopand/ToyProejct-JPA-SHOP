@@ -3,12 +3,14 @@ package com.example.shop.controller;
 
 import com.example.shop.dto.OrderRequest;
 import com.example.shop.dto.OrderResponse;
-import com.example.shop.entity.OrderRepository;
 import com.example.shop.service.OrderService;
 import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @Controller
 @RequiredArgsConstructor
@@ -40,8 +42,12 @@ public class OrderController {
     }
 
     @GetMapping("/cart")
-    public String findCarts(HttpSession session){
+    public String findCarts(HttpSession session, Model model){
         Long id=(Long)session.getAttribute("id");
+        List<OrderResponse> carts=orderService.findCarts(id);
+        System.out.println("sadsadsadsadsadas"+carts);
+        model.addAttribute("carts",carts);
         return "cart";
     }
+
 }

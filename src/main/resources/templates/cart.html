@@ -33,17 +33,17 @@ shopping_cart장바구니
                 <li class="cart_del">삭제</li>
             </ul>
 
-            <ul class="cart_main_content">
+            <ul class="cart_main_content" th:each="cart:${carts}">
                 <li class="main_chk">
-                    <input type="checkbox">
+                    <input type="checkbox" th:value="${cart.getOrdid()}">
                 </li>
                 <li class="main_img">
-                    <img th:src="|/projectimg/logo.png|">
+                    <img th:src="|/projectimg/${imgs.getImgname()}|" th:if="${cart.getProduct().getProid()}==${imgs.getProid()}" th:each="imgs:${cart.getImgs()}">
                 </li>
-                <li class="main_name">제품명</li>
-                <li class="main_price">가격</li>
+                <li class="main_name" th:text="${cart.getProduct().getProname()}">제품명</li>
+                <li class="main_price" th:text="${cart.getProduct().getProname()}">가격</li>
                 <li class="main_quantity">
-                    <input type="number" th:value="|1|">
+                    <input type="number" th:value="${cart.getOrdquantity()}">
                 </li>
                 <li class="main_del"><span class="material-symbols-outlined">
 close

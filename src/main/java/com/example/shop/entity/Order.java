@@ -20,7 +20,7 @@ public class Order {
     private Long ordid;
 
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "pro_id")
     private Product product;
 
@@ -29,7 +29,7 @@ public class Order {
     @JoinColumn(name="optid")
     private Option option;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name="id")
     private Member member;
 
