@@ -9,9 +9,10 @@
     <link th:href="@{/css/footer.css}" rel="stylesheet"/>
     <link th:href="@{/css/cart.css}" rel="stylesheet"/>
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200"/>
+    <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
     <script
             src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-    <script type="text/javascript" th:src="@{/css/js/login.js}"></script>
+    <script type="text/javascript" th:src="@{/css/js/cart.js}"></script>
 </head>
 <body>
 <div id="container">
@@ -35,7 +36,7 @@ shopping_cart장바구니
 
             <ul class="cart_main_content" th:each="cart:${carts}">
                 <li class="main_chk">
-                    <input type="checkbox" th:value="${cart.getOrdid()}">
+                    <input type="checkbox" name="ord_chkbox"th:value="${cart.getOrdid()}" >
                 </li>
                 <li class="main_img">
                     <img th:src="|/projectimg/${imgs.getImgname()}|" th:if="${cart.getProduct().getProid()}==${imgs.getProid()}" th:each="imgs:${cart.getImgs()}">
@@ -43,13 +44,39 @@ shopping_cart장바구니
                 <li class="main_name" th:text="${cart.getProduct().getProname()}">제품명</li>
                 <li class="main_price" th:text="${cart.getProduct().getProname()}">가격</li>
                 <li class="main_quantity">
-                    <input type="number" th:value="${cart.getOrdquantity()}">
+                    <input type="number" th:id="${cart.getOrdid()}" th:value="${cart.getOrdquantity()}">
                 </li>
                 <li class="main_del"><span class="material-symbols-outlined">
 close
 </span>
                 </li>
             </ul>
+        </div>
+
+
+        <div class="cart_btnbox">
+            <button type="button" id="buybtn">구매하기</button>
+            <button type="button" id="removebtn">제거하기</button>
+        </div>
+
+        <div class="cart_modal_con">
+            <span class="modal_text">주소 입력</span>
+            <div class="cart_modal_box">
+                <label class="modal_con1">
+                    <span>받으시는 분</span>
+                    <input type="text" class="ord_huname" placeholder="받는분 성함">
+                </label>
+                <label class="modal_con2">
+                    <span>받는분 주소</span>
+                    <input type="text"  placeholder="우편 검색 자동입력" class="ord_address addr1">
+                    <button type="button" id="addPost">우편 번호</button>
+                </label>
+                <label class="modal_con3">
+                    <input type="text" placeholder="기타 주소" readonly class="ord_address addr2">
+                    <input type="text" placeholder="상세주소 입력" class="ord_address addr3">
+                </label>
+                <button type="button" id="address_addbtn">주문 완료</button>
+            </div>
         </div>
     </main>
     <footer id="index-foo_con"></footer>

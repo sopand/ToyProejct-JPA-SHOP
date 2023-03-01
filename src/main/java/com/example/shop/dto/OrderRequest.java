@@ -9,6 +9,8 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.List;
+
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
@@ -24,9 +26,13 @@ public class OrderRequest {
     private Long proid;
     private Long optid;
 
+    private String ordaddress;
+
     private Long ordid;
+    private String ordhuname;
 
-
+    private List<Long> ordidList;
+    private List<Integer> quantityList;
     public Order create(Product product, Member member, Option option){
         return Order.builder().product(product).member(member).option(option).ordquantity(ordquantity).ordchk(ordchk).build();
     }
@@ -34,4 +40,7 @@ public class OrderRequest {
         return Order.builder().product(product).member(member).ordchk(ordchk).build();
     }
 
+    public Order update(){
+        return Order.builder().ordchk(ordchk).ordquantity(ordquantity).ordaddress(ordaddress).ordhuname(ordhuname).build();
+    }
 }

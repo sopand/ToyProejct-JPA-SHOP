@@ -54,5 +54,13 @@ public class OrderService {
 
         return carts;
     }
+    @Transactional
+    public void modifyCartAndBuy(OrderRequest request){
+        for(int i=0;i<request.getOrdidList().size();i++){
+            request.setOrdid(request.getOrdidList().get(i));
+            request.setOrdquantity(request.getQuantityList().get(i));
+            orderRepository.updateOrder(request);
+        }
+    }
 
 }

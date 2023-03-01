@@ -44,15 +44,29 @@ public class Order {
     @Column(name="ord_chk")
     private String ordchk;
 
+    @Column(name="ord_address")
+    private String ordaddress;
+    @Column(name = "ord_huname")
+    private String ordhuname;
+
     @Builder
-    public Order(Option option,Product product,Member member,int ordquantity, String ordchk){
+    public Order(Option option,Product product,Member member,int ordquantity, String ordchk,String ordaddress,String ordhuname){
         this.product=product;
         this.option=option;
         this.member=member;
         this.ordchk=ordchk;
         this.orddate=new Date();
         this.ordquantity=ordquantity;
+        this.ordaddress=ordaddress;
+        this.ordhuname=ordhuname;
+    }
 
+
+    public void update(Long ordid,String ordaddress,String ordchk,int ordquantity){
+        this.ordid=ordid;
+        this.ordaddress=ordaddress;
+        this.ordchk=ordchk;
+        this.ordquantity=ordquantity;
     }
 
 

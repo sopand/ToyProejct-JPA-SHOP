@@ -50,4 +50,10 @@ public class OrderController {
         return "cart";
     }
 
+    @ResponseBody
+    @PutMapping("/cart")
+    public String modifyCartAndBuy(OrderRequest request){
+        orderService.modifyCartAndBuy(request);
+        return "구매완료";
+    }
 }
