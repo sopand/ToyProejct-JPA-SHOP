@@ -91,4 +91,17 @@ $(function () {
         });
 
     });
+
+    $(".all_chkbox").click(function() {
+        if($(".all_chkbox").is(":checked")) $("input[name=ord_chkbox]").prop("checked", true);
+        else $("input[name=ord_chkbox]").prop("checked", false);
+    });
+
+    $("input[name=ord_chkbox]").click(function() {
+        let total = $("input[name=ord_chkbox]").length;
+        let checked = $("input[name=ord_chkbox]:checked").length;
+
+        if(total != checked) $(".all_chkbox").prop("checked", false);
+        else $(".all_chkbox").prop("checked", true);
+    });
 });
