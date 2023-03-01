@@ -45,7 +45,6 @@ public class OrderController {
     public String findCarts(HttpSession session, Model model){
         Long id=(Long)session.getAttribute("id");
         List<OrderResponse> carts=orderService.findCarts(id);
-        System.out.println("sadsadsadsadsadas"+carts);
         model.addAttribute("carts",carts);
         return "cart";
     }
@@ -55,5 +54,13 @@ public class OrderController {
     public String modifyCartAndBuy(OrderRequest request){
         orderService.modifyCartAndBuy(request);
         return "구매완료";
+    }
+
+    @ResponseBody
+    @DeleteMapping("/cart")
+    public String deleteCarts(HttpSession session,OrderRequest request){
+        orderService.deleteCarts(request.getOrdidList());
+
+        return "장바구니 제거완료";
     }
 }

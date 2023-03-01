@@ -63,4 +63,12 @@ public class OrderService {
         }
     }
 
+    @Transactional
+    public void deleteCarts(List<Long> ordid){
+        ordid.stream().forEach(id->orderRepository.deleteById(id));
+
+    }
+
+
+
 }

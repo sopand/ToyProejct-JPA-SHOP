@@ -60,9 +60,33 @@ $(function () {
            } ,
             success:function (data){
                     alert(data);
+                    location.reload();
             },
             error:function (){
                 alert("에러");
+            }
+        });
+
+    });
+
+    $("#removebtn").click(function (){
+        let ordidList=[];
+        $("input[name=ord_chkbox]:checked").each(function (index,item){
+            ordidList.push($(item).val());
+        });
+        console.log(ordidList);
+        $.ajax({
+           url:"/orders/cart",
+            method:"delete",
+            data:{
+                ordidList:ordidList
+            },
+            success :function (date){
+                alert(date);
+                location.reload();
+            },
+            error :function (){
+               alert("삭제 실패");
             }
         });
 
