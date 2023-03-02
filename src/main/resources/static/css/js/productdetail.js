@@ -15,7 +15,7 @@ $(function () {
 
     $.ajax({
         method: "get",
-        url: "/orders/favorite",
+        url: "/orders/favorite/찜하기",
         data: {
             proid: proid,
         },
@@ -89,23 +89,41 @@ $(function () {
         const optid = $(".opt2").val();
         const ordchk = "장바구니";
         $.ajax({
-            method: "post",
-            url: "/orders",
+            method: "get",
+            url: "/orders/favorite/"+ordchk,
             data: {
-                ordquantity: ordquantity,
                 proid: proid,
-                optid: optid,
-                ordchk: ordchk
-
             },
-            success: function () {
-                alert("장바구니 추가완료");
+            success: function (data) {
+                if (data == null || data == '') {
+                    $.ajax({
+                        method: "post",
+                        url: "/orders",
+                        data: {
+                            ordquantity: ordquantity,
+                            proid: proid,
+                            optid: optid,
+                            ordchk: ordchk
+
+                        },
+                        success: function () {
+                            alert("장바구니 추가완료");
+                        },
+                        error: function () {
+
+                        }
+
+                    });
+                }else{
+                    alert(data);
+                }
             },
             error: function () {
-
-            }
+            },
 
         });
+
+
     });
     $("#favoritebtn").click(function () {
         const ordid = $(this).val();

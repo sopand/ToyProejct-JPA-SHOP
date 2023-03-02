@@ -26,10 +26,10 @@ public class OrderController {
         return  orderService.createOrder(order,id);
     }
     @ResponseBody
-    @GetMapping("/favorite")
-    public OrderResponse hasFavorite(HttpSession session, Long proid){
+    @GetMapping("/favorite/{check}")
+    public String hasFavorite(HttpSession session, Long proid,@PathVariable("check") String check){
         Long id=(Long)session.getAttribute("id");
-        return orderService.hasFavorite(proid,id);
+        return orderService.hasFavorite(proid,id,check);
     }
 
 

@@ -13,6 +13,7 @@ import java.awt.print.Pageable;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+
 @Service
 @RequiredArgsConstructor
 public class OrderService {
@@ -25,50 +26,56 @@ public class OrderService {
 
         Member member = Member.builder().id(id).build();
         Product product = Product.builder().proid(request.getProid()).build();
-        if(!request.getOrdchk().equals("찜하기")){
+        if (!request.getOrdchk().equals("찜하기")) {
             Option option = Option.builder().optid(request.getOptid()).build();
-           return orderRepository.save(request.create(product,member,option)).getOrdid();
-        }else{
-           return orderRepository.save(request.favorite(product,member)).getOrdid();
+            return orderRepository.save(request.create(product, member, option)).getOrdid();
+        } else {
+            return orderRepository.save(request.favorite(product, member)).getOrdid();
         }
 
     }
-    public OrderResponse hasFavorite(Long proid, Long id){
-        Order order=orderRepository.findOrderByProid(proid,id);
-        if(order !=null){
-            return new OrderResponse(order);
+
+    public String hasFavorite(Long proid, Long id, String check) {
+        System.out.println("ㄴㅇㄴㅁㅇㄴㅁㅇㅁㄴㅇㄴㅁㅇ" + check);
+        Order order = orderRepository.hasFavorite(proid, id, check);
+        if (order != null) {
+            if (check.equals("장바구니")) {
+                return "이미 장바구니에 존재하는 제품입니다";
+            } else {
+                return "Has Favorite";
+            }
         }
         return null;
     }
 
-    public void deleteFavorite(Long ordid){
-         orderRepository.deleteById(ordid);
+    public void deleteFavorite(Long ordid) {
+        orderRepository.deleteById(ordid);
     }
 
-    public List<OrderResponse> findCarts(Long id){
-        List<OrderResponse> carts=orderRepository.findOrderById(id).stream().map(OrderResponse::new).toList();
-        List<ImgResponse> imgs=new ArrayList<>();
-       carts.stream().forEach(order->
-              order.setImgs(new ImgResponse(imgRepository.findFirstByImgByProId(order.getProduct().getProid())))
+    public List<OrderResponse> findCarts(Long id) {
+        List<OrderResponse> carts = orderRepository.findOrderById(id).stream().map(OrderResponse::new).toList();
+        List<ImgResponse> imgs = new ArrayList<>();
+        carts.stream().forEach(order ->
+                order.setImgs(new ImgResponse(imgRepository.findFirstByImgByProId(order.getProduct().getProid())))
         );
 
         return carts;
     }
+
     @Transactional
-    public void modifyCartAndBuy(OrderRequest request){
-        for(int i=0;i<request.getOrdidList().size();i++){
+    public void modifyCartAndBuy(OrderRequest request) {
+        for (int i = 0; i < request.getOrdidList().size(); i++) {
             request.setOrdid(request.getOrdidList().get(i));
             request.setOrdquantity(request.getQuantityList().get(i));
-            orderRepository.updateOrder(request);
+            orderRepository.modifyCartAndBuy(request);
         }
     }
 
     @Transactional
-    public void deleteCarts(List<Long> ordid){
-        ordid.stream().forEach(id->orderRepository.deleteById(id));
+    public void deleteCarts(List<Long> ordid) {
+        ordid.stream().forEach(id -> orderRepository.deleteById(id));
 
     }
-
 
 
 }

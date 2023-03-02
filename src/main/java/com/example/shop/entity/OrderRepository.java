@@ -14,14 +14,14 @@ import java.util.Optional;
 
 public interface OrderRepository extends JpaRepository<Order,Long> {
 
-     @Query(value = "SELECT o FROM Order o WHERE o.product.proid = :proid AND o.member.id = :id AND o.ordchk='찜하기' ")
-     Order findOrderByProid(@Param("proid") Long proid, @Param("id") Long id);
+     @Query(value = "SELECT o FROM Order o WHERE o.product.proid = :proid AND o.member.id = :id AND o.ordchk = :check")
+     Order hasFavorite(@Param("proid") Long proid, @Param("id") Long id ,@Param("check")String check);
      
      @Query(value = "SELECT o FROM Order o  WHERE o.member.id = :id AND o.ordchk='장바구니'")
      List<Order> findOrderById(@Param("id")Long id);
 
      @Modifying(clearAutomatically = true)
      @Query(value ="update Order o SET o.ordchk = :#{#dto.ordchk},o.ordquantity = :#{#dto.ordquantity},o.ordhuname = :#{#dto.ordhuname}, o.ordaddress = :#{#dto.ordaddress} WHERE o.ordid = :#{#dto.ordid}" )
-     void updateOrder(@Param("dto")OrderRequest dto);
+     void modifyCartAndBuy(@Param("dto")OrderRequest dto);
 
 }
