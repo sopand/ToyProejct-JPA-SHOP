@@ -49,8 +49,15 @@ public class Order {
     @Column(name = "ord_huname")
     private String ordhuname;
 
+    @Column(name="ord_post_code")
+
+    private Long ordpostCode;
+
+    @Column(name="ord_post_company_key")
+    private String ordpostCompanyKey;
+
     @Builder
-    public Order(Option option,Product product,Member member,int ordquantity, String ordchk,String ordaddress,String ordhuname){
+    public Order(Option option,Product product,Member member,int ordquantity, String ordchk,String ordaddress,String ordhuname,String ordpostCompanyKey,Long ordpostCode){
         this.product=product;
         this.option=option;
         this.member=member;
@@ -59,6 +66,8 @@ public class Order {
         this.ordquantity=ordquantity;
         this.ordaddress=ordaddress;
         this.ordhuname=ordhuname;
+        this.ordpostCompanyKey=ordpostCompanyKey;
+        this.ordpostCode=ordpostCode;
     }
 
 

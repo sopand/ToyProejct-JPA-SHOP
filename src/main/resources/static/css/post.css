@@ -1,0 +1,123 @@
+#container {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+}
+
+#post_main_con {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    padding-top: 50px;
+    padding-bottom: 50px;
+}
+
+.post_main_box {
+    width: 1200px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    padding: 20px;
+}
+
+.post_main_content {
+    width: 1200px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    padding: 30px;
+    border:1px solid #e2e2e2;
+}
+
+
+
+
+.post_day_content {
+    width: 1150px;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    border:1px solid #e2e2e2;
+    margin-top:20px;
+    margin-bottom: 20px;
+}
+
+.post_main_img {
+    width: 150px;
+    margin-left: 25px;
+    margin-right: 25px;
+}
+
+.post_main_img img {
+    width: 150px;
+    height: 100px;
+
+}
+
+.day_main_text {
+    width: 900px;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+}
+
+.day_main_text_name {
+    flex-direction: column;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 400px;
+    border-left:1px solid #e2e2e2;
+    border-right:1px solid #e2e2e2;
+}
+.day_main_text_name span{
+    width: 300px;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    height:50px;
+    font-size: 14px;
+    font-weight: bold;
+}
+.day_main_text_price{
+    width:200px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    border-right: 1px solid #e2e2e2;
+
+}
+.day_main_text_price span{
+    width:200px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 50px;
+    font-size: 12px;
+    font-weight: bold;
+}
+.day_main_text_address{
+    width:300px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+}
+.day_main_text_address span{
+    margin-left:20px;
+    font-size: 14px;
+    font-weight: bold;
+    width:300px;
+    height: 75px;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+}
+

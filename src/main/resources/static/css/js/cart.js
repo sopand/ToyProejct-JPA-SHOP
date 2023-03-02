@@ -46,7 +46,7 @@ $(function () {
         let ordaddress="";
         ordaddress+="(우편번호 : "+$(".addr1").val()+")";
         ordaddress+=$(".addr2").val();
-        ordaddress+="상세 : "+$(".addr3").val();
+        ordaddress+="  상세 주소 : "+$(".addr3").val();
         let ordhuname=$(".ord_huname").val();
         $.ajax({
            url:"/orders/cart",

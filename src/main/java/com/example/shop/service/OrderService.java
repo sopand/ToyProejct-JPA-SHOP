@@ -77,8 +77,12 @@ public class OrderService {
     @Transactional
     public void deleteCarts(List<Long> ordid) {
         ordid.stream().forEach(id -> orderRepository.deleteById(id));
-
     }
 
+    public List<OrderResponse> findDelivery(Long id){
+        List<OrderResponse> delivery=orderRepository.findOrderByOrdChk(id).stream().map(OrderResponse::new).toList();
+        System.out.println();
+        return delivery;
+    }
 
 }

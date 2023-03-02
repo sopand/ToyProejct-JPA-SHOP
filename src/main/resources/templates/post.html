@@ -1,10 +1,53 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>ToyShop</title>
+    <link th:href="@{/css/reset2.css}" rel="stylesheet"/>
+    <link th:href="@{/css/reset.css}" rel="stylesheet"/>
+    <link th:href="@{/css/header.css}" rel="stylesheet"/>
+    <link th:href="@{/css/footer.css}" rel="stylesheet"/>
+    <link th:href="@{/css/post.css}" rel="stylesheet"/>
+    <script
+            src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script type="text/javascript" th:src="@{/css/js/login.js}"></script>
 </head>
 <body>
+<div id="container">
+    <header th:replace="header :: header"></header>
+    <main id="post_main_con">
+        <div class="post_main_box">
+            <div class="post_main_content">
+
+                <div class="post_day_content" th:each="order :${delivery}">
+                    <div class="post_main_img">
+                        <img th:src="|/projectimg/${order.getProduct().getImg()[0].getImgname()}|">
+                    </div>
+                    <div class="day_main_text">
+                        <div class="day_main_text_name">
+                            <span th:text="|제품명:${order.getProduct().getProname()}|"> 제품명</span>
+                            <span th:text="|주문 시간:${order.getOrddate()}|"> 주문 시간</span>
+                            <span> 배송 상태</span>
+                        </div>
+                        <div class="day_main_text_price">
+
+                            <span th:text="|단품 가격:${#numbers.formatInteger(order.getProduct().getProprice(), 3, 'COMMA') + '원'}|"> 개당 가격</span>
+                            <span th:text="|구매 수량:${order.getOrdquantity()}|"> 총 수량</span>
+
+                            <span th:text="|총 가격:${#numbers.formatInteger(order.getOrdquantity()*order.getProduct().getProprice(), 3, 'COMMA') + '원'}|"> 총 가격</span>
+                        </div>
+                        <div class="day_main_text_address">
+                            <span th:text="|받으시는 분 :${order.getOrdhuname()} 님|">받는사람</span>
+                            <span th:text="|배송지 :${order.getOrdaddress()}|"> 주소</span>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+    <footer id="index-foo_con"></footer>
+</div>
 
 </body>
 </html>

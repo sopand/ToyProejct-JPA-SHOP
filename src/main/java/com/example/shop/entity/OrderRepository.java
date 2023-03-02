@@ -24,4 +24,7 @@ public interface OrderRepository extends JpaRepository<Order,Long> {
      @Query(value ="update Order o SET o.ordchk = :#{#dto.ordchk},o.ordquantity = :#{#dto.ordquantity},o.ordhuname = :#{#dto.ordhuname}, o.ordaddress = :#{#dto.ordaddress} WHERE o.ordid = :#{#dto.ordid}" )
      void modifyCartAndBuy(@Param("dto")OrderRequest dto);
 
+     @Query(value = "SELECT o FROM Order o left join fetch o.product p left join fetch p.img i WHERE o.member.id = :id AND p.member.id = :id AND o.ordchk='구매' AND i.imgtype='ProductImg' GROUP BY o.ordid")
+     List<Order> findOrderByOrdChk(Long id);
+
 }
