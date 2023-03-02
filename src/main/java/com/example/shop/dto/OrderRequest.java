@@ -33,14 +33,16 @@ public class OrderRequest {
 
     private List<Long> ordidList;
     private List<Integer> quantityList;
-    public Order create(Product product, Member member, Option option){
+
+    public Order create(Product product, Member member, Option option) {
         return Order.builder().product(product).member(member).option(option).ordquantity(ordquantity).ordchk(ordchk).build();
     }
-    public Order favorite(Product product, Member member){
+
+    public Order favorite(Product product, Member member) {
         return Order.builder().product(product).member(member).ordchk(ordchk).build();
     }
 
-    public Order update(){
-        return Order.builder().ordchk(ordchk).ordquantity(ordquantity).ordaddress(ordaddress).ordhuname(ordhuname).build();
+    public Order directbuy(Product product, Member member, Option option) {
+        return Order.builder().ordchk(ordchk).ordquantity(ordquantity).ordaddress(ordaddress).ordhuname(ordhuname).product(product).member(member).option(option).build();
     }
 }

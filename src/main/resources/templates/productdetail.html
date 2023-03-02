@@ -12,6 +12,7 @@
     <script
             src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script type="text/javascript" th:src="@{/css/js/productdetail.js}"></script>
+    <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
     <script th:inline="javascript">
         /*<![CDATA[*/
         const opt =/*[[${findProduct.option}]]*/"";
@@ -107,6 +108,26 @@
             </label>
             <button type="submit">신고하기</button>
         </form>
+
+        <div class="cart_modal_con">
+            <span class="modal_text">주소 입력</span>
+            <div class="cart_modal_box">
+                <label class="modal_con1">
+                    <span>받으시는 분</span>
+                    <input type="text" class="ord_huname" placeholder="받는분 성함">
+                </label>
+                <label class="modal_con2">
+                    <span>받는분 주소</span>
+                    <input readonly type="text"  placeholder="우편 검색 자동입력" class="ord_address addr1">
+                    <button type="button" id="addPost">우편 번호</button>
+                </label>
+                <label class="modal_con3">
+                    <input type="text" placeholder="기타 주소" readonly class="ord_address addr2">
+                    <input type="text" placeholder="상세주소 입력" class="ord_address addr3">
+                </label>
+                <button type="button" id="address_addbtn">주문 완료</button>
+            </div>
+        </div>
     </main>
     <footer id="index-foo_con"></footer>
 </div>

@@ -23,20 +23,23 @@ public class OrderService {
 
     @Transactional
     public Long createOrder(OrderRequest request, Long id) {
-
         Member member = Member.builder().id(id).build();
         Product product = Product.builder().proid(request.getProid()).build();
-        if (!request.getOrdchk().equals("찜하기")) {
-            Option option = Option.builder().optid(request.getOptid()).build();
-            return orderRepository.save(request.create(product, member, option)).getOrdid();
-        } else {
-            return orderRepository.save(request.favorite(product, member)).getOrdid();
+        switch (request.getOrdchk()) {
+            case "장바구니":
+                Option option = Option.builder().optid(request.getOptid()).build();
+                return orderRepository.save(request.create(product, member, option)).getOrdid();
+            case "구매":
+                Option option2 = Option.builder().optid(request.getOptid()).build();
+                return orderRepository.save(request.directbuy(product, member, option2)).getOrdid();
+            case "찜하기":
+                return orderRepository.save(request.favorite(product, member)).getOrdid();
+            default:
+                return null;
         }
-
     }
 
     public String hasFavorite(Long proid, Long id, String check) {
-        System.out.println("ㄴㅇㄴㅁㅇㄴㅁㅇㅁㄴㅇㄴㅁㅇ" + check);
         Order order = orderRepository.hasFavorite(proid, id, check);
         if (order != null) {
             if (check.equals("장바구니")) {

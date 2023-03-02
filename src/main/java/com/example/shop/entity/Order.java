@@ -62,12 +62,8 @@ public class Order {
     }
 
 
-    public void update(Long ordid,String ordaddress,String ordchk,int ordquantity){
-        this.ordid=ordid;
-        this.ordaddress=ordaddress;
-        this.ordchk=ordchk;
-        this.ordquantity=ordquantity;
-    }
+
+
 
 
 

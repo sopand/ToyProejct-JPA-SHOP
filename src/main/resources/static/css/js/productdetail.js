@@ -62,9 +62,28 @@ $(function () {
     });
 
     $("#buybtn").click(function () {
+        $(".cart_modal_con").css("display", "flex");
+    });
+    $(document).mouseup(function (e) {
+        if ($(".cart_modal_con").has(e.target).length === 0) {
+            $(".cart_modal_con").hide();
+        }
+    });
+    $(document).keydown(function (e) {
+        let code = e.keyCode || e.which;
+        if (code == 27) { // 27은 ESC 키번호
+            $('.cart_modal_con').hide();
+        }
+    });
+    $(document).on("click", "#address_addbtn", function () {
         const ordquantity = $(".quantity").val();
         const optid = $(".opt2").val();
         const ordchk = "구매";
+        let ordaddress = "";
+        ordaddress += "(우편번호 : " + $(".addr1").val() + ")";
+        ordaddress += $(".addr2").val();
+        ordaddress += "상세 : " + $(".addr3").val();
+        let ordhuname = $(".ord_huname").val();
         $.ajax({
             method: "post",
             url: "/orders",
@@ -72,8 +91,9 @@ $(function () {
                 ordquantity: ordquantity,
                 proid: proid,
                 optid: optid,
-                ordchk: ordchk
-
+                ordchk: ordchk,
+                ordaddress:ordaddress,
+                ordhuname:ordhuname
             },
             success: function () {
                 alert("구매완료");
@@ -84,13 +104,34 @@ $(function () {
 
         });
     });
+    $("#addPost").click(function () {
+        new daum.Postcode({
+            oncomplete: function (data) {
+                let addr = ''; // 주소 변수
+                //사용자가 선택한 주소 타입에 따라 해당 주소 값을 가져온다.
+                if (data.userSelectedType === 'R') { // 사용자가 도로명 주소를 선택했을 경우
+                    addr = data.roadAddress;
+                } else { // 사용자가 지번 주소를 선택했을 경우(J)
+                    addr = data.jibunAddress;
+                }
+
+
+                $(".addr1").val(data.zonecode);
+                $(".addr2").val(addr);
+                $(".addr3").focus();
+            }
+        }).open();
+    });
+
+
+
     $("#cartbtn").click(function () {
         const ordquantity = $(".quantity").val();
         const optid = $(".opt2").val();
         const ordchk = "장바구니";
         $.ajax({
             method: "get",
-            url: "/orders/favorite/"+ordchk,
+            url: "/orders/favorite/" + ordchk,
             data: {
                 proid: proid,
             },
@@ -114,7 +155,7 @@ $(function () {
                         }
 
                     });
-                }else{
+                } else {
                     alert(data);
                 }
             },
