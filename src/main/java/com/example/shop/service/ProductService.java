@@ -1,8 +1,9 @@
 package com.example.shop.service;
 
+
 import com.example.shop.dto.*;
 import com.example.shop.entity.*;
-import jakarta.transaction.Transactional;
+import org.springframework.transaction.annotation.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.domain.Page;
@@ -57,10 +58,10 @@ public class ProductService {
 
     }
 
+    @Transactional(readOnly = true)
     public Map<String, Object> findProducts(Pageable page) {
         Page<Product> productLimit = productRepository.findAll(page);
         List<ProductResponse> productList = productLimit.stream().map(ProductResponse::new).collect(Collectors.toList());
-        System.out.println("productList dscdscdscdscds= " + productList);
         Map<String, Object> pagingMap = new HashMap<>();
         int nowPage = productLimit.getPageable().getPageNumber() + 1;
         int startPage = Math.max(nowPage - 4, 1);

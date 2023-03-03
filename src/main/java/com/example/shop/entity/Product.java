@@ -37,7 +37,7 @@ public class Product {
 
     @OneToMany(mappedBy = "product",cascade = CascadeType.ALL)
     @OrderBy("imgid asc")
-    private Set<Img> img=new LinkedHashSet<>();
+    private List<Img> img;
     @Temporal(TemporalType.TIMESTAMP)
     @Column(name="pro_date")
     private Date prodate;

@@ -18,6 +18,8 @@
             <a href="javascript:void(0)" class="logout_href" th:value="${session.email}">로그아웃</a>
             <a href="/products">제품등록</a>
             <a href="/orders/cart">장바구니</a>
+            <a th:href="@{/orders/drives}">배송조회</a>
+            <a href="/orders/sell">판매조회</a>
         </div>
         <div class="index_hed_menu_box">
             <div class="index_hed_menu"><a href="/products/list">전체상품</a></div>

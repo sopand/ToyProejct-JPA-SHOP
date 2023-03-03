@@ -31,10 +31,6 @@ public class OrderController {
         Long id=(Long)session.getAttribute("id");
         return orderService.hasFavorite(proid,id,check);
     }
-
-
-
-
     @ResponseBody
     @DeleteMapping("/favorite")
     public void deleteFavorite(HttpSession session,OrderRequest request){
@@ -69,5 +65,11 @@ public class OrderController {
         Long id=(Long)session.getAttribute("id");
         model.addAttribute("delivery", orderService.findDelivery(id));
         return "post";
+    }
+    @GetMapping("/sell")
+    public String findSells(HttpSession session){
+        Long id=(Long)session.getAttribute("id");
+        
+        return "seller";
     }
 }

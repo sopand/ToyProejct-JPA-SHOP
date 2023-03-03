@@ -97,6 +97,7 @@ $(function () {
             },
             success: function () {
                 alert("구매완료");
+                $('.cart_modal_con').hide();
             },
             error: function () {
 
