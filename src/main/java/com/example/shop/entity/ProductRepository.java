@@ -19,6 +19,10 @@ public interface ProductRepository extends JpaRepository<Product,Long> {
             countQuery = "select count(p.proid) from Product p")
     Page<Product> findAll(Pageable page);
 
+    @Query(value = "select p from Product p left join fetch p.img i left join fetch p.option where i.imgtype='ProductImg' AND p.member.id = :id AND p.member.email = :email GROUP BY p.proid",
+            countQuery = "select count(p.proid) from Product p")
+    Page<Product> findAllByid(Pageable page ,Long id,String email);
+
     @Query(value = "select p from Product p left join fetch p.img i left join fetch p.option o WHERE p.proid = :proid")
     Product findByProduct(Long proid);
 

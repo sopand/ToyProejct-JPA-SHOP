@@ -58,7 +58,6 @@ public class ProductService {
 
     }
 
-    @Transactional(readOnly = true)
     public Map<String, Object> findProducts(Pageable page) {
         Page<Product> productLimit = productRepository.findAll(page);
         List<ProductResponse> productList = productLimit.stream().map(ProductResponse::new).collect(Collectors.toList());
@@ -102,5 +101,19 @@ public class ProductService {
         reproRepository.save(request.toEntity());
     }
 
+
+    public Map<String,Object> findSeller(Long id,String email, Pageable page){
+        Page<Product> productLimit = productRepository.findAllByid(page,id,email);
+        List<ProductResponse> productList = productLimit.stream().map(ProductResponse::new).collect(Collectors.toList());
+        Map<String, Object> pagingMap = new HashMap<>();
+        int nowPage = productLimit.getPageable().getPageNumber() + 1;
+        int startPage = Math.max(nowPage - 4, 1);
+        int endPage = Math.min(nowPage + 5, productLimit.getTotalPages());
+        pagingMap.put("startPage", startPage);
+        pagingMap.put("nowPage", nowPage);
+        pagingMap.put("endPage", endPage);
+        pagingMap.put("productList", productList);
+        return pagingMap;
+    }
 
 }

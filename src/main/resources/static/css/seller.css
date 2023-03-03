@@ -143,6 +143,7 @@
     display: flex;
     align-items: center;
     justify-content: center;
+    flex-direction: column;
 }
 
 .seller_main_content_box {
@@ -212,4 +213,22 @@
     justify-content: flex-start;
     margin-left: 20px;
 
+}
+
+
+.btnbox{
+    width:600px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+}
+.btnbox a{
+    font-size: 16px;
+    margin:15px;
+    width:20px;
+    height: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }

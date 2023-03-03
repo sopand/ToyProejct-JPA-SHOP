@@ -6,6 +6,9 @@ import com.example.shop.dto.OrderResponse;
 import com.example.shop.service.OrderService;
 import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -66,10 +69,5 @@ public class OrderController {
         model.addAttribute("delivery", orderService.findDelivery(id));
         return "post";
     }
-    @GetMapping("/sell")
-    public String findSells(HttpSession session){
-        Long id=(Long)session.getAttribute("id");
-        
-        return "seller";
-    }
+
 }

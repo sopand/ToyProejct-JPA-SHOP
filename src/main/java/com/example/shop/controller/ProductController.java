@@ -73,4 +73,12 @@ public class ProductController {
         productService.createRepro(request);
         return "redirect:/products/"+request.getProid();
     }
+
+    @GetMapping("/list/{id}/{email}")
+    public String findSeller(Model model,@PathVariable("id")Long id,@PathVariable("email")String email,@PageableDefault(page = 0, size = 5, sort = "proid", direction = Sort.Direction.DESC) Pageable pageable){
+        Map<String, Object> pagingProducts = productService.findSeller(id,email,pageable);
+        model.addAttribute("pagingProducts", pagingProducts);
+
+        return "seller";
+    }
 }
