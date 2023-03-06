@@ -6,19 +6,14 @@ import com.example.shop.dto.OrderResponse;
 import com.example.shop.entity.*;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
-import org.springframework.data.domain.PageRequest;
-import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
-
 import java.util.*;
 
 @Service
 @RequiredArgsConstructor
 public class OrderService {
     private final OrderRepository orderRepository;
-
     private final ImgRepository imgRepository;
-
     @Transactional
     public Long createOrder(OrderRequest request, Long id) {
         Member member = Member.builder().id(id).build();

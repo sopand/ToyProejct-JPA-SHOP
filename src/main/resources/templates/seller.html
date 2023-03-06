@@ -26,7 +26,7 @@
     </aside>
     <main id="seller_main_con">
         <div class="seller_main_box">
-            <form class="seller_main_search_box">
+            <form class="seller_main_search_box" th:action="|/products/list/${session.id}/${session.email}|" th:method="GET">
                 <div class="search_label">
                     <input type="search" name="search" placeholder="검색">
                 </div>
@@ -34,7 +34,7 @@
 search
 </span>
                 </button>
-                <select name="abcd" class="search_select">
+                <select name="tag" class="search_select">
                     <option>태그등록1</option>
                     <option>태그등록2</option>
                     <option>태그등록3</option>
@@ -49,7 +49,7 @@ search
             </div>
 
             <div class="seller_main_content">
-                <div class="seller_main_content_box" th:each="product :${pagingProducts['productList']}">
+                <div class="seller_main_content_box" th:each="product :${pagingProducts['productLimit']}">
                     <div class="content-top">
                         <div class="main_content_img">
                             <img th:src="|/projectimg/${img.imgname}|" th:each="img :${product['img']}" th:if="${img.proid}==${product.proid}">
