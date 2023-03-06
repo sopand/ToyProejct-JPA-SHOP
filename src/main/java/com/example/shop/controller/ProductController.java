@@ -83,8 +83,10 @@ public class ProductController {
         }else{
             pagingProducts = productService.findSellerSearch(id, email, pageable, search);
         }
+        if(pagingProducts.get("endPage").equals(0)){
+            pagingProducts.put("endPage",1);
+        }
         model.addAttribute("pagingProducts", pagingProducts);
-
         return "seller";
     }
 

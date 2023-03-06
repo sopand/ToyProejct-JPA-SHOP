@@ -28,6 +28,19 @@ public class ProductService {
 
     private final ReproRepository reproRepository;
 
+
+    public static Map<String,Object> findPaging(Page<ProductResponse> productLimit){
+        Map<String, Object> pagingMap = new HashMap<>();
+        int nowPage = productLimit.getPageable().getPageNumber() + 1;
+        int startPage = Math.max(nowPage - 4, 1);
+        int endPage = Math.min(nowPage + 5, productLimit.getTotalPages());
+        pagingMap.put("startPage", startPage);
+        pagingMap.put("nowPage", nowPage);
+        pagingMap.put("endPage", endPage);
+        pagingMap.put("productLimit", productLimit);
+        return pagingMap;
+    }
+
     @Transactional
     public void fileUpload(MultipartFile file, String img_type, Product p) throws IOException {
         String img_original = file.getOriginalFilename(); // 입력한 원본 파일의 이름
@@ -56,19 +69,6 @@ public class ProductService {
         }
         return p.getProid();
 
-    }
-
-    public Map<String, Object> findProducts(Pageable page) {
-        Page<ProductResponse> productLimit = productRepository.findAllProduct(page);
-        int nowPage = productLimit.getPageable().getPageNumber() + 1;
-        int startPage = Math.max(nowPage - 4, 1);
-        int endPage = Math.min(nowPage + 5, productLimit.getTotalPages());
-        Map<String, Object> pagingMap = new HashMap<>();
-        pagingMap.put("startPage", startPage);
-        pagingMap.put("nowPage", nowPage);
-        pagingMap.put("endPage", endPage);
-        pagingMap.put("productLimit", productLimit);
-        return pagingMap;
     }
 
     public ProductResponse findProduct(Long proid) {
@@ -103,28 +103,21 @@ public class ProductService {
 
     public Map<String,Object> findSeller(Long id,String email, Pageable page){
         Page<ProductResponse> productLimit = productRepository.findAllByid(page,id,email);
-        int nowPage = productLimit.getPageable().getPageNumber() + 1;
-        int startPage = Math.max(nowPage - 4, 1);
-        int endPage = Math.min(nowPage + 5, productLimit.getTotalPages());
-        Map<String, Object> pagingMap = new HashMap<>();
-        pagingMap.put("startPage", startPage);
-        pagingMap.put("nowPage", nowPage);
-        pagingMap.put("endPage", endPage);
-        pagingMap.put("productLimit", productLimit);
+        Map<String, Object> pagingMap = findPaging(productLimit);
+        return pagingMap;
+    }
+
+    public Map<String, Object> findProducts(Pageable page) {
+        Page<ProductResponse> productLimit = productRepository.findAllProduct(page);
+        Map<String, Object> pagingMap = findPaging(productLimit);
         return pagingMap;
     }
 
     public Map<String,Object> findSellerSearch(Long id,String email, Pageable page,String search){
         Page<ProductResponse> productLimit = productRepository.findSearch(page,id,email,search);
-        int nowPage = productLimit.getPageable().getPageNumber() + 1;
-        int startPage = Math.max(nowPage - 4, 1);
-        int endPage = Math.min(nowPage + 5, productLimit.getTotalPages());
-        Map<String, Object> pagingMap = new HashMap<>();
-        pagingMap.put("startPage", startPage);
-        pagingMap.put("nowPage", nowPage);
-        pagingMap.put("endPage", endPage);
-        pagingMap.put("productLimit", productLimit);
+        Map<String, Object> pagingMap = findPaging(productLimit);
         return pagingMap;
     }
+
 
 }

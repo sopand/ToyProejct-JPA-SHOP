@@ -26,7 +26,7 @@
             </form>
             <div class="prolist_main_listbox">
                 <div class="prolist_main_list" th:if="${pagingProducts}!=null"
-                     th:each="product :${pagingProducts['productList']}">
+                     th:each="product :${pagingProducts['productLimit']}">
                     <div class="prolist_list_img">
                         <a th:href="|/products/${product.proid}|">
                             <img th:src="|/projectimg/${img.imgname}|"th:each="img :${product['img']}" th:if="${img.proid}==${product.proid}">
