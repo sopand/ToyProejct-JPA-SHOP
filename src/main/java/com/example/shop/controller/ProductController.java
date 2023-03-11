@@ -21,6 +21,7 @@ import java.io.IOException;
 import java.util.Arrays;
 import java.util.Map;
 import java.util.Random;
+import java.util.Scanner;
 
 @Controller
 @RequiredArgsConstructor
@@ -76,15 +77,11 @@ public class ProductController {
 
     @GetMapping("/list/{id}/{email}")
     public String findSeller(String search,Model model,@PathVariable("id")Long id,@PathVariable("email")String email,@PageableDefault(page = 0, size = 5, sort = "proid", direction = Sort.Direction.DESC) Pageable pageable){
-
         Map<String, Object> pagingProducts;
         if(search==null){
             pagingProducts = productService.findSeller(id, email, pageable);
         }else{
             pagingProducts = productService.findSellerSearch(id, email, pageable, search);
-        }
-        if(pagingProducts.get("endPage").equals(0)){
-            pagingProducts.put("endPage",1);
         }
         model.addAttribute("pagingProducts", pagingProducts);
         return "seller";

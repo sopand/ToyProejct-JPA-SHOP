@@ -7,6 +7,7 @@ import lombok.ToString;
 @Getter
 @ToString
 public class MemberResponse {
+
     private String email;
     private String pwd;
     private String tel;
