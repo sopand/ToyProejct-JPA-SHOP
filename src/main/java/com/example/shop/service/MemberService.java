@@ -15,8 +15,6 @@ public class MemberService {
 
     @Transactional
     public void createMember(MemberRequest request){
-        request.setAddress(request.memberAddr(request.getAddr1(), request.getAddr2(), request.getAddr3()));
-        request.setTel(request.memberTel(request.getTel1(),request.getTel2(),request.getTel3()));
         memberRepository.save(request.memberEntity());
     }
 
