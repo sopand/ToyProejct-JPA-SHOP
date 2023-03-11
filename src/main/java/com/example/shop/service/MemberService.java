@@ -14,8 +14,8 @@ public class MemberService {
     private final MemberRepository memberRepository;
 
     @Transactional
-    public void createMember(MemberRequest request){
-        memberRepository.save(request.memberEntity());
+    public String createMember(MemberRequest request){
+        return memberRepository.save(request.memberEntity()).getEmail();
     }
 
     public MemberResponse hasMember(MemberRequest request){
