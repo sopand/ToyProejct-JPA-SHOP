@@ -30,7 +30,7 @@ public class ProductController {
     }
 
     @PostMapping("")
-    public String createProduct(ProductRequest request, HttpSession session) throws IOException {
+    public String createProduct(ProductRequest request, HttpSession session) throws Exception {
         Long proId = productService.createProduct(request, (Long) session.getAttribute("id"));
         return "redirect:/products/option/" + proId;
     }
@@ -56,16 +56,16 @@ public class ProductController {
         return "productlist";
     }
 
-    @GetMapping("/{proid}")
-    public String findProduct(@PathVariable Long proid, Model model) {
-        ProductResponse findProduct = productService.findProduct(proid);
+    @GetMapping("/{proId}")
+    public String findProduct(@PathVariable Long proId, Model model) {
+        ProductResponse findProduct = productService.findProduct(proId);
         model.addAttribute("findProduct", findProduct);
         return "productdetail";
     }
 
-    @GetMapping("/option/{proid}")
-    public String leadOptionForm(@PathVariable Long proid, Model model) {
-        model.addAttribute("proid", proid);
+    @GetMapping("/option/{proId}")
+    public String leadOptionForm(@PathVariable Long proId, Model model) {
+        model.addAttribute("proId", proId);
         return "optadd";
     }
 
@@ -84,13 +84,13 @@ public class ProductController {
         return "redirect:/products/" + request.getProId();
     }
 
-    @GetMapping("/list/{id}/{email}")
-    public String findSeller(String search, Model model, @PathVariable("id") Long id, @PathVariable("email") String email, @PageableDefault(page = 0, size = 5, sort = "proId", direction = Sort.Direction.DESC) Pageable pageable) {
+    @GetMapping("/list/seller/{id}")
+    public String findSeller(String search, Model model, @PathVariable("id") Long id, @PageableDefault(page = 0, size = 5, sort = "proId", direction = Sort.Direction.DESC) Pageable pageable) {
         PagingList pagingProducts;
         if (search == null) {
-            pagingProducts = productService.findSeller(id, email, pageable);
+            pagingProducts = productService.findSellerProductsList(id, pageable);
         } else {
-            pagingProducts = productService.findSellerSearch(id, email, pageable, search);
+            pagingProducts = productService.findSellerProductSearch(id,pageable, search);
         }
         model.addAttribute("pagingProducts", pagingProducts);
         return "seller";

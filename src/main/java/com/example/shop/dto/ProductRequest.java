@@ -30,7 +30,17 @@ public class ProductRequest {
 
 
     public Product productEntity(Long id) {
-        this.member=Member.builder().id(id).build();
+        this.member=MemberRequest.addMemberIdEntity(id);
         return Product.builder().proName(proName).proPrice(proPrice).proCategory(proCategory).member(member).build();
+    }
+    public Option fullOptionEntity(String opt1,String opt2,int optquantity,Long proId){
+        return  Option.builder().opt1(opt1).opt2(opt2).optquantity(optquantity).product(addProductIDEntity(proId)).build();
+    }
+    public Option opt1NoOptionEntity(String opt2,int optquantity,Long proId){
+        return  Option.builder().opt2(opt2).optquantity(optquantity).product(addProductIDEntity(proId)).build();
+    }
+
+    public Product addProductIDEntity(Long proId){
+        return Product.builder().proId(proId).build();
     }
 }

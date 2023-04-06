@@ -23,5 +23,9 @@ public class MemberRequest {
                 .address("(우편번호:" + addr1 + ")" + addr2 + "(상세주소 :" + addr3+")").build();
     }
 
+    public static Member addMemberIdEntity(Long id){
+        return Member.builder().id(id).build();
+    }
+
 
 }

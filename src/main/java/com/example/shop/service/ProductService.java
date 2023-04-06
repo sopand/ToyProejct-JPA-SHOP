@@ -14,6 +14,7 @@ import org.springframework.web.multipart.MultipartFile;
 import java.io.File;
 import java.io.IOException;
 import java.util.*;
+import java.util.concurrent.atomic.AtomicInteger;
 import java.util.stream.Collectors;
 
 @Service
@@ -27,8 +28,6 @@ public class ProductService {
     private final OptionRepository optionRepository;
 
     private final ReproRepository reproRepository;
-
-
 
 
     @Transactional
@@ -47,7 +46,7 @@ public class ProductService {
     }
 
     @Transactional
-    public Long createProduct(ProductRequest request, Long id) throws IOException {
+    public Long createProduct(ProductRequest request, Long id) throws Exception {
         Product p = productRepository.save(request.productEntity(id));
         for (MultipartFile imgFile : request.getImgList()) {
             fileUpload(imgFile, StaticType.ProductImg.name(), p);
@@ -65,31 +64,25 @@ public class ProductService {
 
     @Transactional
     public void createOption(ProductRequest request) {
-
-        Product findProduct = productRepository.findByProId(request.getProId());
-        if (request.getOpt1() == null) {
-            for (int i = 0; i < request.getOpt2().size(); i++) {
-                Option opt = Option.builder().opt2(request.getOpt2().get(i)).optquantity(request.getOptquantity().get(i)).product(findProduct).build();
-                optionRepository.save(opt);
+        for (int i = 0; i < request.getOpt2().size(); i++) {
+            Option opt = request.fullOptionEntity(request.getOpt1(),request.getOpt2().get(i), request.getOptquantity().get(i), request.getProId());
+            if (request.getOpt1() == null) {
+                opt = request.opt1NoOptionEntity(request.getOpt2().get(i), request.getOptquantity().get(i), request.getProId());
             }
-        } else {
-            for (int i = 0; i < request.getOpt2().size(); i++) {
-                Option opt = Option.builder().opt1(request.getOpt1()).opt2(request.getOpt2().get(i)).optquantity(request.getOptquantity().get(i)).product(findProduct).build();
-                optionRepository.save(opt);
-            }
+            optionRepository.save(opt);
         }
 
 
     }
 
     @Transactional
-    public void createRepro(ReproRequest request){
+    public void createRepro(ReproRequest request) {
         reproRepository.save(request.toEntity());
     }
 
 
-    public PagingList findSeller(Long id,String email, Pageable page){
-        Page<ProductResponse> getPagingProduct = productRepository.findAllByid(page,id,email);
+    public PagingList findSellerProductsList(Long id, Pageable page) {
+        Page<ProductResponse> getPagingProduct = productRepository.findAllByid(page, id);
         return PagingList.setPagingList(getPagingProduct);
     }
 
@@ -97,20 +90,20 @@ public class ProductService {
         Page<ProductResponse> getPagingProduct = productRepository.findAllProduct(page);
         return PagingList.setPagingList(getPagingProduct);
     }
-    public PagingList findByCategoryProducts(Pageable page,String procategory) {
-        Page<ProductResponse> getPagingProduct = productRepository.findByCategory(page,procategory);
+
+    public PagingList findByCategoryProducts(Pageable page, String procategory) {
+        Page<ProductResponse> getPagingProduct = productRepository.findByCategory(page, procategory);
         return PagingList.setPagingList(getPagingProduct);
     }
 
-    public PagingList findBySearchProducts(Pageable page,String search) {
-        Page<ProductResponse> getPagingProduct = productRepository.findBySearchProducts(page,search);
+    public PagingList findBySearchProducts(Pageable page, String search) {
+        Page<ProductResponse> getPagingProduct = productRepository.findBySearchProducts(page, search);
         return PagingList.setPagingList(getPagingProduct);
     }
 
 
-
-    public PagingList findSellerSearch(Long id,String email, Pageable page,String search){
-        Page<ProductResponse> getPagingProduct = productRepository.findSearch(page,id,email,search);
+    public PagingList findSellerProductSearch(Long id, Pageable page, String search) {
+        Page<ProductResponse> getPagingProduct = productRepository.findSellerProductSearch(page, id, search);
         return PagingList.setPagingList(getPagingProduct);
     }
 

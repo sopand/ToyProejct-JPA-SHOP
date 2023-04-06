@@ -15,7 +15,7 @@ $(function () {
         let opt1 ;
         let opt2 = [];
         let optquantity = [];
-        const proid=$('input[name=proid]').val();
+        const proId=$('input[name=proId]').val();
             if($('input[name=opt1]').val()!=''){
                 opt1=$('input[name=opt1]').val();
             }
@@ -30,13 +30,11 @@ $(function () {
                 optquantity.push($(item).val());
             }
         });
-        console.log(opt1);
-        console.log(opt2);
         $.ajax({
             url: "/products/option",
             method: "POST",
             data:{
-                proid:proid,
+                proId:proId,
                 opt1:opt1,
                 opt2:opt2,
                 optquantity:optquantity
