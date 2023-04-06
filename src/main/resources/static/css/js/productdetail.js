@@ -20,10 +20,9 @@ $(function () {
             proId: proId,
         },
         success: function (data) {
-            console.log(data);
             if (data != null && data != '') {
                 $(".favo").css("color", "red");
-                $("#favoritebtn").val(data.ordid);
+                $("#favoritebtn").val(data);
             }
         },
         error: function () {
@@ -152,12 +151,12 @@ $(function () {
                             alert("장바구니 추가완료");
                         },
                         error: function () {
-
+                            alert("장바구니 추가 실패");
                         }
 
                     });
                 } else {
-                    alert(data);
+                    alert("이미 장바구니에 존재하는 상품입니다.");
                 }
             },
             error: function () {
@@ -190,7 +189,6 @@ $(function () {
 
             });
         } else {
-            console.log(ordid);
             $.ajax({
                 method: "delete",
                 url: "/orders/favorite",

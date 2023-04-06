@@ -1,10 +1,7 @@
 package com.example.shop.service;
 
 
-import com.example.shop.dto.PagingList;
-import com.example.shop.dto.ProductRequest;
-import com.example.shop.dto.ProductResponse;
-import com.example.shop.dto.StaticType;
+import com.example.shop.dto.*;
 import com.example.shop.entity.*;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
@@ -28,6 +25,7 @@ public class ProductService {
     private final ImgRepository imgRepository;
     private final OptionRepository optionRepository;
 
+    private final ReproRepository reproRepository;
 
 
     @Transactional
@@ -66,7 +64,6 @@ public class ProductService {
     public void createOption(ProductRequest request) {
         System.out.println("asdsad"+request);
         for (int i = 0; i <request.getOpt2().size(); i++) {
-
             Option opt = request.fullOptionEntity(request.getOpt1(),request.getOpt2().get(i), request.getOptquantity().get(i), request.getProId());
             if (request.getOpt1() == null) {
                 opt = request.opt1NoOptionEntity(request.getOpt2().get(i), request.getOptquantity().get(i), request.getProId());
@@ -103,6 +100,11 @@ public class ProductService {
     public PagingList findSellerProductSearch(Long id, Pageable page, String search) {
         Page<ProductResponse> getPagingProduct = productRepository.findSellerProductSearch(page, id, search);
         return PagingList.setPagingList(getPagingProduct);
+    }
+
+    @Transactional
+    public void createRepro(ReproRequest request) {
+        reproRepository.save(request.toEntity());
     }
 
 

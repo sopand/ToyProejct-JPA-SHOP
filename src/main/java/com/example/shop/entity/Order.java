@@ -1,5 +1,6 @@
 package com.example.shop.entity;
 
+import com.example.shop.dto.OrderRequest;
 import jakarta.persistence.*;
 import lombok.AccessLevel;
 import lombok.Builder;
@@ -70,6 +71,14 @@ public class Order {
         this.ordpostCode=ordpostCode;
     }
 
+
+    public void modifyOrderEntity(OrderRequest request){
+
+        this.ordchk=request.getOrdchk();
+        this.ordquantity=request.getOrdquantity();
+        this.ordhuname=request.getOrdhuname();
+        this.ordaddress=request.getOrdaddress();
+    }
 
 
 

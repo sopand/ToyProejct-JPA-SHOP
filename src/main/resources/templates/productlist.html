@@ -28,7 +28,7 @@
                 <div class="prolist_main_list" th:if="${pagingProducts}!=null" th:each="product :${pagingProducts['pagingList']}">
                     <div class="prolist_list_textbox">
                         <div class="prolist_list_name">
-                            <a href="#" th:text="|제품명 : ${product.proName}|">제품명</a>
+                            <a th:href="|/products/${product.proId}|" th:text="|제품명 : ${product.proName}|">제품명</a>
                         </div>
                         <div class="prolist_list_price" th:text="|가격 : ${product.proPrice}원|">가격</div>
                     </div>

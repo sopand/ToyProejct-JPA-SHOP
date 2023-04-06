@@ -17,10 +17,10 @@
         <span class="seller_aside_text">판매자 관리페이지</span>
         <ul>
             <li>
-                <a href="#">메인</a>
+                <a href="/">메인</a>
             </li>
             <li>
-                <a href="#">제품리스트</a>
+                <a href="/products/list">제품리스트</a>
             </li>
         </ul>
     </aside>
@@ -59,6 +59,7 @@ search
                             <span th:text="|제품가격 : ${#numbers.formatInteger(product.proPrice, 3, 'COMMA') + '원'}|">제품가격</span>
                             <span th:text="|등록일 : ${product.proDate}|">제품 등록일</span>
                             <span th:text="|제품카테고리 : ${product.proCategory}|">제품 카테고리</span>
+                            <button th:value="${product.proId}">제품 삭제</button>
                         </div>
 
                     </div>

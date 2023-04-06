@@ -33,16 +33,12 @@ public class OrderService {
         }
     }
 
-    public String hasFavorite(Long proid, Long id, String check) {
-        Order order = orderRepository.hasFavorite(proid, id, check);
-        if (order == null) {
-            return null;
-        }
-        if (check.equals("장바구니")) {
-            return "이미 장바구니에 존재하는 제품입니다";
-        } else {
-            return "Has Favorite";
-        }
+    public Long hasFavorite(Long proid, Long id, String check) {
+        Order order = orderRepository.findByProductProIdAndMemberIdAndOrdchk(proid, id, check).orElseGet(()->null);
+
+        return order==null ?  null:  order.getOrdid();
+
+
     }
 
     public void deleteFavorite(Long ordid) {
@@ -58,15 +54,15 @@ public class OrderService {
     }
 
     @Transactional
-    public void BuyFromCart(OrderRequest request) {
-            AtomicInteger count= new AtomicInteger();
+    public void BuyFromCart(OrderRequest request){
+        AtomicInteger count= new AtomicInteger();
             request.getOrdidList().stream().forEach(entity->{
                 request.setOrdid(entity);
                 request.setOrdquantity(request.getQuantityList().get(count.getAndIncrement()));
-                orderRepository.modifyCartAndBuy(request);
+                Order order=orderRepository.findByOrdid(request.getOrdid()).orElseThrow(()-> new NoSuchElementException("찾을수 주문 정보입니다 "));
+                order.modifyOrderEntity(request);
                     }
             );
-
     }
 
     @Transactional
@@ -75,9 +71,7 @@ public class OrderService {
     }
 
     public List<OrderResponse> findDelivery(Long id){
-        List<OrderResponse> delivery=orderRepository.findOrderByOrdChk(id).stream().map(OrderResponse::new).toList();
-        System.out.println();
-        return delivery;
+        return orderRepository.findOrderByOrdChk(id).stream().map(OrderResponse::new).toList();
     }
 
 
