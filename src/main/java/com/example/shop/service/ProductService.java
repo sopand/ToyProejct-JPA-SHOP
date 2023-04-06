@@ -29,15 +29,15 @@ public class ProductService {
     private final ReproRepository reproRepository;
 
 
-    public static Map<String,Object> findPaging(Page<ProductResponse> productLimit){
+    public static Map<String,Object> findPaging(Page<ProductResponse> getPagingProduct){
         Map<String, Object> pagingMap = new HashMap<>();
-        int nowPage = productLimit.getPageable().getPageNumber() + 1;
+        int nowPage = getPagingProduct.getPageable().getPageNumber() + 1;
         int startPage = Math.max(nowPage - 4, 1);
-        int endPage = Math.min(nowPage + 5, productLimit.getTotalPages());
+        int endPage = Math.min(nowPage + 5, getPagingProduct.getTotalPages());
         pagingMap.put("startPage", startPage);
         pagingMap.put("nowPage", nowPage);
         pagingMap.put("endPage", endPage);
-        pagingMap.put("productLimit", productLimit);
+        pagingMap.put("getPagingProduct", getPagingProduct);
         return pagingMap;
     }
 
@@ -67,7 +67,7 @@ public class ProductService {
         for (MultipartFile textimgFile : request.getTextimgList()) {
             fileUpload(textimgFile, StaticType.ProductTextImg.name(), p);
         }
-        return p.getProid();
+        return p.getProId();
 
     }
 
@@ -96,27 +96,28 @@ public class ProductService {
 
     @Transactional
     public void createRepro(ReproRequest request){
-        System.out.println("sdsadsadsad"+request);
         reproRepository.save(request.toEntity());
     }
 
 
     public Map<String,Object> findSeller(Long id,String email, Pageable page){
-        Page<ProductResponse> productLimit = productRepository.findAllByid(page,id,email);
-        Map<String, Object> pagingMap = findPaging(productLimit);
-        return pagingMap;
+        Page<ProductResponse> getPagingProduct = productRepository.findAllByid(page,id,email);
+        return findPaging(getPagingProduct);
     }
 
     public Map<String, Object> findProducts(Pageable page) {
-        Page<ProductResponse> productLimit = productRepository.findAllProduct(page);
-        Map<String, Object> pagingMap = findPaging(productLimit);
-        return pagingMap;
+        Page<ProductResponse> getPagingProduct = productRepository.findAllProduct(page);
+        return findPaging(getPagingProduct);
+    }
+    public Map<String, Object> findByCategoryProducts(Pageable page,String procategory) {
+        Page<ProductResponse> getPagingProduct = productRepository.findAllProduct(page);
+        return findPaging(getPagingProduct);
     }
 
+
     public Map<String,Object> findSellerSearch(Long id,String email, Pageable page,String search){
-        Page<ProductResponse> productLimit = productRepository.findSearch(page,id,email,search);
-        Map<String, Object> pagingMap = findPaging(productLimit);
-        return pagingMap;
+        Page<ProductResponse> getPagingProduct = productRepository.findSearch(page,id,email,search);
+        return findPaging(getPagingProduct);
     }
 
 

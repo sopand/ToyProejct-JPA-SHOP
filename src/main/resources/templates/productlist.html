@@ -25,16 +25,19 @@
                 <button type="submit">검색</button>
             </form>
             <div class="prolist_main_listbox">
-                <div class="prolist_main_list" th:if="${pagingProducts}!=null"
-                     th:each="product :${pagingProducts['productLimit']}">
+                <div class="prolist_main_list" th:if="${pagingProducts}!=null" th:each="product :${pagingProducts['getPagingProduct']}">
+                    <div class="prolist_list_textbox">
+                        <div class="prolist_list_name">
+                            <a href="#" th:text="|제품명 : ${product.proname}|">제품명</a>
+                        </div>
+                        <div class="prolist_list_price" th:text="|가격 : ${product.proprice}원|">가격</div>
+                    </div>
                     <div class="prolist_list_img">
                         <a th:href="|/products/${product.proid}|">
-                            <img th:src="|/projectimg/${img.imgname}|"th:each="img :${product['img']}" th:if="${img.proid}==${product.proid}">
-                        </a></div>
-                    <div class="prolist_list_textbox">
-                        <div class="prolist_list_name"><a href="#" th:text="|제품명:${product.proname}|">제품명</a></div>
-                        <div class="prolist_list_price" th:text="|가격 :${product.proprice}|">가격</div>
+                            <img th:src="|/projectimg/${img.imgname}|" th:each="img :${product['img']}" th:if="${img.proid}==${product.proid}">
+                        </a>
                     </div>
+
                 </div>
             </div>
         </div>

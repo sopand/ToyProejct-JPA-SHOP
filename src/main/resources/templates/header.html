@@ -12,7 +12,6 @@
         <div class="index_hed_log_box" th:if="${session.email}==null">
             <a href="/login">로그인</a>
             <a href="/members">회원가입</a>
-
         </div>
         <div class="index_hed_log_box" th:if="${session.email}!=null">
             <a href="javascript:void(0)" class="logout_href" th:value="${session.email}">로그아웃</a>
@@ -23,9 +22,11 @@
         </div>
         <div class="index_hed_menu_box">
             <div class="index_hed_menu"><a href="/products/list">전체상품</a></div>
-            <div class="index_hed_menu"><a href="#">Menu</a></div>
-            <div class="index_hed_menu"><a href="#">Menu</a></div>
-            <div class="index_hed_menu"><a href="#">Menu</a></div>
+            <div class="index_hed_menu"><a href="/products/list/상의">상의</a></div>
+            <div class="index_hed_menu"><a href="/products/list/하의">하의</a></div>
+            <div class="index_hed_menu"><a href="/products/list/아우터">아우터</a></div>
+            <div class="index_hed_menu"><a href="/products/list/신발">신발</a></div>
+            <div class="index_hed_menu"><a href="/products/list/악세사리">악세사리</a></div>
         </div>
     </div>
 

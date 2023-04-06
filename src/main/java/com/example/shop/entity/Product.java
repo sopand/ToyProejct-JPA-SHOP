@@ -17,21 +17,17 @@ import java.util.*;
 public class Product {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "pro_id")
-    private Long proid;
+    private Long proId;
 
-    @Column(name = "pro_name")
-    private String proname;
+    private String proName;
 
 
-    @Column(name = "pro_price")
-    private int proprice;
+    private int proPrice;
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name="id")
     private Member member;
 
-    @Column(name="pro_category")
-    private String procategory;
+    private String proCategory;
 
 
 
@@ -39,8 +35,7 @@ public class Product {
     @OrderBy("imgid asc")
     private List<Img> img;
     @Temporal(TemporalType.TIMESTAMP)
-    @Column(name="pro_date")
-    private Date prodate;
+    private Date proDate;
 
 
     @OneToMany(mappedBy ="product",cascade = CascadeType.ALL)
@@ -49,12 +44,12 @@ public class Product {
 
 
     @Builder
-    public Product(Long proid,String proname,int proprice,Long id,String procategory,Member member){
-        this.proname=proname;
-        this.proid=proid;
-        this.proprice=proprice;
-        this.prodate=new Date();
-        this.procategory=procategory;
+    public Product(Long proId,String proName,int proPrice,Long id,String proCategory,Member member){
+        this.proName=proName;
+        this.proId=proId;
+        this.proPrice=proPrice;
+        this.proDate=new Date();
+        this.proCategory=proCategory;
         this.member=member;
     }
 }
