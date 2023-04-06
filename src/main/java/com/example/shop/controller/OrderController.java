@@ -30,9 +30,9 @@ public class OrderController {
     }
     @ResponseBody
     @GetMapping("/favorite/{check}")
-    public String hasFavorite(HttpSession session, Long proid,@PathVariable("check") String check){
+    public String hasFavorite(HttpSession session, Long proId,@PathVariable("check") String check){
         Long id=(Long)session.getAttribute("id");
-        return orderService.hasFavorite(proid,id,check);
+        return orderService.hasFavorite(proId,id,check);
     }
     @ResponseBody
     @DeleteMapping("/favorite")

@@ -18,7 +18,7 @@ public class OptionResponse {
 
     public OptionResponse(Option entity){
         this.opquantity=entity.getOptquantity();
-        this.proid=entity.getProduct().getProid();
+        this.proid=entity.getProduct().getProId();
         this.opt2=entity.getOpt2();
         this.opt1=entity.getOpt1();
         this.optid=entity.getOptid();

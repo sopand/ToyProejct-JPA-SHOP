@@ -17,11 +17,9 @@ import java.util.*;
 public class Product {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "pro_id")
     private Long proId;
-
     private String proName;
-
-
     private int proPrice;
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name="id")
@@ -44,7 +42,7 @@ public class Product {
 
 
     @Builder
-    public Product(Long proId,String proName,int proPrice,Long id,String proCategory,Member member){
+    public Product(Long proId,String proName,int proPrice,String proCategory,Member member){
         this.proName=proName;
         this.proId=proId;
         this.proPrice=proPrice;

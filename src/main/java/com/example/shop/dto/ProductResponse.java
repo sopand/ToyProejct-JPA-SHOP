@@ -19,24 +19,24 @@ import java.util.stream.Collectors;
 @ToString
 public class ProductResponse {
 
-    private Long proid;
-    private String proname;
-    private int proprice;
+    private Long proId;
+    private String proName;
+    private int proPrice;
 
-    private String procategory;
+    private String proCategory;
     private List<ImgResponse> img=new ArrayList<>();
 
     private List<OptionResponse> option=new ArrayList<>();
-    private Date prodate;
+    private Date proDate;
 
     private List<String> option1=new ArrayList<>();
 
     public ProductResponse(Product entity){
-        this.proid=entity.getProid();
-        this.proname=entity.getProname();
-        this.proprice=entity.getProprice();
-        this.prodate=entity.getProdate();
-        this.procategory= entity.getProcategory();
+        this.proId=entity.getProId();
+        this.proName=entity.getProName();
+        this.proPrice=entity.getProPrice();
+        this.proDate=entity.getProDate();
+        this.proCategory= entity.getProCategory();
         this.img=entity.getImg().stream().map(ImgResponse::new).toList();
         this.option=entity.getOption().stream().map(OptionResponse::new).toList();
         if(option.get(0).getOpt1()!=null){

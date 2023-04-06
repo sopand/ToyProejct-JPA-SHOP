@@ -16,23 +16,23 @@ import java.util.Optional;
 
 public interface ProductRepository extends JpaRepository<Product,Long> {
 
-    @Query(value = "select p from Product p left join fetch p.img i left join fetch p.option where i.imgtype='ProductImg' GROUP BY p.proid",
-            countQuery = "select count(p.proid) from Product p")
+    @Query(value = "select p from Product p left join fetch p.img i left join fetch p.option where i.imgtype='ProductImg' GROUP BY p.proId",
+            countQuery = "select count(p.proId) from Product p")
     Page<ProductResponse> findAllProduct(Pageable page);
 
-    @Query(value = "select p from Product p left join fetch p.img i left join fetch p.option where i.imgtype='ProductImg' AND p.member.id = :id AND p.member.email = :email GROUP BY p.proid",
-            countQuery = "select count(p.proid) from Product p")
+    @Query(value = "select p from Product p left join fetch p.img i left join fetch p.option where i.imgtype='ProductImg' AND p.member.id = :id AND p.member.email = :email GROUP BY p.proId",
+            countQuery = "select count(p.proId) from Product p")
     Page<ProductResponse> findAllByid(Pageable page ,Long id,String email);
 
-    @Query(value = "select p from Product p left join fetch p.img i left join fetch p.option where i.imgtype='ProductImg' AND p.member.id = :id AND p.member.email = :email AND p.proname = :search GROUP BY p.proid",
-            countQuery = "select count(p.proid) from Product p")
+    @Query(value = "select p from Product p left join fetch p.img i left join fetch p.option where i.imgtype='ProductImg' AND p.member.id = :id AND p.member.email = :email AND p.proName = :search GROUP BY p.proId",
+            countQuery = "select count(p.proId) from Product p")
     Page<ProductResponse> findSearch(Pageable page , Long id, String email, String search);
 
-    @Query(value = "select p from Product p left join fetch p.img i left join fetch p.option o WHERE p.proid = :proid")
-    Product findByProduct(Long proid);
+    @Query(value = "select p from Product p left join fetch p.img i left join fetch p.option o WHERE p.proId = :proId")
+    Product findByProduct(Long proId);
 
 
-    Product findByProid(Long proid);
+    Product findByProId(Long proId);
 
 
 }

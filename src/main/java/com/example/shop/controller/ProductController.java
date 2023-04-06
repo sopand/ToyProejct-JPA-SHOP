@@ -1,15 +1,13 @@
 package com.example.shop.controller;
 
 
-import com.example.shop.dto.ProductResponse;
+import com.example.shop.dto.PagingList;
 import com.example.shop.dto.ProductRequest;
+import com.example.shop.dto.ProductResponse;
 import com.example.shop.dto.ReproRequest;
-import com.example.shop.entity.Option;
-import com.example.shop.service.MemberService;
 import com.example.shop.service.ProductService;
 import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
-import org.springframework.boot.configurationprocessor.json.JSONObject;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.web.PageableDefault;
@@ -18,38 +16,35 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import java.io.IOException;
-import java.util.Arrays;
 import java.util.Map;
-import java.util.Random;
-import java.util.Scanner;
 
 @Controller
 @RequiredArgsConstructor
 @RequestMapping("/products")
 public class ProductController {
     private final ProductService productService;
+
     @GetMapping("")
     public String loadProudctAdd() {
         return "productadd";
     }
 
     @PostMapping("")
-    public String createProduct(ProductRequest request,HttpSession session) throws IOException {
-        Long proid = productService.createProduct(request, (Long) session.getAttribute("id"));
-
-        return "redirect:/products/option/" + proid;
+    public String createProduct(ProductRequest request, HttpSession session) throws IOException {
+        Long proId = productService.createProduct(request, (Long) session.getAttribute("id"));
+        return "redirect:/products/option/" + proId;
     }
 
     @GetMapping("/list")
-    public String findProducts(Model model, @PageableDefault(page = 0, size = 9, sort = "proid", direction = Sort.Direction.DESC) Pageable pageable) {
-        Map<String, Object> pagingProducts = productService.findProducts(pageable);
+    public String findProducts(Model model, @PageableDefault(page = 0, size = 9, sort = "proId", direction = Sort.Direction.DESC) Pageable pageable) {
+        PagingList pagingProducts = productService.findProducts(pageable);
         model.addAttribute("pagingProducts", pagingProducts);
         return "productlist";
     }
 
     @GetMapping("/list/{procategory}")
-    public String findByCategoryProducts(@PathVariable String procategory, Model model, @PageableDefault(page = 0, size = 9, sort = "proid", direction = Sort.Direction.DESC) Pageable pageable) {
-        Map<String, Object> pagingProducts = productService.findProducts(pageable);
+    public String findByCategoryProducts(@PathVariable String procategory, Model model, @PageableDefault(page = 0, size = 9, sort = "proId", direction = Sort.Direction.DESC) Pageable pageable) {
+        PagingList pagingProducts = productService.findProducts(pageable);
         model.addAttribute("pagingProducts", pagingProducts);
         return "productlist";
     }
@@ -76,18 +71,18 @@ public class ProductController {
     }
 
     @PostMapping("/return")
-    public String createRepro(ReproRequest request,HttpSession session){
-        request.setId((Long)session.getAttribute("id"));
+    public String createRepro(ReproRequest request, HttpSession session) {
+        request.setId((Long) session.getAttribute("id"));
         productService.createRepro(request);
-        return "redirect:/products/"+request.getProid();
+        return "redirect:/products/" + request.getProId();
     }
 
     @GetMapping("/list/{id}/{email}")
-    public String findSeller(String search,Model model,@PathVariable("id")Long id,@PathVariable("email")String email,@PageableDefault(page = 0, size = 5, sort = "proid", direction = Sort.Direction.DESC) Pageable pageable){
-        Map<String, Object> pagingProducts;
-        if(search==null){
+    public String findSeller(String search, Model model, @PathVariable("id") Long id, @PathVariable("email") String email, @PageableDefault(page = 0, size = 5, sort = "proId", direction = Sort.Direction.DESC) Pageable pageable) {
+        PagingList pagingProducts;
+        if (search == null) {
             pagingProducts = productService.findSeller(id, email, pageable);
-        }else{
+        } else {
             pagingProducts = productService.findSellerSearch(id, email, pageable, search);
         }
         model.addAttribute("pagingProducts", pagingProducts);

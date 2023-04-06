@@ -12,7 +12,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class ReproRequest {
     private String rep_chk;
-    private Long proid;
+    private Long proId;
 
     private Long id;
     private String rep_select;
@@ -21,7 +21,7 @@ public class ReproRequest {
 
     public Repro toEntity(){
         Member member= Member.builder().id(id).build();
-        Product pro= Product.builder().proid(proid).build();
+        Product pro= Product.builder().proId(proId).build();
         return Repro.builder().rep_chk(rep_chk).rep_select(rep_select).rep_text(rep_text).product(pro).member(member).build();
     }
 }

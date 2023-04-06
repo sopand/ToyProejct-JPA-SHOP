@@ -14,12 +14,12 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 public class ProductRequest {
-    private String proname;
+    private String proName;
 
-    private Long proid;
-    private int proprice;
+    private Long proId;
+    private int proPrice;
 
-    private String procategory;
+    private String proCategory;
     private Member member;
     private String opt1;
     private List<String> opt2;
@@ -29,7 +29,8 @@ public class ProductRequest {
 
 
 
-    public Product productEntity() {
-        return Product.builder().proname(proname).proprice(proprice).procategory(procategory).member(member).build();
+    public Product productEntity(Long id) {
+        this.member=Member.builder().id(id).build();
+        return Product.builder().proName(proName).proPrice(proPrice).proCategory(proCategory).member(member).build();
     }
 }

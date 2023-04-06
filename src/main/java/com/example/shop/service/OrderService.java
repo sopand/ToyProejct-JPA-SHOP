@@ -17,7 +17,7 @@ public class OrderService {
     @Transactional
     public Long createOrder(OrderRequest request, Long id) {
         Member member = Member.builder().id(id).build();
-        Product product = Product.builder().proid(request.getProid()).build();
+        Product product = Product.builder().proId(request.getProid()).build();
         switch (request.getOrdchk()) {
             case "장바구니":
                 Option option = Option.builder().optid(request.getOptid()).build();
@@ -52,7 +52,7 @@ public class OrderService {
         List<OrderResponse> carts = orderRepository.findOrderById(id).stream().map(OrderResponse::new).toList();
         List<ImgResponse> imgs = new ArrayList<>();
         carts.stream().forEach(order ->
-                order.setImgs(new ImgResponse(imgRepository.findFirstByImgByProId(order.getProduct().getProid())))
+                order.setImgs(new ImgResponse(imgRepository.findFirstByImgByProId(order.getProduct().getProId())))
         );
 
         return carts;

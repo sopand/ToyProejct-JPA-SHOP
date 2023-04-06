@@ -16,7 +16,7 @@ public class ImgResponse {
     private String imgtype;
     public ImgResponse(Img entity){
         this.imgname=entity.getImgname();
-        this.proid=entity.getProduct().getProid();
+        this.proid=entity.getProduct().getProId();
         this.imgoriginal=entity.getImgoriginal();
         this.imgid=entity.getImgid();
         this.imgtype=entity.getImgtype();

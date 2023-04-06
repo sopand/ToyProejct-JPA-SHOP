@@ -18,11 +18,9 @@ public class Option {
     private int optquantity;
     private String opt1;
     private String opt2;
-
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "pro_id")
     private Product product;
-
     @Builder
     public Option(Long optid,int optquantity,String opt1,String opt2,Product product){
         this.optid=optid;

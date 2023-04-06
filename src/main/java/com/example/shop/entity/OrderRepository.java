@@ -14,8 +14,8 @@ import java.util.Optional;
 
 public interface OrderRepository extends JpaRepository<Order,Long> {
 
-     @Query(value = "SELECT o FROM Order o WHERE o.product.proid = :proid AND o.member.id = :id AND o.ordchk = :check")
-     Order hasFavorite(@Param("proid") Long proid, @Param("id") Long id ,@Param("check")String check);
+     @Query(value = "SELECT o FROM Order o WHERE o.product.proId = :proId AND o.member.id = :id AND o.ordchk = :check")
+     Order hasFavorite(@Param("proId") Long proId, @Param("id") Long id ,@Param("check")String check);
      
      @Query(value = "SELECT o FROM Order o  WHERE o.member.id = :id AND o.ordchk='장바구니'")
      List<Order> findOrderById(@Param("id")Long id);

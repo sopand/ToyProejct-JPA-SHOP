@@ -29,17 +29,7 @@ public class ProductService {
     private final ReproRepository reproRepository;
 
 
-    public static Map<String,Object> findPaging(Page<ProductResponse> getPagingProduct){
-        Map<String, Object> pagingMap = new HashMap<>();
-        int nowPage = getPagingProduct.getPageable().getPageNumber() + 1;
-        int startPage = Math.max(nowPage - 4, 1);
-        int endPage = Math.min(nowPage + 5, getPagingProduct.getTotalPages());
-        pagingMap.put("startPage", startPage);
-        pagingMap.put("nowPage", nowPage);
-        pagingMap.put("endPage", endPage);
-        pagingMap.put("getPagingProduct", getPagingProduct);
-        return pagingMap;
-    }
+
 
     @Transactional
     public void fileUpload(MultipartFile file, String img_type, Product p) throws IOException {
@@ -58,9 +48,7 @@ public class ProductService {
 
     @Transactional
     public Long createProduct(ProductRequest request, Long id) throws IOException {
-        Member m = Member.builder().id(id).build();
-        request.setMember(m);
-        Product p = productRepository.save(request.productEntity());
+        Product p = productRepository.save(request.productEntity(id));
         for (MultipartFile imgFile : request.getImgList()) {
             fileUpload(imgFile, StaticType.ProductImg.name(), p);
         }
@@ -78,7 +66,7 @@ public class ProductService {
     @Transactional
     public void createOption(ProductRequest request) {
 
-        Product findProduct = productRepository.findByProid(request.getProid());
+        Product findProduct = productRepository.findByProId(request.getProId());
         if (request.getOpt1() == null) {
             for (int i = 0; i < request.getOpt2().size(); i++) {
                 Option opt = Option.builder().opt2(request.getOpt2().get(i)).optquantity(request.getOptquantity().get(i)).product(findProduct).build();
@@ -100,24 +88,21 @@ public class ProductService {
     }
 
 
-    public Map<String,Object> findSeller(Long id,String email, Pageable page){
+    public PagingList findSeller(Long id,String email, Pageable page){
         Page<ProductResponse> getPagingProduct = productRepository.findAllByid(page,id,email);
-        return findPaging(getPagingProduct);
+        return PagingList.setPagingList(getPagingProduct);
     }
 
-    public Map<String, Object> findProducts(Pageable page) {
+    public PagingList findProducts(Pageable page) {
         Page<ProductResponse> getPagingProduct = productRepository.findAllProduct(page);
-        return findPaging(getPagingProduct);
-    }
-    public Map<String, Object> findByCategoryProducts(Pageable page,String procategory) {
-        Page<ProductResponse> getPagingProduct = productRepository.findAllProduct(page);
-        return findPaging(getPagingProduct);
+        return PagingList.setPagingList(getPagingProduct);
     }
 
 
-    public Map<String,Object> findSellerSearch(Long id,String email, Pageable page,String search){
+
+    public PagingList findSellerSearch(Long id,String email, Pageable page,String search){
         Page<ProductResponse> getPagingProduct = productRepository.findSearch(page,id,email,search);
-        return findPaging(getPagingProduct);
+        return PagingList.setPagingList(getPagingProduct);
     }
 
 
