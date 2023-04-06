@@ -1,21 +1,22 @@
 package com.example.shop.service;
 
 
-import com.example.shop.dto.*;
+import com.example.shop.dto.PagingList;
+import com.example.shop.dto.ProductRequest;
+import com.example.shop.dto.ProductResponse;
+import com.example.shop.dto.StaticType;
 import com.example.shop.entity.*;
-import org.springframework.transaction.annotation.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.File;
 import java.io.IOException;
-import java.util.*;
-import java.util.concurrent.atomic.AtomicInteger;
-import java.util.stream.Collectors;
+import java.util.UUID;
 
 @Service
 @RequiredArgsConstructor
@@ -27,7 +28,6 @@ public class ProductService {
     private final ImgRepository imgRepository;
     private final OptionRepository optionRepository;
 
-    private final ReproRepository reproRepository;
 
 
     @Transactional
@@ -64,7 +64,9 @@ public class ProductService {
 
     @Transactional
     public void createOption(ProductRequest request) {
-        for (int i = 0; i < request.getOpt2().size(); i++) {
+        System.out.println("asdsad"+request);
+        for (int i = 0; i <request.getOpt2().size(); i++) {
+
             Option opt = request.fullOptionEntity(request.getOpt1(),request.getOpt2().get(i), request.getOptquantity().get(i), request.getProId());
             if (request.getOpt1() == null) {
                 opt = request.opt1NoOptionEntity(request.getOpt2().get(i), request.getOptquantity().get(i), request.getProId());
@@ -75,10 +77,6 @@ public class ProductService {
 
     }
 
-    @Transactional
-    public void createRepro(ReproRequest request) {
-        reproRepository.save(request.toEntity());
-    }
 
 
     public PagingList findSellerProductsList(Long id, Pageable page) {

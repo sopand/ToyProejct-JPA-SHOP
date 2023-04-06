@@ -16,6 +16,7 @@ $(function () {
         let opt2 = [];
         let optquantity = [];
         const proId=$('input[name=proId]').val();
+
             if($('input[name=opt1]').val()!=''){
                 opt1=$('input[name=opt1]').val();
             }

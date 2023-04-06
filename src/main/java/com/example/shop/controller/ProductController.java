@@ -4,7 +4,6 @@ package com.example.shop.controller;
 import com.example.shop.dto.PagingList;
 import com.example.shop.dto.ProductRequest;
 import com.example.shop.dto.ProductResponse;
-import com.example.shop.dto.ReproRequest;
 import com.example.shop.service.ProductService;
 import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
@@ -14,9 +13,6 @@ import org.springframework.data.web.PageableDefault;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
-
-import java.io.IOException;
-import java.util.Map;
 
 @Controller
 @RequiredArgsConstructor
@@ -77,12 +73,6 @@ public class ProductController {
         return "성공";
     }
 
-    @PostMapping("/return")
-    public String createRepro(ReproRequest request, HttpSession session) {
-        request.setId((Long) session.getAttribute("id"));
-        productService.createRepro(request);
-        return "redirect:/products/" + request.getProId();
-    }
 
     @GetMapping("/list/seller/{id}")
     public String findSeller(String search, Model model, @PathVariable("id") Long id, @PageableDefault(page = 0, size = 5, sort = "proId", direction = Sort.Direction.DESC) Pageable pageable) {

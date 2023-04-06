@@ -39,7 +39,7 @@ public class ProductResponse {
         this.proCategory= entity.getProCategory();
         this.img=entity.getImg().stream().map(ImgResponse::new).toList();
         this.option=entity.getOption().stream().map(OptionResponse::new).toList();
-        if(option.get(0).getOpt1()!=null){
+        if(option.get(0).getOpt1()!=null&& option!=null){
             List<String> opt1List=option.stream().map(opt->new String(opt.getOpt1())).toList();
             this.option1=opt1List.stream().distinct().toList();
         }
