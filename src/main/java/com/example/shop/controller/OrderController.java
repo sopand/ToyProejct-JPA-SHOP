@@ -51,14 +51,14 @@ public class OrderController {
 
     @ResponseBody
     @PutMapping("/cart")
-    public String modifyCartAndBuy(OrderRequest request){
-        orderService.modifyCartAndBuy(request);
+    public String BuyFromCart(OrderRequest request){
+        orderService.BuyFromCart(request);
         return "구매완료";
     }
 
     @ResponseBody
     @DeleteMapping("/cart")
-    public String deleteCarts(HttpSession session,OrderRequest request){
+    public String deleteCarts(OrderRequest request){
         orderService.deleteCarts(request.getOrdidList());
 
         return "장바구니 제거완료";

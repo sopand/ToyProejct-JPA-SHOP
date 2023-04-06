@@ -8,6 +8,7 @@ import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import java.util.*;
+import java.util.concurrent.atomic.AtomicInteger;
 
 @Service
 @RequiredArgsConstructor
@@ -17,7 +18,7 @@ public class OrderService {
     @Transactional
     public Long createOrder(OrderRequest request, Long id) {
         Member member = Member.builder().id(id).build();
-        Product product = Product.builder().proId(request.getProid()).build();
+        Product product = Product.builder().proId(request.getProId()).build();
         switch (request.getOrdchk()) {
             case "장바구니":
                 Option option = Option.builder().optid(request.getOptid()).build();
@@ -34,14 +35,14 @@ public class OrderService {
 
     public String hasFavorite(Long proid, Long id, String check) {
         Order order = orderRepository.hasFavorite(proid, id, check);
-        if (order != null) {
-            if (check.equals("장바구니")) {
-                return "이미 장바구니에 존재하는 제품입니다";
-            } else {
-                return "Has Favorite";
-            }
+        if (order == null) {
+            return null;
         }
-        return null;
+        if (check.equals("장바구니")) {
+            return "이미 장바구니에 존재하는 제품입니다";
+        } else {
+            return "Has Favorite";
+        }
     }
 
     public void deleteFavorite(Long ordid) {
@@ -50,21 +51,22 @@ public class OrderService {
 
     public List<OrderResponse> findCarts(Long id) {
         List<OrderResponse> carts = orderRepository.findOrderById(id).stream().map(OrderResponse::new).toList();
-        List<ImgResponse> imgs = new ArrayList<>();
         carts.stream().forEach(order ->
                 order.setImgs(new ImgResponse(imgRepository.findFirstByImgByProId(order.getProduct().getProId())))
         );
-
         return carts;
     }
 
     @Transactional
-    public void modifyCartAndBuy(OrderRequest request) {
-        for (int i = 0; i < request.getOrdidList().size(); i++) {
-            request.setOrdid(request.getOrdidList().get(i));
-            request.setOrdquantity(request.getQuantityList().get(i));
-            orderRepository.modifyCartAndBuy(request);
-        }
+    public void BuyFromCart(OrderRequest request) {
+            AtomicInteger count= new AtomicInteger();
+            request.getOrdidList().stream().forEach(entity->{
+                request.setOrdid(entity);
+                request.setOrdquantity(request.getQuantityList().get(count.getAndIncrement()));
+                orderRepository.modifyCartAndBuy(request);
+                    }
+            );
+
     }
 
     @Transactional

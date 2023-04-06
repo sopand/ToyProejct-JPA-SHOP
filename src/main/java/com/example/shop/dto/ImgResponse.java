@@ -10,13 +10,13 @@ import lombok.ToString;
 public class ImgResponse {
     private String imgname;
     private String imgoriginal;
-    private Long proid;
+    private Long proId;
     private Long imgid;
 
     private String imgtype;
     public ImgResponse(Img entity){
         this.imgname=entity.getImgname();
-        this.proid=entity.getProduct().getProId();
+        this.proId=entity.getProduct().getProId();
         this.imgoriginal=entity.getImgoriginal();
         this.imgid=entity.getImgid();
         this.imgtype=entity.getImgtype();

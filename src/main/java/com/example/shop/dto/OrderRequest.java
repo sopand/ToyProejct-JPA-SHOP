@@ -23,7 +23,7 @@ public class OrderRequest {
     private int ordquantity;
 
     private String ordchk;
-    private Long proid;
+    private Long proId;
     private Long optid;
 
     private String ordaddress;
@@ -35,6 +35,7 @@ public class OrderRequest {
     private List<Integer> quantityList;
 
     public Order create(Product product, Member member, Option option) {
+
         return Order.builder().product(product).member(member).option(option).ordquantity(ordquantity).ordchk(ordchk).build();
     }
 
@@ -45,4 +46,6 @@ public class OrderRequest {
     public Order directbuy(Product product, Member member, Option option) {
         return Order.builder().ordchk(ordchk).ordquantity(ordquantity).ordaddress(ordaddress).ordhuname(ordhuname).product(product).member(member).option(option).build();
     }
+
+
 }
