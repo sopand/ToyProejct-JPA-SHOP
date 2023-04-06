@@ -42,10 +42,12 @@
             </div>
         </div>
         <div class="btnbox">
-            <th:block th:each="page : ${#numbers.sequence(pagingProducts['startPage'], pagingProducts['endPage'])}">
-                <a th:if="${page != pagingProducts['nowPage']}" th:href="@{/products/list(page = ${page - 1})}" th:text="${page}"></a>
+
+            <th:block th:each="page : ${#numbers.sequence(pagingProducts['startPage'], pagingProducts['endPage'])}" th:if="${pagingProducts!=null}">
+                <a th:if="${page != pagingProducts['nowPage']} and ${page}!=0" th:href="@{/boards(page = ${page - 1})}" th:text="${page}"></a>
                 <strong th:if="${page == pagingProducts['nowPage']}" th:text="${page}" style="color : red;font-weight:bold;font-size: 18px"></strong>
             </th:block>
+
         </div>
     </main>
     <footer id="index-foo_con"></footer>

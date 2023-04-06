@@ -44,7 +44,7 @@ public class ProductController {
 
     @GetMapping("/list/{procategory}")
     public String findByCategoryProducts(@PathVariable String procategory, Model model, @PageableDefault(page = 0, size = 9, sort = "proId", direction = Sort.Direction.DESC) Pageable pageable) {
-        PagingList pagingProducts = productService.findProducts(pageable);
+        PagingList pagingProducts = productService.findByCategoryProducts(pageable,procategory);
         model.addAttribute("pagingProducts", pagingProducts);
         return "productlist";
     }
@@ -88,6 +88,5 @@ public class ProductController {
         model.addAttribute("pagingProducts", pagingProducts);
         return "seller";
     }
-
 
 }
