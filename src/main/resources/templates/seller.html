@@ -49,20 +49,20 @@ search
             </div>
 
             <div class="seller_main_content">
-                <div class="seller_main_content_box" th:each="product :${pagingProducts['productLimit']}" th:if="${product}!=null">
+                <div class="seller_main_content_box" th:each="product :${pagingProducts['pagingList']}" th:if="${product}!=null">
                     <div class="content-top">
                         <div class="main_content_img">
-                            <img th:src="|/projectimg/${img.imgname}|" th:each="img :${product['img']}" th:if="${img.proid}==${product.proid}">
+                            <img th:src="|/projectimg/${img.imgname}|" th:each="img :${product['img']}" th:if="${img.proId}==${product.proId}">
                         </div>
                         <div class="main_content_product">
-                            <span th:text="|상품명 : ${product.proname}|">제품명</span>
-                            <span th:text="|제품가격 : ${#numbers.formatInteger(product.proprice, 3, 'COMMA') + '원'}|">제품가격</span>
-                            <span th:text="|등록일 : ${product.prodate}|">제품 등록일</span>
-                            <span th:text="|제품카테고리 : ${product.procategory}|">제품 카테고리</span>
+                            <span th:text="|상품명 : ${product.proName}|">제품명</span>
+                            <span th:text="|제품가격 : ${#numbers.formatInteger(product.proPrice, 3, 'COMMA') + '원'}|">제품가격</span>
+                            <span th:text="|등록일 : ${product.proDate}|">제품 등록일</span>
+                            <span th:text="|제품카테고리 : ${product.proCategory}|">제품 카테고리</span>
                         </div>
 
                     </div>
-                    <div class="main_content_option" th:each="opt :${product['option']}" th:if="${opt.proid}==${product.proid}">
+                    <div class="main_content_option" th:each="opt :${product['option']}" th:if="${opt.proId}==${product.proId}">
                         <span th:text="|옵션 정보 ( 대분류 :${opt.opt1} , 중분류:${opt.opt2} , 남은 재고:${opt.opquantity}개 )|" th:if="${opt.opt1}!=null">옵션 1, 2 , 수량</span>
                         <span th:text="|옵션 정보 ( 대분류:${opt.opt2} , 남은 재고:${opt.opquantity}개 )|" th:if="${opt.opt1}==null">옵션  2 , 수량</span>
                     </div>

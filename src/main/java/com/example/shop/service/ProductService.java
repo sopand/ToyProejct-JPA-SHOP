@@ -98,9 +98,15 @@ public class ProductService {
         return PagingList.setPagingList(getPagingProduct);
     }
     public PagingList findByCategoryProducts(Pageable page,String procategory) {
-        Page<ProductResponse> getPagingProduct = productRepository.fidByCategory(page,procategory);
+        Page<ProductResponse> getPagingProduct = productRepository.findByCategory(page,procategory);
         return PagingList.setPagingList(getPagingProduct);
     }
+
+    public PagingList findBySearchProducts(Pageable page,String search) {
+        Page<ProductResponse> getPagingProduct = productRepository.findBySearchProducts(page,search);
+        return PagingList.setPagingList(getPagingProduct);
+    }
+
 
 
     public PagingList findSellerSearch(Long id,String email, Pageable page,String search){

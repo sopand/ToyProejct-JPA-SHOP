@@ -1,6 +1,6 @@
 $(function () {
     const opt1val = opt[0].opt1;
-    const proid = $(".proid").val();
+    const proId = $(".proId").val();
 
     if (opt1val != null) {
         let html = "";
@@ -17,7 +17,7 @@ $(function () {
         method: "get",
         url: "/orders/favorite/찜하기",
         data: {
-            proid: proid,
+            proId: proId,
         },
         success: function (data) {
             console.log(data);
@@ -89,7 +89,7 @@ $(function () {
             url: "/orders",
             data: {
                 ordquantity: ordquantity,
-                proid: proid,
+                proId: proId,
                 optid: optid,
                 ordchk: ordchk,
                 ordaddress:ordaddress,
@@ -134,7 +134,7 @@ $(function () {
             method: "get",
             url: "/orders/favorite/" + ordchk,
             data: {
-                proid: proid,
+                proId: proId,
             },
             success: function (data) {
                 if (data == null || data == '') {
@@ -143,7 +143,7 @@ $(function () {
                         url: "/orders",
                         data: {
                             ordquantity: ordquantity,
-                            proid: proid,
+                            proId: proId,
                             optid: optid,
                             ordchk: ordchk
 
@@ -175,7 +175,7 @@ $(function () {
                 method: "post",
                 url: "/orders",
                 data: {
-                    proid: proid,
+                    proId: proId,
                     ordchk: ordchk
 
                 },

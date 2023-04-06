@@ -48,6 +48,13 @@ public class ProductController {
         model.addAttribute("pagingProducts", pagingProducts);
         return "productlist";
     }
+    @GetMapping("/list/search")
+    public String findBySearchProducts(String search, Model model, @PageableDefault(page = 0, size = 9, sort = "proId", direction = Sort.Direction.DESC) Pageable pageable) {
+        PagingList pagingProducts = productService.findBySearchProducts(pageable,search);
+        model.addAttribute("pagingProducts", pagingProducts);
+
+        return "productlist";
+    }
 
     @GetMapping("/{proid}")
     public String findProduct(@PathVariable Long proid, Model model) {

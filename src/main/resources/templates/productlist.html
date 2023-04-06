@@ -20,7 +20,7 @@
             <div class="prolist_main_text">
                 <p>All Product List</p>
             </div>
-            <form class="prolist_main_searchbox">
+            <form class="prolist_main_searchbox" action="/products/list/search" th:method="GET">
                 <input type="search" name="search" placeholder="검색할 제품">
                 <button type="submit">검색</button>
             </form>
@@ -34,7 +34,7 @@
                     </div>
                     <div class="prolist_list_img">
                         <a th:href="|/products/${product.proId}|">
-                            <img th:src="|/projectimg/${img.imgname}|" th:each="img :${product['img']}" th:if="${img.proid}==${product.proId}">
+                            <img th:src="|/projectimg/${img.imgname}|" th:each="img :${product['img']}" th:if="${img.proId}==${product.proId}">
                         </a>
                     </div>
 

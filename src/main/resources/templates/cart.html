@@ -39,10 +39,10 @@ shopping_cart장바구니
                     <input type="checkbox" name="ord_chkbox"th:value="${cart.getOrdid()}" >
                 </li>
                 <li class="main_img">
-                    <img th:src="|/projectimg/${imgs.getImgname()}|" th:if="${cart.getProduct().getProid()}==${imgs.getProid()}" th:each="imgs:${cart.getImgs()}">
+                    <img th:src="|/projectimg/${imgs.getImgname()}|" th:if="${cart.getProduct().getProId()}==${imgs.getProId()}" th:each="imgs:${cart.getImgs()}">
                 </li>
-                <li class="main_name" th:text="${cart.getProduct().getProname()}">제품명</li>
-                <li class="main_price" th:text="${cart.getProduct().getProname()}">가격</li>
+                <li class="main_name" th:text="${cart.getProduct().getProName()}">제품명</li>
+                <li class="main_price" th:text="${cart.getProduct().getProName()}">가격</li>
                 <li class="main_quantity">
                     <input type="number" th:id="${cart.getOrdid()}" th:value="${cart.getOrdquantity()}">
                 </li>
