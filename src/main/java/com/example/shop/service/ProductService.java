@@ -29,7 +29,6 @@ public class ProductService {
 
     /**
      * 제품생성시 등록한 이미지의 데이터파일을 인자로받아 실제 외부 폴더에 생성하고 DB에 넣어주는 역할을 하는 로직
-     *
      * @param file          = 사용자가 입력한 이미지파일을 가지고 있는 객체
      * @param img_type      = 이미지의 상세이미지/대표이미지 의 구분을 위한 값
      * @param productEntity = Product객체
