@@ -2,6 +2,7 @@ package com.example.shop.controller;
 
 import com.example.shop.dto.MemberRequest;
 import com.example.shop.dto.MemberResponse;
+import com.example.shop.service.EmailService;
 import com.example.shop.service.MemberService;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
@@ -10,12 +11,15 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 @Controller
 @RequestMapping("/members")
 @RequiredArgsConstructor
 public class MemberController {
     private final MemberService memberService;
+
+    private final EmailService emailService;
 
     @GetMapping("")
     public String loadMemberForm() {
@@ -47,4 +51,11 @@ public class MemberController {
         return "index";
     }
 
+
+
+    @ResponseBody
+    @PostMapping("/email/checking")
+    public String createEmailCode(String email) throws Exception {
+        return emailService.sendSimpleMessage(email);
+    }
 }

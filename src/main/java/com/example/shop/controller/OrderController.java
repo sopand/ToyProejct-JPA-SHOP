@@ -63,11 +63,6 @@ public class OrderController {
 
         return "장바구니 제거완료";
     }
-    @GetMapping("/drives")
-    public String findOrdersParcel(HttpSession session,Model model){
-        Long id=(Long)session.getAttribute("id");
-        model.addAttribute("delivery", orderService.findDelivery(id));
-        return "post";
-    }
+
 
 }

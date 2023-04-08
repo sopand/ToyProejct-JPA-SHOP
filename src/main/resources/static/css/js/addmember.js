@@ -1,6 +1,6 @@
 
 $(function (){
-
+let emailChk="";
 $("#addPost").click(function () {
     new daum.Postcode({
         oncomplete: function (data) {
@@ -12,7 +12,6 @@ $("#addPost").click(function () {
                 addr = data.jibunAddress;
             }
 
-
             $(".addr1").val(data.zonecode);
             $(".addr2").val(addr);
             $(".addr3").focus();
@@ -22,5 +21,29 @@ $("#addPost").click(function () {
 
 $("#addmem_btn").click(function(){
     $(".addmem_main_box").submit();
+});
+
+$(".emailChk_btn").click(function (){
+    const email=$("input[name=email]").val();
+    if(email==null||email==""){
+        alert("이메일을 입력하세요")
+        return false;
+    }
+    ajaxCall("/members/email/checking","POST",{email},function (data){
+        emailChk=data;
+        alert("인증 코드가 전송되었습니다.");
+    },function (){
+        alert("이메일을 다시입력해주세요");
+    },)
+
+});
+$(".emailSubmitBtn").click(function (){
+   const number=$("input[name=emailChk]").val();
+    if(number!=emailChk){
+        alert("이메일 인증코드가 일치하지 않습니다");
+        return;
+    }
+    alert("이메일 인증 성공하셨습니다");
+
 });
 });

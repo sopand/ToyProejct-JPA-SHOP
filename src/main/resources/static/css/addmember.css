@@ -60,6 +60,9 @@
     align-items: center;
     justify-content: center;
 }
+.mail2{
+    margin-top:20px;
+}
 
 .addmem_tag_email span {
     width: 100px;

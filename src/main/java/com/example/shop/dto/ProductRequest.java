@@ -28,26 +28,27 @@ public class ProductRequest {
     private List<MultipartFile> textimgList;
 
 
-
     public Product productEntity(Long id) {
-        this.member=MemberRequest.addMemberIdEntity(id);
+        this.member = MemberRequest.addMemberIdEntity(id);
         return Product.builder().proName(proName).proPrice(proPrice).proCategory(proCategory).member(member).build();
     }
-    public Option createOptionEntity(int index,ProductRequest request){
-        if(request.getOpt1()!=null){
-            return  Option.builder()
+
+    public Option createOptionEntity(int index, ProductRequest request) {
+        if (request.getOpt1() != null) {
+            return Option.builder()
                     .opt1(request.getOpt1())
-                    .opt2( request.getOpt2().get(index))
+                    .opt2(request.getOpt2().get(index))
                     .optquantity(request.getOptquantity().get(index))
-                    .product(addProductIDEntity( request.getProId())).build();
-        }else{
-            return  Option.builder()
-                    .opt2( request.getOpt2().get(index))
-                    .optquantity(request.getOptquantity().get(index))
-                    .product(addProductIDEntity( request.getProId())).build();
+                    .product(addProductIDEntity(request.getProId())).build();
         }
+        return Option.builder()
+                .opt2(request.getOpt2().get(index))
+                .optquantity(request.getOptquantity().get(index))
+                .product(addProductIDEntity(request.getProId())).build();
+
     }
-    public Product addProductIDEntity(Long proId){
+
+    public Product addProductIDEntity(Long proId) {
         return Product.builder().proId(proId).build();
     }
 }

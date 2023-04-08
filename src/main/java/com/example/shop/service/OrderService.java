@@ -7,7 +7,9 @@ import com.example.shop.entity.*;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
-import java.util.*;
+
+import java.util.List;
+import java.util.NoSuchElementException;
 import java.util.concurrent.atomic.AtomicInteger;
 
 @Service
@@ -102,15 +104,6 @@ public class OrderService {
         ordid.stream().forEach(id -> orderRepository.deleteById(id));
     }
 
-
-    /**
-     * 배송조회를 하기위한 로직
-     * @param id = 조회하려고 하는 사용자의 고유번호
-     * @return
-     */
-    public List<OrderResponse> findDelivery(Long id){
-        return orderRepository.findOrderByOrdChk(id).stream().map(OrderResponse::new).toList();
-    }
 
 
 

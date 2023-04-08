@@ -11,6 +11,7 @@
     <script
             src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script type="text/javascript" th:src="@{/css/js/addmember.js}"></script>
+    <script type="text/javascript" th:src="@{/css/js/common.js}"></script>
 </head>
 <body>
 <div id="container">
@@ -24,8 +25,14 @@
             <div class="addmem_tag_email">
                 <span>이메일 : </span>
                 <input type="email" name="email" placeholder="이메일 입력">
-                <button type="button">이메일 인증</button>
+                <button type="button" class="emailChk_btn">이메일 인증</button>
             </div>
+
+            <label class="addmem_tag_email mail2">
+                <span>인증코드 : </span>
+                <input type="text" name="emailChk" placeholder="인증코드 입력">
+                <button type="button" class="emailSubmitBtn">인증 확인</button>
+            </label>
             <label class="addmem_tag">
                 <span>비밀번호 : </span>
                 <input type="password" name="pwd" placeholder="패스워드 입력">
