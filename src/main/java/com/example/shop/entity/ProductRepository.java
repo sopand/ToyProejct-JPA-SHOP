@@ -21,28 +21,28 @@ public interface ProductRepository extends JpaRepository<Product,Long> {
      * @param page = 페이징에 대한 설정 값이 들어있는 객체,
      * @return = Product를 ProductReponse객체로 리턴하고있다.
      */
-    @Query(value = "select p from Product p left join fetch p.img i left join fetch p.option where i.imgtype='ProductImg' GROUP BY p.proId",
+    @Query(value = "select p from Product p left join fetch p.img i  where i.imgtype='ProductImg' GROUP BY p.proId",
             countQuery = "select count(p.proId) from Product p")
     Page<ProductResponse> findAllProduct(Pageable page);
 
-    @Query(value = "select p from Product p left join fetch p.img i left join fetch p.option where i.imgtype='ProductImg' AND p.proCategory = :proCategory GROUP BY p.proId",
+    @Query(value = "select p from Product p left join fetch p.img i where i.imgtype='ProductImg' AND p.proCategory = :proCategory GROUP BY p.proId",
             countQuery = "select count(p.proId) from Product p")
     Page<ProductResponse> findByCategory(Pageable page,String proCategory);
 
-    @Query(value = "select p from Product p left join fetch p.img i left join fetch p.option where i.imgtype='ProductImg' AND p.member.id = :id  GROUP BY p.proId",
+    @Query(value = "select p from Product p left join fetch p.img i  where i.imgtype='ProductImg' AND p.member.id = :id  GROUP BY p.proId",
             countQuery = "select count(p.proId) from Product p")
     Page<ProductResponse> findAllByid(Pageable page ,Long id);
 
-    @Query(value = "select p from Product p left join fetch p.img i left join fetch p.option where i.imgtype='ProductImg' AND p.member.id = :id AND p.proName LIKE %:search% GROUP BY p.proId",
+    @Query(value = "select p from Product p left join fetch p.img i where i.imgtype='ProductImg' AND p.member.id = :id AND p.proName LIKE %:search% GROUP BY p.proId",
             countQuery = "select count(p.proId) from Product p")
     Page<ProductResponse> findSellerProductSearch(Pageable page , Long id,String search);
 
 
-    @Query(value = "select p from Product p left join fetch p.img i left join fetch p.option where i.imgtype='ProductImg' AND p.proName LIKE %:search% GROUP BY p.proId",
+    @Query(value = "select p from Product p left join fetch p.img i where i.imgtype='ProductImg' AND p.proName LIKE %:search% GROUP BY p.proId",
             countQuery = "select count(p.proId) from Product p")
     Page<ProductResponse> findBySearchProducts(Pageable page,String search);
 
-    @Query(value = "select p from Product p left join fetch p.img i left join fetch p.option o WHERE p.proId = :proId GROUP BY p.proId,i.imgid,o.optid")
+    @Query(value = "select DISTINCT p from Product p left join fetch p.img i WHERE p.proId = :proId")
     Product findByProduct(Long proId);
 
 

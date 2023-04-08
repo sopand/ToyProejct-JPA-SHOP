@@ -38,7 +38,7 @@ public class Product {
 
     @OneToMany(mappedBy ="product",cascade = CascadeType.ALL)
     @OrderBy("optid asc")
-    private Set<Option> option=new LinkedHashSet<>();
+    private List<Option> option=new ArrayList<>();
 
 
     @Builder
