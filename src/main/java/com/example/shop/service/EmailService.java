@@ -44,7 +44,7 @@ public class EmailService {
       msg += "<span style=\"font-size:24px; font-weight:bold;\">인증 번호 :" + ePw + "</span>";
       msg += "</div>";
       message.setText(msg, "utf-8", "html"); // 내용, charset타입, subtype
-      message.setFrom(new InternetAddress("powsemail1021@gmail.com", "K.M University"));
+      message.setFrom(new InternetAddress("powsemail0121@gmail.com", "SHOP 인증 센터"));
       return message;
    }
 
