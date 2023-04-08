@@ -81,28 +81,16 @@ $(function () {
         let ordaddress = "";
         ordaddress += "(우편번호 : " + $(".addr1").val() + ")";
         ordaddress += $(".addr2").val();
-        ordaddress+="  상세 주소 : "+$(".addr3").val();
+        ordaddress += "  상세 주소 : " + $(".addr3").val();
         let ordhuname = $(".ord_huname").val();
-        $.ajax({
-            method: "post",
-            url: "/orders",
-            data: {
-                ordquantity: ordquantity,
-                proId: proId,
-                optid: optid,
-                ordchk: ordchk,
-                ordaddress:ordaddress,
-                ordhuname:ordhuname
-            },
-            success: function () {
-                alert("구매완료");
-                $('.cart_modal_con').hide();
-            },
-            error: function () {
-
-            }
-
+        ajaxCall("/orders", "POST", {
+            ordquantity, proId, optid, ordchk, ordaddress, ordhuname
+        }, function () {
+            alert("구매완료");
+            $('.cart_modal_con').hide();
+        }, function () {
         });
+
     });
     $("#addPost").click(function () {
         new daum.Postcode({
@@ -124,43 +112,25 @@ $(function () {
     });
 
 
-
     $("#cartbtn").click(function () {
         const ordquantity = $(".quantity").val();
         const optid = $(".opt2").val();
         const ordchk = "장바구니";
-        $.ajax({
-            method: "get",
-            url: "/orders/favorite/" + ordchk,
-            data: {
-                proId: proId,
-            },
-            success: function (data) {
-                if (data == null || data == '') {
-                    $.ajax({
-                        method: "post",
-                        url: "/orders",
-                        data: {
-                            ordquantity: ordquantity,
-                            proId: proId,
-                            optid: optid,
-                            ordchk: ordchk
-
-                        },
-                        success: function () {
-                            alert("장바구니 추가완료");
-                        },
-                        error: function () {
-                            alert("장바구니 추가 실패");
-                        }
-
-                    });
-                } else {
-                    alert("이미 장바구니에 존재하는 상품입니다.");
-                }
-            },
-            error: function () {
-            },
+        ajaxCall("/orders/favorite/" + ordchk, "GET", {
+            proId: proId,
+        }, function (data) {
+            if (data == null || data == '') {
+                ajaxCall("/orders", "POST", {
+                    ordquantity, proId, optid, ordchk
+                }, function () {
+                    alert("장바구니 추가완료");
+                }, function () {
+                    alert("장바구니 추가 실패");
+                });
+            } else {
+                alert("이미 장바구니에 존재하는 상품입니다.");
+            }
+        }, function () {
 
         });
 
@@ -169,42 +139,26 @@ $(function () {
     $("#favoritebtn").click(function () {
         const ordid = $(this).val();
         const ordchk = "찜하기";
-        if (ordid == null || ordid == '') {
-            $.ajax({
-                method: "post",
-                url: "/orders",
-                data: {
-                    proId: proId,
-                    ordchk: ordchk
 
-                },
-                success: function (data) {
+        if (ordid == null || ordid == '') {
+            ajaxCall("/orders", "POST", {proId, ordchk},
+                function (data) {
                     alert("찜 완료");
                     $(".favo").css("color", "red");
                     $("#favoritebtn").val(data);
-                },
-                error: function () {
+                }, function () {
 
-                }
-
-            });
+                });
         } else {
-            $.ajax({
-                method: "delete",
-                url: "/orders/favorite",
-                data: {
-                    ordid: ordid
-                },
-                success: function () {
+            ajaxCall("/orders/favorite", "DELETE", {ordid},
+                function () {
                     alert("찜하기 취소");
                     $(".favo").css("color", "black");
                     $("#favoritebtn").val('');
-                },
-                error: function () {
+                }, function () {
 
-                }
+                });
 
-            });
         }
 
     });

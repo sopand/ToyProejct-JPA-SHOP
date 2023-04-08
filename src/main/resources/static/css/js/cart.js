@@ -48,25 +48,19 @@ $(function () {
         ordaddress+=$(".addr2").val();
         ordaddress+="  상세 주소 : "+$(".addr3").val();
         let ordhuname=$(".ord_huname").val();
-        $.ajax({
-           url:"/orders/cart",
-           method:"PUT",
-           data:{
-               ordaddress:ordaddress,
-               quantityList:quantityList,
-               ordidList:ordidList,
-               ordchk:"구매",
-               ordhuname:ordhuname
-           } ,
-            success:function (data){
-                    alert(data);
-                    location.reload();
+        ajaxCall("/orders/cart","PUT",{
+            ordaddress:ordaddress,
+            quantityList:quantityList,
+            ordidList:ordidList,
+            ordchk:"구매",
+            ordhuname:ordhuname
+        },function (data){
+                alert(data);
+                location.reload();
             },
-            error:function (){
-                alert("에러");
-            }
+            function (){
+            alert("에러");
         });
-
     });
 
     $("#removebtn").click(function (){
@@ -74,22 +68,13 @@ $(function () {
         $("input[name=ord_chkbox]:checked").each(function (index,item){
             ordidList.push($(item).val());
         });
-        console.log(ordidList);
-        $.ajax({
-           url:"/orders/cart",
-            method:"delete",
-            data:{
-                ordidList:ordidList
-            },
-            success :function (date){
+        ajaxCall("/orders/cart","delete",{ordidList:ordidList},function (date){
                 alert(date);
                 location.reload();
             },
-            error :function (){
-               alert("삭제 실패");
-            }
+           function (){
+            alert("삭제 실패");
         });
-
     });
 
     $(".all_chkbox").click(function() {
