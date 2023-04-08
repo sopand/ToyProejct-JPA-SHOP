@@ -1,7 +1,6 @@
-
-$(function (){
-    let emailChk="";
-    let emailCheckkingAnd=false;
+$(function () {
+    let emailChk = "";
+    let emailCheckkingAnd = false;
     $("#addPost").click(function () {
         new daum.Postcode({
             oncomplete: function (data) {
@@ -20,36 +19,46 @@ $(function (){
         }).open();
     });
 
-    $("#addmem_btn").click(function(){
-        if(emailCheckkingAnd){
+    $("#addmem_btn").click(function () {
+        if (emailCheckkingAnd) {
             $(".addmem_main_box").submit();
             return;
         }
         alert("이메일 체크가 되어있지 않습니다.");
     });
 
-    $(".emailChk_btn").click(function (){
-        const email=$("input[name=email]").val();
-        if(email==null||email==""){
+    $(".emailChk_btn").click(function () {
+        const email = $("input[name=email]").val();
+        if (email == null || email == "") {
             alert("이메일을 입력하세요")
             return false;
         }
-        ajaxCall("/members/email/checking","POST",{email},function (data){
-            emailChk=data;
-            alert("인증 코드가 전송되었습니다.");
-        },function (){
+        ajaxCall("/members/email/checking", "GET", {email}, function (data) {
+            console.log(data);
+            if (data == null || data == '') {
+                ajaxCall("/members/email/checking", "POST", {email}, function (data) {
+                    emailChk = data;
+                    alert("인증 코드가 전송되었습니다.");
+                }, function () {
+                    alert("이메일을 다시입력해주세요");
+                },)
+                return;
+            }
+            alert("이미 존재하는 이메일입니다 다른 이메일을 입력해주세요");
+
+        }, function () {
             alert("이메일을 다시입력해주세요");
         },)
 
     });
-    $(".emailSubmitBtn").click(function (){
-        const number=$("input[name=emailChk]").val();
-        if(number!=emailChk){
+    $(".emailSubmitBtn").click(function () {
+        const number = $("input[name=emailChk]").val();
+        if (number != emailChk) {
             alert("이메일 인증코드가 일치하지 않습니다");
             return;
         }
-        $("input[name=emailChk]").attr("readonly",true);
-        emailCheckkingAnd=true;
+        $("input[name=emailChk]").attr("readonly", true);
+        emailCheckkingAnd = true;
         alert("이메일 인증 성공하셨습니다");
 
     });

@@ -42,7 +42,7 @@ public interface ProductRepository extends JpaRepository<Product,Long> {
             countQuery = "select count(p.proId) from Product p")
     Page<ProductResponse> findBySearchProducts(Pageable page,String search);
 
-    @Query(value = "select p from Product p left join fetch p.img i left join fetch p.option o WHERE p.proId = :proId")
+    @Query(value = "select p from Product p left join fetch p.img i left join fetch p.option o WHERE p.proId = :proId GROUP BY p.proId,i.imgid,o.optid")
     Product findByProduct(Long proId);
 
 

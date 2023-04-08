@@ -13,6 +13,7 @@ $(function () {
         f.setAttribute('action', '/members/logout');
         document.body.appendChild(f);
         f.submit();
+        alert("로그아웃 되었습니다");
 
 
     });

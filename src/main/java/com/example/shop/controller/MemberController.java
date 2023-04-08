@@ -58,4 +58,10 @@ public class MemberController {
     public String createEmailCode(String email) throws Exception {
         return emailService.sendSimpleMessage(email);
     }
+
+    @ResponseBody
+    @GetMapping("/email/checking")
+    public MemberResponse findMember(String email){
+        return memberService.findMember(email);
+    }
 }

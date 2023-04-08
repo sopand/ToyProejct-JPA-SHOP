@@ -34,4 +34,8 @@ public class MemberService {
                 .filter(member -> member.getPwd().equals(request.getPwd()))
                    .map(member -> new MemberResponse(member)).orElse(null);
     }
+
+    public MemberResponse findMember(String email){
+        return memberRepository.findByEmail(email).map(member-> new MemberResponse(member)).orElse(null);
+    }
 }

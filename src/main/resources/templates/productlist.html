@@ -17,9 +17,7 @@
     <header th:replace="header :: header"></header>
     <main id="prolist_main_con">
         <div class="prolist_main_box">
-            <div class="prolist_main_text">
-                <p>All Product List</p>
-            </div>
+
             <form class="prolist_main_searchbox" action="/products/list/search" th:method="GET">
                 <input type="search" name="search" placeholder="검색할 제품">
                 <button type="submit">검색</button>
@@ -44,8 +42,8 @@
         <div class="btnbox">
 
             <th:block th:each="page : ${#numbers.sequence(pagingProducts['startPage'], pagingProducts['endPage'])}" th:if="${pagingProducts!=null}">
-                <a th:if="${page != pagingProducts['nowPage']} and ${page}!=0" th:href="@{/boards(page = ${page - 1})}" th:text="${page}"></a>
-                <strong th:if="${page == pagingProducts['nowPage']}" th:text="${page}" style="color : red;font-weight:bold;font-size: 18px"></strong>
+                <a th:if="${page != pagingProducts['nowPage']} and ${page}!=0" th:href="@{/products/list(page = ${page - 1})}" th:text="${page}"></a>
+                <strong th:if="${page == pagingProducts['nowPage']}" th:text="${page}"></strong>
             </th:block>
 
         </div>

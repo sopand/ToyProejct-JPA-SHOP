@@ -19,13 +19,7 @@
     justify-content: center;
     flex-direction: column;
 }
-.prolist_main_text{
-    width:100%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    padding-top: 100px;
-}
+
 .prolist_main_listbox{
     margin-top:150px;
     width: 1400px;
@@ -92,7 +86,7 @@
 
 
 .prolist_main_searchbox{
-    margin-top: 50px;
+    margin-top: 100px;
     width:1400px;
     display: flex;
     align-items: center;
@@ -106,13 +100,14 @@
     padding-left:10px;
 }
 .prolist_main_searchbox button{
-    width:50px;
+    width:75px;
     height:50px;
     background-color: #4285F4;
     margin-left:30px;
     color:white;
     font-size: 16px;
     font-weight: bold;
+    border-radius: 15px;
 }
 
 .btnbox{
@@ -123,11 +118,16 @@
 
 }
 .btnbox a{
-    font-size: 16px;
+    font-size: 20px;
     margin:15px;
     width:20px;
     height: 20px;
     display: flex;
     align-items: center;
     justify-content: center;
+}
+.btnbox strong{
+    color : red;
+    font-weight:bold;
+    font-size: 22px;
 }

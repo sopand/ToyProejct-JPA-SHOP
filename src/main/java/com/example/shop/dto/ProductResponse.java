@@ -38,6 +38,7 @@ public class ProductResponse {
         this.proDate=entity.getProDate();
         this.proCategory= entity.getProCategory();
         this.img=entity.getImg().stream().map(ImgResponse::new).toList();
+        System.out.println("이미지"+img);
         this.option=entity.getOption().stream().map(OptionResponse::new).toList();
         if(option.get(0).getOpt1()!=null&& option!=null){
             List<String> opt1List=option.stream().map(opt->new String(opt.getOpt1())).toList();

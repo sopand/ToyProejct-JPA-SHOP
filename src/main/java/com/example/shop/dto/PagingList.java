@@ -18,6 +18,8 @@ public class PagingList {
     private int endPage;
 
 
+
+
     public static PagingList setPagingList(Page<?> getPagingProduct) {
         int nowPage = getPagingProduct.getPageable().getPageNumber() + 1;
         int startPage = Math.max(nowPage - 4, 1);
