@@ -31,8 +31,8 @@ public class Option {
     }
 
     public void modifyOptionQuantity(int quantity){
-        System.out.println("기존 갯수"+optquantity +"뺄 갯수"+quantity);
-        this.optquantity=optquantity-quantity;
+            this.optquantity=optquantity-quantity;
+
     }
 
 }

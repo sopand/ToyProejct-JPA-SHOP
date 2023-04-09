@@ -104,6 +104,7 @@ $(function () {
             alert("구매완료");
             $('.cart_modal_con').hide();
         }, function () {
+            alert("구매 실패 구매수량이 재고량보다 많은 것 같습니다");
         });
 
     });

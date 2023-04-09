@@ -24,7 +24,7 @@ public class OrderController {
 
     @ResponseBody
     @PostMapping
-    public Long createOrder(OrderRequest order, HttpSession session) {
+    public Long createOrder(OrderRequest order, HttpSession session) throws Exception {
         Long id=(Long)session.getAttribute("id");
         return  orderService.createOrder(order,id);
     }

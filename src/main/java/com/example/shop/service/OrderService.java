@@ -26,12 +26,15 @@ public class OrderService {
      * @return = 생성 여부를 확인하기 위한 Long 고유번호 데이터
      */
     @Transactional
-    public Long createOrder(OrderRequest request, Long id) {
+    public Long createOrder(OrderRequest request, Long id) throws Exception {
         switch (request.getOrdchk()) {
             case "장바구니":
                 return orderRepository.save(request.create(id)).getOrdid();
             case "구매":
-                Option option=optionRepository.findById(request.getProId()).orElseThrow(()-> new NoSuchElementException("찾는 옵션이 없어요"));
+                Option option=optionRepository.findById(request.getOptid()).orElseThrow(()-> new NoSuchElementException("찾는 옵션이 없어요"));
+                if(option.getOptquantity()<request.getOrdquantity()){
+                    throw new Exception("남은 갯수보다 재고량이 적습니다");
+                }
                 option.modifyOptionQuantity(request.getOrdquantity());
                 return orderRepository.save(request.directbuy(id)).getOrdid();
             case "찜하기":
@@ -89,7 +92,7 @@ public class OrderService {
                     request.setOrdid(entity);
                     request.setOrdquantity(request.getQuantityList().get(count.getAndIncrement()));
                     Order order=orderRepository.findByOrdid(request.getOrdid()).orElseThrow(()-> new NoSuchElementException("찾을수 주문 정보입니다 "));
-                    Option option=optionRepository.findById(order.getOption().getOptid()).orElseThrow(()-> new NoSuchElementException("찾을수 없는 옵션입니다"));
+                    Option option=optionRepository.findById(order.getOption().getOptid()).filter(opt-> opt.getOptquantity()>order.getOrdquantity()).orElseThrow();
                     option.modifyOptionQuantity(order.getOrdquantity());
                     order.modifyOrderEntity(request);
                 }
