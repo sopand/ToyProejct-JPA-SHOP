@@ -1,7 +1,7 @@
 $(function () {
     const opt1val = opt[0].opt1;
     const proId = $(".proId").val();
-
+    const email = $("input[name=email]").val();
     if (opt1val != null) {
         let html = "";
         $(opt).each(function (index, item) {
@@ -12,25 +12,31 @@ $(function () {
         });
         $(".opt2").html(html);
     }
-
-    $.ajax({
-        method: "get",
-        url: "/orders/favorite/찜하기",
-        data: {
-            proId: proId,
-        },
-        success: function (data) {
-            if (data != null && data != '') {
-                $(".favo").css("color", "red");
-                $("#favoritebtn").val(data);
+    if (email != null && email != "") {
+        $.ajax({
+            method: "get",
+            url: "/orders/favorite/찜하기",
+            data: {
+                proId: proId,
+            },
+            success: function (data) {
+                if (data != null && data != '') {
+                    $(".favo").css("color", "red");
+                    $("#favoritebtn").val(data);
+                }
+            },
+            error: function () {
             }
-        },
-        error: function () {
-        }
 
-    });
+        });
+    }
+
 
     $("#firebtn").click(function () {
+        if (email == null || email == '') {
+            alert("로그인 후 이용가능합니다");
+            return;
+        }
         $(".detail_modal_con").css("display", "flex");
     });
     $(document).mouseup(function (e) {
@@ -60,7 +66,12 @@ $(function () {
 
     });
 
+
     $("#buybtn").click(function () {
+        if (email == null || email == "") {
+            alert("로그인후 구매가능합니다.");
+            return;
+        }
         $(".cart_modal_con").css("display", "flex");
     });
     $(document).mouseup(function (e) {
@@ -83,6 +94,10 @@ $(function () {
         ordaddress += $(".addr2").val();
         ordaddress += "  상세 주소 : " + $(".addr3").val();
         let ordhuname = $(".ord_huname").val();
+        if ($(".addr1").val() == null || $(".addr1").val() == "") {
+            alert("우편번호를 입력해주세요");
+            return;
+        }
         ajaxCall("/orders", "POST", {
             ordquantity, proId, optid, ordchk, ordaddress, ordhuname
         }, function () {
@@ -116,6 +131,10 @@ $(function () {
         const ordquantity = $(".quantity").val();
         const optid = $(".opt2").val();
         const ordchk = "장바구니";
+        if (email == null || email == "") {
+            alert("로그인 후 장바구니를 사용 가능 합니다");
+            return;
+        }
         ajaxCall("/orders/favorite/" + ordchk, "GET", {
             proId: proId,
         }, function (data) {
@@ -139,7 +158,10 @@ $(function () {
     $("#favoritebtn").click(function () {
         const ordid = $(this).val();
         const ordchk = "찜하기";
-
+        if (email == null || email == "") {
+            alert("로그인 후 찜하기를 사용 가능 합니다");
+            return;
+        }
         if (ordid == null || ordid == '') {
             ajaxCall("/orders", "POST", {proId, ordchk},
                 function (data) {

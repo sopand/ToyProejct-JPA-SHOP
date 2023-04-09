@@ -17,3 +17,9 @@
             }
         });
     };
+    function nullChk(chk,message){
+        if(chk==null||chk==""){
+            alert(message);
+            return;
+        }
+    }
