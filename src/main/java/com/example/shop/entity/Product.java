@@ -50,4 +50,6 @@ public class Product {
         this.proCategory=proCategory;
         this.member=member;
     }
+
+
 }

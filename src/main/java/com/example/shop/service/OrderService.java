@@ -17,26 +17,25 @@ import java.util.concurrent.atomic.AtomicInteger;
 public class OrderService {
     private final OrderRepository orderRepository;
     private final ImgRepository imgRepository;
+    private final OptionRepository optionRepository;
 
     /**
-     * 제품의 Order테이블과 관련된 생성작업을 하는 로직 (구매,찜하기,장바구니)등 
+     * 제품의 Order테이블과 관련된 생성작업을 하는 로직 (구매,찜하기,장바구니)등
      * @param request = 사용자가 주문하려는 제품의 정보와 사용자의 주소등이 들어있는 객체
      * @param id = 해당 사용자의 고유번호
      * @return = 생성 여부를 확인하기 위한 Long 고유번호 데이터
      */
     @Transactional
     public Long createOrder(OrderRequest request, Long id) {
-        Member member = Member.builder().id(id).build();
-        Product product = Product.builder().proId(request.getProId()).build();
         switch (request.getOrdchk()) {
             case "장바구니":
-                Option option = Option.builder().optid(request.getOptid()).build();
-                return orderRepository.save(request.create(product, member, option)).getOrdid();
+                return orderRepository.save(request.create(id)).getOrdid();
             case "구매":
-                Option option2 = Option.builder().optid(request.getOptid()).build();
-                return orderRepository.save(request.directbuy(product, member, option2)).getOrdid();
+                Option option=optionRepository.findById(request.getProId()).orElseThrow(()-> new NoSuchElementException("찾는 옵션이 없어요"));
+                option.modifyOptionQuantity(request.getOrdquantity());
+                return orderRepository.save(request.directbuy(id)).getOrdid();
             case "찜하기":
-                return orderRepository.save(request.favorite(product, member)).getOrdid();
+                return orderRepository.save(request.favorite(id)).getOrdid();
             default:
                 return null;
         }
@@ -81,18 +80,20 @@ public class OrderService {
 
     /**
      * 장바구니 페이지에서 구매기능을 작동하기 위한 로직
-     * @param request = 구매하려고 하는 제품의 정보가들어 있는 객체 (주소 , 옵션 등등) 
+     * @param request = 구매하려고 하는 제품의 정보가들어 있는 객체 (주소 , 옵션 등등)
      */
     @Transactional
     public void BuyFromCart(OrderRequest request){
         AtomicInteger count= new AtomicInteger();
-            request.getOrdidList().stream().forEach(entity->{
-                request.setOrdid(entity);
-                request.setOrdquantity(request.getQuantityList().get(count.getAndIncrement()));
-                Order order=orderRepository.findByOrdid(request.getOrdid()).orElseThrow(()-> new NoSuchElementException("찾을수 주문 정보입니다 "));
-                order.modifyOrderEntity(request);
-                    }
-            );
+        request.getOrdidList().stream().forEach(entity->{
+                    request.setOrdid(entity);
+                    request.setOrdquantity(request.getQuantityList().get(count.getAndIncrement()));
+                    Order order=orderRepository.findByOrdid(request.getOrdid()).orElseThrow(()-> new NoSuchElementException("찾을수 주문 정보입니다 "));
+                    Option option=optionRepository.findById(order.getOption().getOptid()).orElseThrow(()-> new NoSuchElementException("찾을수 없는 옵션입니다"));
+                    option.modifyOptionQuantity(order.getOrdquantity());
+                    order.modifyOrderEntity(request);
+                }
+        );
     }
 
     /**

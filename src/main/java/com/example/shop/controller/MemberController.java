@@ -48,6 +48,7 @@ public class MemberController {
     @PostMapping("/logout")
     public String deleteLogin(String email,HttpSession session){
         session.removeAttribute("email");
+        session.removeAttribute("id");
         return "index";
     }
 

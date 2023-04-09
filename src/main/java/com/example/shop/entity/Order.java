@@ -73,7 +73,6 @@ public class Order {
 
 
     public void modifyOrderEntity(OrderRequest request){
-
         this.ordchk=request.getOrdchk();
         this.ordquantity=request.getOrdquantity();
         this.ordhuname=request.getOrdhuname();

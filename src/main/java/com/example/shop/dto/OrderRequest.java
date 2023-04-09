@@ -16,8 +16,6 @@ import java.util.List;
 @NoArgsConstructor
 @Builder
 public class OrderRequest {
-    private Product product;
-    private Member member;
 
     private Option option;
     private int ordquantity;
@@ -34,18 +32,43 @@ public class OrderRequest {
     private List<Long> ordidList;
     private List<Integer> quantityList;
 
-    public Order create(Product product, Member member, Option option) {
+    public Order create(Long id) {
 
-        return Order.builder().product(product).member(member).option(option).ordquantity(ordquantity).ordchk(ordchk).build();
+        return Order.builder()
+                .product(createProductEntity())
+                .member(createMemberEntity(id))
+                .option(createOptionEntity())
+                .ordquantity(ordquantity)
+                .ordchk(ordchk)
+                .build();
+    }
+    public Order favorite(Long id) {
+        return Order.builder()
+                .product(createProductEntity())
+                .member(createMemberEntity(id))
+                .ordchk(ordchk).build();
     }
 
-    public Order favorite(Product product, Member member) {
-        return Order.builder().product(product).member(member).ordchk(ordchk).build();
+    public Order directbuy(Long id) {
+        return Order.builder()
+                .ordchk(ordchk)
+                .ordquantity(ordquantity)
+                .ordaddress(ordaddress)
+                .ordhuname(ordhuname)
+                .product(createProductEntity())
+                .member(createMemberEntity(id))
+                .option(createOptionEntity()).build();
     }
 
-    public Order directbuy(Product product, Member member, Option option) {
-        return Order.builder().ordchk(ordchk).ordquantity(ordquantity).ordaddress(ordaddress).ordhuname(ordhuname).product(product).member(member).option(option).build();
+    public Option createOptionEntity(){
+        return Option.builder().optid(optid).build();
     }
+    public Member createMemberEntity(Long id){
+        return Member.builder().id(id).build();
+    }public Product createProductEntity(){
+        return Product.builder().proId(proId).build();
+    }
+
 
 
 }
