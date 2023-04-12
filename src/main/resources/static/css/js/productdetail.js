@@ -2,7 +2,7 @@ $(function () {
     const opt1val = opt[0].opt1;
     const proId = $(".proId").val();
     const email = $("input[name=email]").val();
-    if (opt1val != null) {
+    if (notNull(opt1val)) {
         let html = "";
         $(opt).each(function (index, item) {
             let firstOpt2 = $(item);
@@ -12,7 +12,7 @@ $(function () {
         });
         $(".opt2").html(html);
     }
-    if (email != null && email != "") {
+    if (notNull(email)) {
         $.ajax({
             method: "get",
             url: "/orders/favorite/찜하기",
@@ -20,7 +20,7 @@ $(function () {
                 proId: proId,
             },
             success: function (data) {
-                if (data != null && data != '') {
+                if (notNull(data)) {
                     $(".favo").css("color", "red");
                     $("#favoritebtn").val(data);
                 }
@@ -33,7 +33,7 @@ $(function () {
 
 
     $("#firebtn").click(function () {
-        if (email == null || email == '') {
+        if (nullChk(email)) {
             alert("로그인 후 이용가능합니다");
             return;
         }
@@ -68,7 +68,7 @@ $(function () {
 
 
     $("#buybtn").click(function () {
-        if (email == null || email == "") {
+        if (nullChk(email)) {
             alert("로그인후 구매가능합니다.");
             return;
         }
@@ -132,14 +132,14 @@ $(function () {
         const ordquantity = $(".quantity").val();
         const optid = $(".opt2").val();
         const ordchk = "장바구니";
-        if (email == null || email == "") {
+        if (nullChk(email)) {
             alert("로그인 후 장바구니를 사용 가능 합니다");
             return;
         }
         ajaxCall("/orders/favorite/" + ordchk, "GET", {
             proId: proId,
         }, function (data) {
-            if (data == null || data == '') {
+            if (nullChk(data)) {
                 ajaxCall("/orders", "POST", {
                     ordquantity, proId, optid, ordchk
                 }, function () {
@@ -159,11 +159,11 @@ $(function () {
     $("#favoritebtn").click(function () {
         const ordid = $(this).val();
         const ordchk = "찜하기";
-        if (email == null || email == "") {
+        if (nullChk(email)) {
             alert("로그인 후 찜하기를 사용 가능 합니다");
             return;
         }
-        if (ordid == null || ordid == '') {
+        if (nullChk(ordid)) {
             ajaxCall("/orders", "POST", {proId, ordchk},
                 function (data) {
                     alert("찜 완료");

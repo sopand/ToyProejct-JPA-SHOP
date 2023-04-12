@@ -1,4 +1,11 @@
 spring:
+  mail:
+    host: smtp.gmail.com
+    port: 587
+    username: kmkemail1021@gmail.com
+    password: wkkrlmvrgidndoxy
+  messages:
+    basename: messages
   profiles:
     include: config
   jpa:

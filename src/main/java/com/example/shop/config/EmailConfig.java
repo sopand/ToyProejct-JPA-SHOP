@@ -9,11 +9,15 @@ import org.springframework.mail.javamail.JavaMailSenderImpl;
 
 import java.util.Properties;
 
+
+/**
+ * 이메일 전송을 위한 설정을 해놓은 설정파일.
+ */
 @Configuration
 @PropertySource("classpath:application.yml") // Property의 값을 가져오기 위한 것 Configuration과 함께 사용된다.
 public class EmailConfig {
-
-    @Value("${spring.mail.username}") // application.yml에서 설정해놓은 값을 불러온다
+    // application.yml에서 설정해놓은 여러 설정 값들을 Value를 이용하여 가져온다.
+    @Value("${spring.mail.username}")
     private String id;
     @Value("${spring.mail.password}")
     private String password;

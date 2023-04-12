@@ -16,16 +16,16 @@ $(function () {
         let opt2 = [];
         let optquantity = [];
         const proId=$('input[name=proId]').val();
-            if($('input[name=opt1]').val()!=''){
+            if(notNull($('input[name=opt1]').val())){
                 opt1=$('input[name=opt1]').val();
             }
         $("input[name=opt2]").each(function(index, item){
-            if($(item).val()!=''){
+            if(notNull($(item).val())){
                 opt2.push($(item).val());
             }
         });
         $("input[name=optquantity]").each(function(index, item){
-            if($(item).val()!=''){
+            if(notNull($(item).val())){
                 optquantity.push($(item).val());
             }
         });

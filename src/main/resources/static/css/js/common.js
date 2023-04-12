@@ -17,9 +17,15 @@
             }
         });
     };
-    function nullChk(chk,message){
+    function nullChk(chk){
         if(chk==null||chk==""){
-            alert(message);
-            return;
+            return true;
         }
+        return false;
+    }
+    function  notNull(chk){
+        if(chk!=null && chk!=""){
+            return true;
+        }
+        return false;
     }
