@@ -22,6 +22,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
 public class MemberController {
     private final MemberService memberService;
 
+    public static Long memberId;
+
     private final EmailService emailService;
 
     /**
@@ -58,6 +60,7 @@ public class MemberController {
         if (findMember != null) {
             session.setAttribute("email", findMember.getEmail());
             session.setAttribute("id", findMember.getId());
+            memberId=findMember.getId();
             return "redirect:/index";
         }
         return "login";

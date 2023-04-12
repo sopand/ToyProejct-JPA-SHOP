@@ -15,6 +15,11 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+import static com.example.shop.controller.MemberController.memberId;
+
+/**
+ * 주문과 관련된 모든 처리를 담당하는 컨트롤러
+ */
 @Controller
 @RequiredArgsConstructor
 @RequestMapping("/orders")
@@ -22,29 +27,39 @@ public class OrderController {
 
     private final OrderService orderService;
 
+
+    /**
+     * 주문을 생성하는 기능을 담당하는 맵핑
+     * @param order = 주문에 대한 정보가 저장되어있는 객체
+     * @return = 제대로 주문이 되었는지 확인하기위한 생성된 Order의 고유번호를 리턴
+     * @throws Exception
+     */
     @ResponseBody
     @PostMapping
-    public Long createOrder(OrderRequest order, HttpSession session) throws Exception {
-        Long id=(Long)session.getAttribute("id");
-        return  orderService.createOrder(order,id);
+    public Long createOrder(OrderRequest order) throws Exception {
+        return  orderService.createOrder(order,memberId);
     }
+
+    /**
+     * 제품의 좋아요여부를 체크하기 위한 맵핑.
+     * @param proId
+     * @param check
+     * @return
+     */
     @ResponseBody
     @GetMapping("/favorite/{check}")
-    public Long hasFavorite(HttpSession session, Long proId,@PathVariable("check") String check){
-        Long id=(Long)session.getAttribute("id");
-        return orderService.hasFavorite(proId,id,check);
+    public Long hasFavorite(Long proId,@PathVariable("check") String check){
+        return orderService.hasFavorite(proId,memberId,check);
     }
     @ResponseBody
     @DeleteMapping("/favorite")
-    public void deleteFavorite(HttpSession session,OrderRequest request){
-        Long id=(Long)session.getAttribute("id");
+    public void deleteFavorite(OrderRequest request){
         orderService.deleteFavorite(request.getOrdid());
     }
 
     @GetMapping("/cart")
-    public String findCarts(HttpSession session, Model model){
-        Long id=(Long)session.getAttribute("id");
-        List<OrderResponse> carts=orderService.findCarts(id);
+    public String findCarts( Model model){
+        List<OrderResponse> carts=orderService.findCarts(memberId);
         model.addAttribute("carts",carts);
         return "cart";
     }

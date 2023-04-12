@@ -15,6 +15,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import static com.example.shop.controller.MemberController.memberId;
+
 
 /**
  * 제품의 생성 / 수정 /삭제 및 옵션관련 등 제품관련 모든 처리들을 담당하는 컨트롤러
@@ -37,13 +39,12 @@ public class ProductController {
     /**
      * 제품판매글 등록 페이지에서 입력한 데이터를 DB에 생성시켜주기 위한 맵핑
      * @param request = 사용자가 입력한 게시글의 데이터가 들어있는 객체
-     * @param session = 해당 사용자의 로그인 아이디를 가져오기 위한 세션객체
      * @return = ADD기능은 forward방식으로 페이지전환시 F5를 클릭하면 등록한 객체가 무한반복 될 수 있는 오류가 있어 redirec로 옵션 생성페이지로 이동
      * @throws Exception
      */
     @PostMapping("")
-    public String createProduct(ProductRequest request, HttpSession session) throws Exception {
-        Long proId = productService.createProduct(request, (Long) session.getAttribute("id"));
+    public String createProduct(ProductRequest request) throws Exception {
+        Long proId = productService.createProduct(request, memberId);
         return "redirect:/products/option/" + proId;
     }
 
