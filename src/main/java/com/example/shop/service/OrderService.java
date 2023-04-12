@@ -53,7 +53,6 @@ public class OrderService {
      */
     public Long hasFavorite(Long proid, Long id, String check) {
         Order order = orderRepository.findByProductProIdAndMemberIdAndOrdchk(proid, id, check).orElseGet(()->null);
-
         return order==null ?  null:  order.getOrdid();
 
 
@@ -88,11 +87,11 @@ public class OrderService {
     @Transactional
     public void BuyFromCart(OrderRequest request){
         AtomicInteger count= new AtomicInteger();
-        request.getOrdidList().stream().forEach(entity->{
-                    request.setOrdid(entity);
-                    request.setOrdquantity(request.getQuantityList().get(count.getAndIncrement()));
-                    Order order=orderRepository.findByOrdid(request.getOrdid()).orElseThrow(()-> new NoSuchElementException("찾을수 주문 정보입니다 "));
-                    Option option=optionRepository.findById(order.getOption().getOptid()).filter(opt-> opt.getOptquantity()>order.getOrdquantity()).orElseThrow();
+        request.getOrdidList().stream().forEach(reqeust->{ // 주문하려는 제품의 OrdId = 장바구니의 주문번호에 맞춰 반복
+                    request.setOrdid(reqeust);      // ordId를 요청객체의 ordId에 Set
+                    request.setOrdquantity(request.getQuantityList().get(count.getAndIncrement())); // ordId와 ordQuantity의 List사이즈가 동일하기 때문에 count로 같은 배열의 수량을 set
+                    Order order=orderRepository.findByOrdid(request.getOrdid()).orElseThrow(()-> new NoSuchElementException("찾을수 주문 정보입니다 ")); // Order의 상태를 구매하기로 변경하기 위해 찾아옴
+                    Option option=optionRepository.findById(order.getOption().getOptid()).filter(opt-> opt.getOptquantity()>order.getOrdquantity()).orElseThrow(); //Option의 재고량을 파악하고 구매한 숫자만 큼 줄이기위해 찾아옴
                     option.modifyOptionQuantity(order.getOrdquantity());
                     order.modifyOrderEntity(request);
                 }
